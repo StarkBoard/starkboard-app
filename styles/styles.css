@@ -1,0 +1,390 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+@import url('./footer.css');
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: black;
+}
+
+header {
+  width: 100%;
+  background-color: black;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.logo {
+  width: 140px;
+  cursor: pointer;
+}
+
+nav ul li {
+  display: inline-block;
+  list-style: none;
+  margin: 30px 20px;
+  font-size: 24px;
+
+}
+
+.h1 {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  font-size: 40px;
+}
+
+p {
+  font-weight: 300;
+}
+
+.button {
+  margin-top: 50px;
+  padding: 14px 40px;
+  border-radius: 100px;
+  color: rgb(255, 255, 255);
+  background: rgba(34, 33, 39, 0);
+  color: white;
+  border: none;
+  font-weight: 600;
+  font-size: 16px;
+  transition: 0.5s;
+  cursor: pointer;
+  border: #fff solid 0.5px;
+}
+
+.image {
+  margin-left: 0px;
+  cursor: pointer;
+  transition: 0.5s;
+  margin-top: 40px;
+  width: 100%;
+}
+
+.img {
+  -webkit-mask: url(/images/darkmode.svg) no-repeat center;
+  mask: url(/images/darkmode.svg) no-repeat center;
+}
+
+.image:hover {
+  transform: scale(1.03);
+  transition: 0.5s;
+}
+
+nav ul li:hover {
+  display: inline-block;
+  list-style: none;
+  margin: 30px 20px;
+  font-size: 24px;
+  color: rgb(100, 100, 100);
+}
+
+.text-white {
+  color: white !important;
+}
+
+.icones li {
+  cursor: pointer;
+  color: white !important;
+  text-decoration: none;
+}
+
+/*Darkmode*/
+.darkmode {
+  background: #fff;
+}
+
+/* Icones style */
+
+.icones svg {
+  transition: 0.5s;
+}
+
+.icones svg:hover {
+  color: rgb(100, 100, 100);
+}
+
+.oda {
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
+  transition: 0.5s;
+  text-decoration: none;
+  margin-top: 71px;
+}
+
+.oda:hover {
+  color: rgb(100, 100, 100);
+}
+
+@media only screen and (max-width: 600px) {
+  #mainimg {
+    margin: 0 auto;
+    height: 350px;
+    width: 100%;
+    size: cover;
+    content: url("/images/darkmode-phone.svg");
+  }
+
+  .oda {
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.5s;
+    text-decoration: none;
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+
+  .button {
+    display: flex;
+    align-items: center;
+    margin-top: 50px;
+    padding: 14px 40px;
+    border-radius: 100px;
+    color: rgb(255, 255, 255);
+    background: rgba(34, 33, 39, 0);
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    transition: 0.5s;
+    cursor: pointer;
+    border: #fff solid 0.5px;
+    margin: auto;
+  }
+
+  .h1 {
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 20px;
+  }
+
+  p {
+    text-align: center;
+  }
+
+  .logo {
+    width: 40%;
+  }
+}
+
+.credit {
+  margin-bottom: 30px;
+}
+
+
+/* 
+ LIGHT / DARK MODE - START
+*/
+
+/* Light mode */
+#landing-page.light {
+  color: black;
+}
+
+#landing-page.light .button {
+  background-color: white;
+  border-color: black;
+  color: black;
+}
+
+#landing-page.light body {
+  background-color: #F3F3F3;
+}
+
+#landing-page.light .icones svg {
+  color: black;
+}
+
+#landing-page.light .button:hover {
+  background-color: black;
+  color: white;
+}
+
+#landing-page.light .oda {
+  color: black;
+}
+
+/* Dark mode */
+#landing-page.dark {
+  color: white;
+}
+
+#landing-page.dark .icones svg {
+  color: white;
+}
+
+#landing-page.dark #darkmode {
+  transform: rotate(90);
+}
+
+#landing-page.dark .button {
+  background-color: black;
+  border-color: white;
+  color: white;
+}
+
+#landing-page.dark .button:hover {
+  background-color: white;
+  color: black;
+}
+
+#landing-page.dark .oda {
+  color: white;
+}
+
+#landing-page.dark {
+  background-color: black;
+}
+
+/* 
+ LIGHT / DARK MODE - END
+*/
+
+.loader-wrap {
+  width: 100%;
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  background-position: center center;
+  background-size: cover;
+  color: white;
+  font-size: 100px;;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+ul {
+  list-style: none;
+}
+
+.black-gradient {
+  background: linear-gradient(to right, rgb(0, 0, 0), rgb(20, 20, 20));
+  border: #423E52 1px solid;
+}
+
+.blue-gradient {
+  background: linear-gradient(to right, #02C1FE, #023693);
+}
+
+.sidebar {
+  margin-top: 2.9rem !important;
+}
+
+.navigation {
+  list-style-type: none;
+  padding: 20px;
+  border-radius: 15px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+.navigation a {
+  text-decoration: none;
+  color: white;
+  text-align: left;
+  font-size: 15px;
+  margin-left: 15px;
+  font-weight: 600;
+}
+
+.navigation svg {
+  margin-right: 20px;
+}
+
+.navigation li {
+  margin-top: 20px;
+}
+
+.page {
+  display: flex;
+}
+
+.page-title {
+  color: white;
+  font-weight: 700;
+}
+
+.data-block p {
+  font-weight: 600;;
+}
+
+.rounded {
+  border-radius: 15px !important;
+}
+
+.navigation a.sidebar-selected svg {
+  color: #02C1FE;
+}
+
+
+.data-table th {
+  padding: 10px;
+  border-radius: 15px;
+}
+
+.data-table td {
+  padding: 10px;
+}
+
+
+
+.data-table {
+  border-radius: 7px;
+}
+
+.table-striped thead {
+  border: none !important;
+}
+
+.table-striped th {
+  border: none !important;
+}
+
+.table-striped tr {
+  border: none !important;
+}
+
+.data-table {
+  background: linear-gradient(to right, rgb(0, 0, 0), rgb(20, 20, 20));
+  margin-bottom: 0px;
+}
+
+.table-container {
+  background-color: #423E52;
+}
+
+.data-table thead tr {
+  border-bottom: 1px solid #423E52 !important;
+}
+
+.data-table tbody tr:not(:last-child) {
+  border-bottom: 1px solid #423E52 !important;
+}
+
+.data-table tbody td {
+  border: none;
+  color: white !important;
+  font-weight: 500;
+}
