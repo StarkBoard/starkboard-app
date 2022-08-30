@@ -32,7 +32,7 @@ const Layout: React.FC<Props> = ({ children }: Props) => {
   }, [])
 
   return (
-    <div>
+    <div className="body">
       <Header mode={mode} switchMode={() => setMode(mode === 'dark' ? 'light' : 'dark')} />
       <div className="container">
         <div className="row">
