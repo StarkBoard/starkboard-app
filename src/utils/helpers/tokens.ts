@@ -1,19 +1,19 @@
 import { TokenPricesState } from 'store/reducers/tokens-prices.slice'
-import { TvlUnit } from 'store/reducers/tvl-evolution.slice'
+import { TvlBase } from 'store/reducers/tvl-evolution.slice'
 
-const calculateTokensTotalValue = (tvl: TvlUnit, tokenPrices: TokenPricesState): number => {
+const calculateTokensTotalValue = (tvl: TvlBase, tokenPrices: TokenPricesState): number => {
   let total = 0
-  total = total + tvl.eth * tokenPrices.eth
-  total = total + tvl.dai * tokenPrices.dai
-  total = total + tvl.wbtc * tokenPrices.wbtc
-  total = total + tvl.usdt * tokenPrices.usdt
-  total = total + tvl.usdc * tokenPrices.usdc
-  total = total + tvl.stark * tokenPrices.stark
+  total += tvl.eth ? tvl.eth * tokenPrices.eth : 0
+  total += tvl.dai ? tvl.dai * tokenPrices.dai : 0
+  total += tvl.wbtc ? tvl.wbtc * tokenPrices.wbtc : 0
+  total += tvl.usdt ? tvl.usdt * tokenPrices.usdt : 0
+  total += tvl.usdc ? tvl.usdc * tokenPrices.usdc : 0
+  total += tvl.stark ? tvl.stark * tokenPrices.stark : 0
   return total
 }
 
 const getTokensValue = (
-  tvl: TvlUnit,
+  tvl: TvlBase,
   tokenPrices: TokenPricesState
 ) => ({
   eth: tvl.eth * tokenPrices.eth,

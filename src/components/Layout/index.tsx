@@ -22,12 +22,6 @@ const Layout: React.FC<Props> = ({ children }: Props) => {
 
   const dispatch = useAppDispatch()
   const tokensPrices = useSelector<RootState, TokenPricesState>(state => state.tokensPrices)
-  const loadingDailyTvl = useSelector<RootState, boolean>(state => state.dailyTvl.loading)
-  const loadingDailyData = useSelector<RootState, boolean>(state => state.dailyData.loading)
-  const loadingTransfersData = useSelector<RootState, boolean>(state => state.transfers.loading)
-  const loadingTokensPrices = useSelector<RootState, boolean>(state => state.tokensPrices.loading)
-
-  const isAppLoading = loadingDailyTvl || loadingDailyData || loadingTransfersData || loadingTokensPrices
 
   useEffect(() => {
     if (!tokensPrices.loading) {
@@ -53,7 +47,7 @@ const Layout: React.FC<Props> = ({ children }: Props) => {
             <Sidebar />
           </div>
           <div className="col-12 col-md-9 mx-2 mx-md-5">
-            {isAppLoading ? (<Loader />) : children}
+            {children}
           </div>
         </div>
       </div>

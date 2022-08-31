@@ -6,19 +6,22 @@ import { MetricsUnit } from 'store/reducers/metrics.slice'
 import { formatValue } from 'utils/helpers/format'
 import Chart from 'components/Charts'
 import NetworthTable from 'components/Tables/NetWorth'
+import Loader from 'components/Loader'
 
 const Users = () => {
   const metrics = useSelector<RootState, MetricsUnit[]>(state => state.metrics.data)
   const usersEvolution = useMemo(() => metrics.map(metric => ([metric.day.getTime(), metric.wallets])).filter(metrics => metrics[1] > 0), [metrics])
-  const totalUsers = useMemo(() => metrics[metrics.length - 1].wallets, [metrics])
+  const totalUsers = useMemo(() => metrics.length === 0 ? 0 : metrics[metrics.length - 1].wallets, [metrics])
   const totalUsersChange = useMemo(() => {
-    const previousDayUsers = metrics[metrics.length - 2].wallets
+    const previousDayUsers = metrics.length === 0 ? 0 : metrics[metrics.length - 2].wallets
     return 100 * Math.abs((totalUsers - previousDayUsers) / ((totalUsers + previousDayUsers) / 2))
   }, [metrics])
 
-  return (
+  const fetchingData = useSelector<RootState, boolean>(state => state.metrics.loading)
+  const loading = fetchingData || metrics.length === 0 || totalUsers === 0
+
+  const content = (
     <>
-      <h2 className="ps-0 pb-4 page-title">Users Data</h2>
       <div className="row justify-content-between">
         <div className="col-6">
           <DataBlock color="BLACK" title="Total Users" data={formatValue(totalUsers)} />
@@ -45,6 +48,13 @@ const Users = () => {
       </div>
       <h2 className="ps-0 pb-4 page-title">Networth leaderboard (Top 50)</h2>
       <NetworthTable />
+    </>
+  )
+
+  return (
+    <>
+      <h2 className="ps-0 pb-4 page-title">Users Data</h2>
+      {loading ? (<Loader />) : content}
     </>
   )
 }

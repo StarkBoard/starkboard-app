@@ -5,6 +5,7 @@ import { RootState } from 'store/store'
 import { formatCurrency } from 'utils/helpers/format'
 import Chart from 'components/Charts'
 import { VolumeUnit } from 'store/reducers/volume.slice'
+import Loader from 'components/Loader'
 
 const Home = () => {
   const volumeUnits = useSelector<RootState, VolumeUnit[]>(state => state.volume.data)
@@ -18,9 +19,11 @@ const Home = () => {
     return 0
   }, [volumeUnits])
 
-  return (
+  const fetchingData = useSelector<RootState, boolean>(state => state.volume.loading)
+  const loading = fetchingData || volumeUnits.length === 0
+
+  const content = (
     <>
-      <h2 className="ps-0 pb-4 page-title">Volume</h2>
       <div className="row justify-content-between">
         <div className="col-6 col-md-4">
           <DataBlock color="BLACK" title="Total Volume" data={formatCurrency(volumeUnits.length > 0 ? volumeUnits[volumeUnits.length - 1].total : 0)} />
@@ -40,6 +43,13 @@ const Home = () => {
           <Chart data={data} formatter={(value) => formatCurrency(value, 2)} />
         </div>
       </div>
+    </>
+  )
+
+  return (
+    <>
+      <h2 className="ps-0 pb-4 page-title">Volume</h2>
+      {loading ? (<Loader />) : content}
     </>
   )
 }

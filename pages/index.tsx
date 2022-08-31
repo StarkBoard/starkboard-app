@@ -6,6 +6,7 @@ import { RootState } from 'store/store'
 import { TvlUnit } from 'store/reducers/tvl-evolution.slice'
 import { formatCurrency } from 'utils/helpers/format'
 import Chart from 'components/Charts'
+import Loader from 'components/Loader'
 
 const Home = () => {
   const tvlUnits = useSelector<RootState, TvlUnit[]>(state => state.tvlEvolution.data)
@@ -19,9 +20,11 @@ const Home = () => {
     return 0
   }, [tvlUnits])
 
-  return (
+  const fetchingData = useSelector<RootState, boolean>(state => state.tvlEvolution.loading)
+  const loading = fetchingData || tvlUnits.length === 0
+
+  const content = (
     <>
-      <h2 className="ps-0 pb-4 page-title">Starknet overview</h2>
       <div className="row justify-content-between">
         <div className="col-6 col-md-4">
           <DataBlock color="BLACK" title="Total Value Locked (USD)" mobileTitle="TVL" data={formatCurrency(tvlUnits.length > 0 ? tvlUnits[tvlUnits.length - 1].total : 0)} />
@@ -43,6 +46,13 @@ const Home = () => {
       </div>
       <h2 className="ps-0 pb-4 page-title">TVL Ranking</h2>
       <Table />
+    </>
+  )
+
+  return (
+    <>
+      <h2 className="ps-0 pb-4 page-title">Starknet overview</h2>
+      {loading ? (<Loader />) : content}
     </>
   )
 }
