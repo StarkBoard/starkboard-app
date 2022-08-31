@@ -387,5 +387,10 @@ ul {
 .data-table tbody td {
   border: none;
   color: white !important;
-  font-weight: 500;
+  font-weight: bold;
+}
+
+
+.apexcharts-yaxis-label tspan {
+  color: white !important;
 }

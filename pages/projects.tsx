@@ -1,7 +1,7 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
 import DataBlock from 'components/DataBlock'
-import Table from 'components/Table'
+import Table from 'components/Tables/TVL'
 import { ApexOptions } from 'apexcharts'
 
 const Home = () => {

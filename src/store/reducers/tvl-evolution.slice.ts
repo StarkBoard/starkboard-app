@@ -1,15 +1,18 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios, { AxiosResponse } from 'axios'
 import { setAll } from 'utils/helpers'
+import { calculateTvl } from 'utils/helpers/tvl';
 import { RootState } from '../store'
+import { TokenPricesState } from './tokens-prices.slice';
 
 export interface TvlUnit {
-  ETH: number;
-  DAI: number;
-  WBTC: number;
-  USDT: number;
-  USDC: number;
-  STARK: number;
+  eth: number;
+  dai: number;
+  wbtc: number;
+  usdt: number;
+  usdc: number;
+  stark: number;
+  total: number;
   day: Date;
 }
 
@@ -25,7 +28,7 @@ const initialState: TvlEvolutionState = {
 
 export const fetchTvlEvolution = createAsyncThunk(
   'tvlEvolution/fetch',
-  async () => {
+  async (prices: TokenPricesState) => {
     const tokens = ['ETH', 'DAI', 'WBTC', 'USDT', 'USDC', 'STARK']
     const requests = [] as Promise<AxiosResponse>[]
     tokens.forEach(token => {
@@ -44,17 +47,19 @@ export const fetchTvlEvolution = createAsyncThunk(
     const formattedResponses = [] as TvlUnit[]
     // Loop them in order to merge them. Instead of using an instance per token per day, we're merging them into a single instance for every tokens per day.
     responses[0].forEach((unit, index) => {
-      formattedResponses.push({
-        ETH: unit.aggregated_amount,
-        DAI: responses[1][index].aggregated_amount,
-        WBTC: responses[2][index]?.aggregated_amount || 0,
-        USDT: responses[3][index]?.aggregated_amount || 0,
-        USDC: responses[4][index]?.aggregated_amount || 0,
-        STARK: responses[5][index]?.aggregated_amount || 0,
-        day: unit.day
-      })
+      const tvlUnit = {
+        eth: unit.aggregated_amount,
+        dai: responses[1][index].aggregated_amount,
+        wbtc: responses[2][index]?.aggregated_amount || 0,
+        usdt: responses[3][index]?.aggregated_amount || 0,
+        usdc: responses[4][index]?.aggregated_amount || 0,
+        stark: responses[5][index]?.aggregated_amount || 0,
+        day: new Date(unit.day),
+        total: 0
+      } as TvlUnit
+      formattedResponses.push({ ...tvlUnit, total: calculateTvl(tvlUnit, prices) })
     })
-    return [] as TvlUnit[]
+    return formattedResponses as TvlUnit[]
   }
 )
 

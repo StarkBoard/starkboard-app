@@ -4,6 +4,7 @@ import React, { ReactElement, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { fetchDailyData } from 'store/reducers/daily-data.slice'
 import { fetchDailyTvl } from 'store/reducers/daily-tvl.slice'
+import { fetchTokensPrices, TokenPricesState } from 'store/reducers/tokens-prices.slice'
 import { fetchTranfers } from 'store/reducers/transfers.slice'
 import { fetchTvlEvolution } from 'store/reducers/tvl-evolution.slice'
 import { RootState, useAppDispatch } from 'store/store'
@@ -18,16 +19,24 @@ const Layout: React.FC<Props> = ({ children }: Props) => {
   const [mode, setMode] = useState<'light' | 'dark'>('dark')
 
   const dispatch = useAppDispatch()
+  const tokensPrices = useSelector<RootState, TokenPricesState>(state => state.tokensPrices)
   const loadingDailyTvl = useSelector<RootState, boolean>(state => state.dailyTvl.loading)
   const loadingDailyData = useSelector<RootState, boolean>(state => state.dailyData.loading)
   const loadingTransfersData = useSelector<RootState, boolean>(state => state.transfers.loading)
+  const loadingTokensPrices = useSelector<RootState, boolean>(state => state.tokensPrices.loading)
 
-  const isAppLoading = loadingDailyTvl || loadingDailyData || loadingTransfersData
+  const isAppLoading = loadingDailyTvl || loadingDailyData || loadingTransfersData || loadingTokensPrices
 
   useEffect(() => {
+    if (!tokensPrices.loading) {
+      dispatch(fetchTvlEvolution(tokensPrices))
+    }
+  }, [tokensPrices])
+
+  useEffect(() => {
+    dispatch(fetchTokensPrices())
     dispatch(fetchDailyTvl())
     dispatch(fetchDailyData())
-    dispatch(fetchTvlEvolution())
     dispatch(fetchTranfers())
   }, [])
 
