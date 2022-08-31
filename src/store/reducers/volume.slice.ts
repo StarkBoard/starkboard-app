@@ -71,25 +71,20 @@ export const fetchVolumeEvolution = createAsyncThunk(
       })
     })
 
-    // Add the `total` field
+    // Add Date and convert to array
     for (const key of values.keys()) {
       const volumeUnit = values.get(key) as VolumeUnit
-      const total = calculateTokensTotalValue(volumeUnit, prices)
-      const dailyVolume =
-        formattedResponses.length === 0
-          ? total
-          : total - formattedResponses[formattedResponses.length - 1].total
+
       formattedResponses.push({
         ...volumeUnit,
-        total,
-        dailyVolume,
+        total: 0,
+        dailyVolume: 0,
         day: new Date(key)
       })
     }
     // Sort them by increasing timestamp + remove low values in order to have a clean chart
     const filteredData = formattedResponses
       .sort((a, b) => a.day.getTime() - b.day.getTime())
-      .filter((value) => value.total > 300000)
 
     // Map containing the token's last TVL
     const lastValues = new Map<string, number>()
@@ -109,9 +104,14 @@ export const fetchVolumeEvolution = createAsyncThunk(
           lastValues.set(token.toLowerCase(), tempData)
         }
       }
+      const total = calculateTokensTotalValue(filteredData[index], prices)
+      filteredData[index].total = total
+      filteredData[index].dailyVolume = index === 0
+        ? total
+        : total - formattedResponses[index - 1].total
     }
 
-    return filteredData as VolumeUnit[]
+    return filteredData.filter((value) => value.total > 300000) as VolumeUnit[]
   }
 )
 

@@ -63,14 +63,13 @@ export const fetchTvlEvolution = createAsyncThunk(
       })
     })
 
-    // Add the `total` field
     for (const key of values.keys()) {
       const tvlUnit = values.get(key) as TvlBase
-      const total = calculateTokensTotalValue(tvlUnit, prices)
-      formattedResponses.push({ ...tvlUnit, total, day: new Date(key) })
+      formattedResponses.push({ ...tvlUnit, total: 0, day: new Date(key) })
     }
+
     // Sort them by increasing timestamp + remove low values in order to have a clean chart
-    const filteredData = formattedResponses.sort((a, b) => a.day.getTime() - b.day.getTime()).filter(value => value.total > 300000)
+    const filteredData = formattedResponses.sort((a, b) => a.day.getTime() - b.day.getTime())
 
     // Map containing the token's last TVL
     const lastValues = new Map<string, number>()
@@ -89,8 +88,10 @@ export const fetchTvlEvolution = createAsyncThunk(
           lastValues.set(token.toLowerCase(), tempData)
         }
       }
+      filteredData[index].total = calculateTokensTotalValue(filteredData[index], prices)
     }
-    return filteredData as TvlUnit[]
+
+    return filteredData.filter(value => value.total > 300000) as TvlUnit[]
   }
 )
 
