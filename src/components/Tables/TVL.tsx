@@ -62,7 +62,7 @@ const TvlTable = () => {
                     </div>
                     <div></div>
                   </td>
-                  <td className="d-none d-md-table-cell">{token.name.toUpperCase()}</td>
+                  <td>{token.name.toUpperCase()}</td>
                   <td className="d-none d-md-table-cell">Layer 1</td>
                   <td className="d-none d-md-table-cell">
                     <span style={{ color: isNaN(token.change) || token.change === 0 ? 'white' : token.change > 0 ? '#03D9A5' : '#DE365E' }}>
