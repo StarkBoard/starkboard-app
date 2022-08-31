@@ -1,6 +1,5 @@
-import { faTrophy, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { faTrophy } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { TokenPricesState } from 'store/reducers/tokens-prices.slice'
@@ -8,9 +7,7 @@ import { TvlUnit } from 'store/reducers/tvl-evolution.slice'
 import { RootState } from 'store/store'
 import { getTokensTvlValue } from 'utils/helpers/tvl'
 
-const formatNumber = (value: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(value / 1000)
-
-const TvlTable = () => {
+const NetworthTable = () => {
   const tvlUnits = useSelector<RootState, TvlUnit[]>(state => state.tvlEvolution.data)
   const prices = useSelector<RootState, TokenPricesState>(state => state.tokensPrices)
   const [orderedTokens, setOrderedTokens] = useState<{ currentTvl: number, previousTvl: number, change: number, name: string }[]>([])
@@ -39,11 +36,9 @@ const TvlTable = () => {
           <thead>
             <tr>
               <th></th>
-              <th>Name</th>
-              <th className="d-none d-md-table-cell">Category</th>
+              <th>Address</th>
+              <th className="d-none d-md-table-cell">Net Worth</th>
               <th className="d-none d-md-table-cell">24h Change</th>
-              <th>TVL</th>
-              <th className="d-none d-md-table-cell">MCap/TVL</th>
             </tr>
           </thead>
           <tbody>
@@ -56,21 +51,12 @@ const TvlTable = () => {
                         <FontAwesomeIcon icon={faTrophy} style={{ color: index === 0 ? '#E4B200' : index === 1 ? '#C1C1C1' : index === 2 ? '#7F4C35' : '#01C1FD' }} />
                       </div>
                       <div className="mx-3">{index + 1}</div>
-                      <div>
-                        <Image src={`/images/tokens/${token.name}.png`} height={20} width={20} alt={`${token.name} Logo`} className="d-flex " />
-                      </div>
                     </div>
                     <div></div>
                   </td>
-                  <td className="d-none d-md-table-cell">{token.name.toUpperCase()}</td>
-                  <td className="d-none d-md-table-cell">Layer 1</td>
-                  <td className="d-none d-md-table-cell">
-                    <span style={{ color: isNaN(token.change) || token.change === 0 ? 'white' : token.change > 0 ? '#03D9A5' : '#DE365E' }}>
-                      {isNaN(token.change) ? '0' : token.change.toFixed(2)}%
-                    </span>
-                  </td>
-                  <td>{formatNumber(token.currentTvl)}k</td>
-                  <td className="d-none d-md-table-cell"><FontAwesomeIcon icon={faXmark} /></td>
+                  <td>0x</td>
+                  <td>Soon</td>
+                  <td className="d-none d-md-table-cell">Soon</td>
                 </tr>
               ))
             }
@@ -81,4 +67,4 @@ const TvlTable = () => {
   )
 }
 
-export default TvlTable
+export default NetworthTable

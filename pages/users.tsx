@@ -1,68 +1,52 @@
-import React from 'react'
-import dynamic from 'next/dynamic'
+import React, { useMemo } from 'react'
 import DataBlock from 'components/DataBlock'
-import Table from 'components/Tables/TVL'
-import { ApexOptions } from 'apexcharts'
+import { useSelector } from 'react-redux'
+import { RootState } from 'store/store'
+import { MetricsUnit } from 'store/reducers/metrics.slice'
+import { formatValue } from 'utils/helpers/format'
+import Chart from 'components/Charts'
+import NetworthTable from 'components/Tables/NetWorth'
 
-const Home = () => {
-  const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
+const Users = () => {
+  const metrics = useSelector<RootState, MetricsUnit[]>(state => state.metrics.data)
+  const usersEvolution = useMemo(() => metrics.map(metric => ([metric.day.getTime(), metric.wallets])).filter(metrics => metrics[1] > 0), [metrics])
+  const totalUsers = useMemo(() => metrics[metrics.length - 1].wallets, [metrics])
+  const totalUsersChange = useMemo(() => {
+    const previousDayUsers = metrics[metrics.length - 2].wallets
+    return 100 * Math.abs((totalUsers - previousDayUsers) / ((totalUsers + previousDayUsers) / 2))
+  }, [metrics])
 
-  const options = {
-    options: {
-      chart: {
-        type: 'bar'
-      },
-      xaxis: {
-        type: 'datetime',
-        axisBorder: {
-          show: false
-        },
-        axisTicks: {
-          show: false
-        }
-      }
-    },
-    series: [{
-      data: [{
-        x: 'category A',
-        y: 10
-      }, {
-        x: 'category B',
-        y: 18
-      }, {
-        x: 'category C',
-        y: 13
-      }]
-    }]
-  }
   return (
     <>
       <h2 className="ps-0 pb-4 page-title">Users Data</h2>
       <div className="row justify-content-between">
-        <div className="col-6 col-md-4">
-          <DataBlock color="BLACK" title="Total Users" data="56.5k" />
+        <div className="col-6">
+          <DataBlock color="BLACK" title="Total Users" data={formatValue(totalUsers)} />
         </div>
-        <div className="col-6 col-md-4">
-          <DataBlock color="BLUE" title="Change (last 24 hours)" mobileTitle="24h Change" data="-3.3%" />
-        </div>
-        <div className="col-12 col-md-4 mt-2 mt-md-0">
-          <DataBlock color="BLACK" title="Average value per user" data="$39.3" />
+        <div className="col-6">
+          <DataBlock color="BLUE" title="Change (last 24 hours)" mobileTitle="24h Change" data={`${totalUsersChange > 0 ? '+' : ''}${totalUsersChange.toFixed(2)}%`} />
         </div>
       </div>
       <div className="container my-5 p-2 black-gradient rounded">
+        <div className="row text-white text-center mt-3">
+          <h6 className="mb-0 font-weight-bold">Total Users Evolution</h6>
+        </div>
         <div className="row">
-          <Chart
-            options={options.options as ApexOptions}
-            series={options.series}
-            type="bar"
-            height="400"
-          />
+          <Chart data={usersEvolution} formatter={value => formatValue(value)} />
+        </div>
+      </div>
+      <div className="row justify-content-between mb-5">
+        <div className="col-6">
+          <DataBlock color="BLACK" title="Unique Daily Users" data={'Soon'} />
+        </div>
+        <div className="col-6">
+          <DataBlock color="BLUE" title="Average value per user" data="Soon" />
         </div>
       </div>
       <h2 className="ps-0 pb-4 page-title">Networth leaderboard (Top 50)</h2>
-      <Table />
+      <NetworthTable />
     </>
   )
 }
 
-export default Home
+export default Users

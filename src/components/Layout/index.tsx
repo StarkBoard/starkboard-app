@@ -4,6 +4,7 @@ import React, { ReactElement, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { fetchDailyData } from 'store/reducers/daily-data.slice'
 import { fetchDailyTvl } from 'store/reducers/daily-tvl.slice'
+import { fetchMetrics } from 'store/reducers/metrics.slice'
 import { fetchTokensPrices, TokenPricesState } from 'store/reducers/tokens-prices.slice'
 import { fetchTranfers } from 'store/reducers/transfers.slice'
 import { fetchTvlEvolution } from 'store/reducers/tvl-evolution.slice'
@@ -35,6 +36,7 @@ const Layout: React.FC<Props> = ({ children }: Props) => {
 
   useEffect(() => {
     dispatch(fetchTokensPrices())
+    dispatch(fetchMetrics())
     dispatch(fetchDailyTvl())
     dispatch(fetchDailyData())
     dispatch(fetchTranfers())
