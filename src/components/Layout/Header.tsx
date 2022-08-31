@@ -42,7 +42,7 @@ const Header: React.FC<Props> = ({ mode, network, switchNetwork }: Props) => {
               <div className="d-flex flex-row">
                 {network && (
                   <p id="chain-name" onClick={switchNetwork}>
-                    <FontAwesomeIcon icon={faArrowRightArrowLeft} />
+                    <FontAwesomeIcon icon={faArrowRightArrowLeft} className="d-none d-md-inline-block" />
                     {network.charAt(0).toUpperCase() + network.slice(1).toLowerCase()}
                   </p>
                 )}
