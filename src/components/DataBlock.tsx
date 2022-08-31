@@ -3,7 +3,7 @@ import React from 'react'
 interface Props {
   color: 'BLACK' | 'BLUE',
   classes?: string,
-  title: string,
+  title: string | React.ReactElement,
   data: string,
   mobileTitle?: string
 }

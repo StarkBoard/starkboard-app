@@ -25,7 +25,8 @@ const TvlTable = () => {
           currentTvl,
           previousTvl,
           name: token,
-          change: 100 * Math.abs((currentTvl - previousTvl) / ((currentTvl + previousTvl) / 2))
+          change: ((currentTvl - previousTvl) / previousTvl) * 100
+
         })
       }
       setOrderedTokens(orderedTokens.sort((a, b) => (b.currentTvl - a.currentTvl)))

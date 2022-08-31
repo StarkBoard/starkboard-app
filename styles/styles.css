@@ -402,3 +402,17 @@ ul {
 .apexcharts-yaxis-label tspan {
   color: white !important;
 }
+
+.period-selection small {
+  font-weight: 500;
+  margin: 0px 2px;
+  cursor: pointer;
+}
+
+.period-selection small.selected {
+  font-weight: 600 !important;
+}
+
+.period-selection p {
+  margin-bottom: 0;
+}

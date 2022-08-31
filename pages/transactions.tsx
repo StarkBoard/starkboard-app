@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import DataBlock from 'components/DataBlock'
 import { useSelector } from 'react-redux'
 import { RootState } from 'store/store'
@@ -6,30 +6,47 @@ import { MetricsUnit } from 'store/reducers/metrics.slice'
 import { formatValue } from 'utils/helpers/format'
 import Chart from 'components/Charts'
 import Loader from 'components/Loader'
+import PeriodSelection from 'components/PeriodSelection'
 
 const Transactions = () => {
   const metrics = useSelector<RootState, MetricsUnit[]>(state => state.metrics.data)
   const dailyTransactions = useSelector<RootState, number[][]>(state => state.dailyData.data.map(data => ([data.day.getTime(), data.count_txs])))
-  const totalTransactions = useMemo(() => metrics.length === 0 ? 0 : metrics[metrics.length - 1].transactions, [metrics])
+
+  const [selectedVariationPeriod, setSelectedVariationPeriod] = useState('M')
+  const [selectedCumulativePeriod, setSelectedCumulativePeriod] = useState('D')
+  const cumulativeRollbackPeriod = selectedCumulativePeriod === 'D' ? 1 : selectedCumulativePeriod === 'W' ? 7 : selectedCumulativePeriod === 'M' ? 31 : metrics.length - 1
+
+  const totalTransactions = useMemo(() => {
+    if (metrics.length === 0) return 0
+    const current = metrics[metrics.length - 1].transactions
+    const previous = metrics[metrics.length - cumulativeRollbackPeriod - 1].transactions
+    return current - previous
+  }, [metrics, cumulativeRollbackPeriod])
+
   const totalTransactionsChange = useMemo(() => {
-    const previousDayTransactions = metrics.length === 0 ? 0 : metrics[metrics.length - 2].transactions
-    return 100 * Math.abs((totalTransactions - previousDayTransactions) / ((totalTransactions + previousDayTransactions) / 2))
-  }, [metrics])
+    if (metrics.length > 2) {
+      const rollbackPeriod = selectedVariationPeriod === 'D' ? 1 : selectedVariationPeriod === 'W' ? 7 : selectedVariationPeriod === 'M' ? 31 : metrics.length - 1
+      const current = metrics[metrics.length - 1].transactions
+      const previous = metrics[metrics.length - 1 - rollbackPeriod].transactions
+      return ((current - previous) / previous) * 100
+    }
+    return 0
+  }, [metrics, selectedVariationPeriod])
 
   const fetchingData = useSelector<RootState, boolean>(state => state.metrics.loading)
   const loading = fetchingData || metrics.length === 0 || totalTransactions === 0
 
+  const periodVariationSelection = (<PeriodSelection selected={selectedVariationPeriod} setSelected={setSelectedVariationPeriod} />)
+  const periodCumulativeSelection = (<PeriodSelection selected={selectedCumulativePeriod} setSelected={setSelectedCumulativePeriod} prefix='Total Transactions' />)
+
   const content = (
     <>
       <div className="row justify-content-between">
-        <div className="col-6 col-md-4">
-          <DataBlock color="BLACK" title="Total Transactions" mobileTitle="Total Tx" data={formatValue(totalTransactions)} />
+        <div className="col-12 col-md-6">
+          <DataBlock color="BLACK" title={periodCumulativeSelection} data={formatValue(totalTransactions)} />
         </div>
-        <div className="col-6 col-md-4">
-          <DataBlock color="BLUE" title="Change (last 24 hours)" mobileTitle="24h Change" data={`${totalTransactionsChange > 0 ? '+' : ''}${totalTransactionsChange.toFixed(2)}%`} />
-        </div>
-        <div className="col-12 col-md-4 mt-2 mt-md-0">
-          <DataBlock color="BLACK" title="Transactions per day" data={formatValue(metrics.length === 0 ? 0 : metrics[metrics.length - 1].transactions - metrics[metrics.length - 2].transactions)} />
+        <div className="col-12 col-md-6 mt-2 mt-md-0">
+          <DataBlock color="BLUE" title={periodVariationSelection} data={`${totalTransactionsChange > 0 ? '+' : ''}${totalTransactionsChange.toFixed(2)}%`} />
         </div>
       </div>
       <div className="container my-5 p-2 black-gradient rounded">

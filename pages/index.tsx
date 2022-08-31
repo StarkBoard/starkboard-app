@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import DataBlock from 'components/DataBlock'
 import Table from 'components/Tables/TVL'
 import { useSelector } from 'react-redux'
@@ -7,30 +7,34 @@ import { TvlUnit } from 'store/reducers/tvl-evolution.slice'
 import { formatCurrency } from 'utils/helpers/format'
 import Chart from 'components/Charts'
 import Loader from 'components/Loader'
+import PeriodSelection from 'components/PeriodSelection'
 
 const Home = () => {
+  const [selectedPeriod, setSelectedPeriod] = useState('M')
+
   const tvlUnits = useSelector<RootState, TvlUnit[]>(state => state.tvlEvolution.data)
   const data = useMemo(() => tvlUnits.map(tvl => ([tvl.day.getTime(), tvl.total])), [tvlUnits])
+  const totalTvl = useMemo(() => tvlUnits.length > 0 ? tvlUnits[tvlUnits.length - 1].total : 0, [tvlUnits])
+
   const tvlChange = useMemo(() => {
-    if (tvlUnits.length > 2) {
-      const currentTvl = tvlUnits[tvlUnits.length - 1].total
-      const previousDayTvl = tvlUnits[tvlUnits.length - 2].total
-      return 100 * Math.abs((currentTvl - previousDayTvl) / ((currentTvl + previousDayTvl) / 2))
-    }
-    return 0
-  }, [tvlUnits])
+    const rollbackPeriod = selectedPeriod === 'D' ? 1 : selectedPeriod === 'W' ? 7 : selectedPeriod === 'M' ? 31 : tvlUnits.length - 1
+    const previous = tvlUnits.length === 0 ? 0 : tvlUnits[tvlUnits.length - 1 - rollbackPeriod].total
+    return ((totalTvl - previous) / previous) * 100
+  }, [tvlUnits, selectedPeriod])
 
   const fetchingData = useSelector<RootState, boolean>(state => state.tvlEvolution.loading)
   const loading = fetchingData || tvlUnits.length === 0
+
+  const periodSelection = (<PeriodSelection selected={selectedPeriod} setSelected={setSelectedPeriod} />)
 
   const content = (
     <>
       <div className="row justify-content-between">
         <div className="col-6 col-md-4">
-          <DataBlock color="BLACK" title="Total Value Locked (USD)" mobileTitle="TVL" data={formatCurrency(tvlUnits.length > 0 ? tvlUnits[tvlUnits.length - 1].total : 0)} />
+          <DataBlock color="BLACK" title="Total Value Locked (USD)" mobileTitle="TVL" data={formatCurrency(totalTvl)} />
         </div>
         <div className="col-6 col-md-4">
-          <DataBlock color="BLUE" title="Change (last 24 hours)" mobileTitle="24h Change" data={`${tvlChange > 0 ? '+' : ''}${tvlChange.toFixed(2)}%`} />
+          <DataBlock color="BLUE" title={periodSelection} data={`${tvlChange > 0 ? '+' : ''}${tvlChange.toFixed(2)}%`} />
         </div>
         <div className="col-12 col-md-4 mt-2 mt-md-0">
           <DataBlock color="BLACK" title="TVL in non-native" data="Soon" />

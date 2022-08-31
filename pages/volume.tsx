@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import DataBlock from 'components/DataBlock'
 import { useSelector } from 'react-redux'
 import { RootState } from 'store/store'
@@ -6,33 +6,46 @@ import { formatCurrency } from 'utils/helpers/format'
 import Chart from 'components/Charts'
 import { VolumeUnit } from 'store/reducers/volume.slice'
 import Loader from 'components/Loader'
+import PeriodSelection from 'components/PeriodSelection'
 
-const Home = () => {
+const Volume = () => {
   const volumeUnits = useSelector<RootState, VolumeUnit[]>(state => state.volume.data)
   const data = useMemo(() => volumeUnits.map(volume => ([volume.day.getTime(), volume.dailyVolume])), [volumeUnits])
+
+  const [selectedVariationPeriod, setSelectedVariationPeriod] = useState('M')
+  const [selectedCumulativePeriod, setSelectedCumulativePeriod] = useState('D')
+  const cumulativeRollbackPeriod = selectedCumulativePeriod === 'D' ? 1 : selectedCumulativePeriod === 'W' ? 7 : selectedCumulativePeriod === 'M' ? 31 : volumeUnits.length - 1
+  const totalVolume = useMemo(() => {
+    if (volumeUnits.length === 0) return 0
+    const current = volumeUnits[volumeUnits.length - 1].total
+    const previous = volumeUnits[volumeUnits.length - cumulativeRollbackPeriod - 1].total
+    return current - previous
+  }, [volumeUnits, cumulativeRollbackPeriod])
+
   const volumeChange = useMemo(() => {
     if (volumeUnits.length > 2) {
+      const rollbackPeriod = selectedVariationPeriod === 'D' ? 1 : selectedVariationPeriod === 'W' ? 7 : selectedVariationPeriod === 'M' ? 31 : volumeUnits.length - 1
       const currentVolume = volumeUnits[volumeUnits.length - 1].total
-      const previousDayVolume = volumeUnits[volumeUnits.length - 2].total
-      return 100 * Math.abs((currentVolume - previousDayVolume) / ((currentVolume + previousDayVolume) / 2))
+      const previousPeriodVolume = volumeUnits[volumeUnits.length - 1 - rollbackPeriod].total
+      return ((currentVolume - previousPeriodVolume) / previousPeriodVolume) * 100
     }
     return 0
-  }, [volumeUnits])
+  }, [volumeUnits, selectedVariationPeriod])
 
   const fetchingData = useSelector<RootState, boolean>(state => state.volume.loading)
   const loading = fetchingData || volumeUnits.length === 0
 
+  const periodVariationSelection = (<PeriodSelection selected={selectedVariationPeriod} setSelected={setSelectedVariationPeriod} />)
+  const periodCumulativeSelection = (<PeriodSelection selected={selectedCumulativePeriod} setSelected={setSelectedCumulativePeriod} prefix='Total Volume' />)
+
   const content = (
     <>
       <div className="row justify-content-between">
-        <div className="col-6 col-md-4">
-          <DataBlock color="BLACK" title="Total Volume" data={formatCurrency(volumeUnits.length > 0 ? volumeUnits[volumeUnits.length - 1].total : 0)} />
+        <div className="col-12 col-md-6">
+          <DataBlock color="BLACK" title={periodCumulativeSelection} data={formatCurrency(totalVolume)} />
         </div>
-        <div className="col-6 col-md-4">
-          <DataBlock color="BLUE" title="Change (last 24 hours)" mobileTitle="24h Change" data={`${volumeChange > 0 ? '+' : ''}${volumeChange.toFixed(2)}%`} />
-        </div>
-        <div className="col-12 col-md-4 mt-2 mt-md-0">
-          <DataBlock color="BLACK" title="Volume (last 24 hours)" data={formatCurrency(volumeUnits.length > 0 ? volumeUnits[volumeUnits.length - 2].dailyVolume : 0)} />
+        <div className="col-12 col-md-6 mt-2 mt-md-0">
+          <DataBlock color="BLUE" title={periodVariationSelection} data={`${volumeChange > 0 ? '+' : ''}${volumeChange.toFixed(2)}%`} />
         </div>
       </div>
       <div className="container my-5 p-2 black-gradient rounded">
@@ -54,4 +67,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Volume
