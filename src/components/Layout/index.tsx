@@ -11,7 +11,7 @@ import { fetchVolumeEvolution } from 'store/reducers/volume.slice'
 import { RootState, useAppDispatch } from 'store/store'
 import Footer from './Footer'
 import Header from './Header'
-import { getCookie, setCookie } from 'cookies-next';
+import { getCookie, setCookie } from 'cookies-next'
 import { useRouter } from 'next/router'
 
 interface Props {
