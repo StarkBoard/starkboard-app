@@ -29,7 +29,8 @@ export const fetchDailyTvl = createAsyncThunk('dailyTvl/fetch', async () => {
     }, {
       headers: { 'x-api-key': process.env.NEXT_PUBLIC_API_KEY || '' }
     })
-  return data.result as DailyTvl[]
+  const formattedData = (data.result as DailyTvl[]).map(unit => ({ ...unit, day: new Date(unit.day) }))
+  return formattedData
 })
 
 const dailyTvlSlice = createSlice({

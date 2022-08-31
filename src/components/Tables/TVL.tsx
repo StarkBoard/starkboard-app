@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { TokenPricesState } from 'store/reducers/tokens-prices.slice'
 import { TvlUnit } from 'store/reducers/tvl-evolution.slice'
 import { RootState } from 'store/store'
-import { getTokensTvlValue } from 'utils/helpers/tvl'
+import { getTokensValue } from 'utils/helpers/tokens'
 
 const formatNumber = (value: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(value / 1000)
 
@@ -17,8 +17,8 @@ const TvlTable = () => {
 
   useEffect(() => {
     if (tvlUnits.length > 2) {
-      const currentTokensTvl = getTokensTvlValue(tvlUnits[tvlUnits.length - 1], prices)
-      const previousTokensTvl = getTokensTvlValue(tvlUnits[tvlUnits.length - 2], prices)
+      const currentTokensTvl = getTokensValue(tvlUnits[tvlUnits.length - 1], prices)
+      const previousTokensTvl = getTokensValue(tvlUnits[tvlUnits.length - 2], prices)
       const orderedTokens = []
       for (const [token, currentTvl] of Object.entries(currentTokensTvl)) {
         const previousTvl = previousTokensTvl[token as 'eth']

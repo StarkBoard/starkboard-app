@@ -2,10 +2,11 @@ import { configureStore } from '@reduxjs/toolkit'
 import { useDispatch } from 'react-redux'
 import dailyTvlSlice from './reducers/daily-tvl.slice'
 import dailyDataSlice from './reducers/daily-data.slice'
-import transfersSlice from './reducers/transfers.slice';
-import tvlEvolutionSlice from './reducers/tvl-evolution.slice';
-import tokensPricesSlice from './reducers/tokens-prices.slice';
-import metricsSlice from './reducers/metrics.slice';
+import transfersSlice from './reducers/transfers.slice'
+import tvlEvolutionSlice from './reducers/tvl-evolution.slice'
+import tokensPricesSlice from './reducers/tokens-prices.slice'
+import metricsSlice from './reducers/metrics.slice'
+import volumeSlice from './reducers/volume.slice'
 
 export interface AppState {
   dailyTvl: typeof dailyTvlSlice;
@@ -14,6 +15,7 @@ export interface AppState {
   tvlEvolution: typeof tvlEvolutionSlice;
   tokensPrices: typeof tokensPricesSlice;
   metrics: typeof metricsSlice;
+  volue: typeof volumeSlice;
 }
 
 const store = configureStore({
@@ -23,7 +25,8 @@ const store = configureStore({
     dailyData: dailyDataSlice,
     tvlEvolution: tvlEvolutionSlice,
     tokensPrices: tokensPricesSlice,
-    metrics: metricsSlice
+    metrics: metricsSlice,
+    volume: volumeSlice
   },
   middleware: getDefaultMiddleware => getDefaultMiddleware({ serializableCheck: false })
 })

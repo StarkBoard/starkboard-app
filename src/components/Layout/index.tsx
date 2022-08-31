@@ -8,6 +8,7 @@ import { fetchMetrics } from 'store/reducers/metrics.slice'
 import { fetchTokensPrices, TokenPricesState } from 'store/reducers/tokens-prices.slice'
 import { fetchTranfers } from 'store/reducers/transfers.slice'
 import { fetchTvlEvolution } from 'store/reducers/tvl-evolution.slice'
+import { fetchVolumeEvolution } from 'store/reducers/volume.slice'
 import { RootState, useAppDispatch } from 'store/store'
 import Footer from './Footer'
 import Header from './Header'
@@ -31,6 +32,7 @@ const Layout: React.FC<Props> = ({ children }: Props) => {
   useEffect(() => {
     if (!tokensPrices.loading) {
       dispatch(fetchTvlEvolution(tokensPrices))
+      dispatch(fetchVolumeEvolution(tokensPrices))
     }
   }, [tokensPrices])
 

@@ -310,6 +310,14 @@ ul {
   font-weight: 600;
 }
 
+.navigation span {
+  text-decoration: none;
+  text-align: left;
+  font-size: 15px;
+  margin-left: 15px;
+  font-weight: 600;
+}
+
 .navigation svg {
   margin-right: 20px;
 }

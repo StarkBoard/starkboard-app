@@ -1,60 +1,42 @@
-import React from 'react'
-import dynamic from 'next/dynamic'
+import React, { useMemo } from 'react'
 import DataBlock from 'components/DataBlock'
-import { ApexOptions } from 'apexcharts'
+import { useSelector } from 'react-redux'
+import { RootState } from 'store/store'
+import { MetricsUnit } from 'store/reducers/metrics.slice'
+import { formatValue } from 'utils/helpers/format'
+import Chart from 'components/Charts'
 
-const Home = () => {
-  const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
+const Transactions = () => {
+  const metrics = useSelector<RootState, MetricsUnit[]>(state => state.metrics.data)
+  const dailyTransactions = useSelector<RootState, number[][]>(state => state.dailyData.data.map(data => ([data.day.getTime(), data.count_txs])))
+  const totalTransactions = useMemo(() => metrics[metrics.length - 1].transactions, [metrics])
+  const totalTransactionsChange = useMemo(() => {
+    const previousDayTransactions = metrics[metrics.length - 2].transactions
+    return 100 * Math.abs((totalTransactions - previousDayTransactions) / ((totalTransactions + previousDayTransactions) / 2))
+  }, [metrics])
 
-  const options = {
-    options: {
-      chart: {
-        type: 'bar'
-      },
-      xaxis: {
-        type: 'datetime',
-        axisBorder: {
-          show: false
-        },
-        axisTicks: {
-          show: false
-        }
-      }
-    },
-    series: [{
-      data: [{
-        x: 'category A',
-        y: 10
-      }, {
-        x: 'category B',
-        y: 18
-      }, {
-        x: 'category C',
-        y: 13
-      }]
-    }]
-  }
   return (
     <>
       <h2 className="ps-0 pb-4 page-title">Transactions</h2>
       <div className="row justify-content-between">
         <div className="col-6 col-md-4">
-          <DataBlock color="BLACK" title="Total Transactions" mobileTitle="Total Tx" data="988.5k" />
+          <DataBlock color="BLACK" title="Total Transactions" mobileTitle="Total Tx" data={formatValue(totalTransactions)} />
         </div>
         <div className="col-6 col-md-4">
-          <DataBlock color="BLUE" title="Change (last 24 hours)" mobileTitle="24h Change" data="+2.2%" />
+          <DataBlock color="BLUE" title="Change (last 24 hours)" mobileTitle="24h Change" data={`${totalTransactionsChange > 0 ? '+' : ''}${totalTransactionsChange.toFixed(2)}%`} />
         </div>
         <div className="col-12 col-md-4 mt-2 mt-md-0">
-          <DataBlock color="BLACK" title="Transactions per day" data="9.9k" />
+          <DataBlock color="BLACK" title="Transactions per day" data={formatValue(metrics[metrics.length - 1].transactions - metrics[metrics.length - 2].transactions)} />
         </div>
       </div>
       <div className="container my-5 p-2 black-gradient rounded">
+        <div className="row text-white text-center mt-3">
+          <h6 className="mb-0 font-weight-bold">Daily Transactions</h6>
+        </div>
         <div className="row">
           <Chart
-            options={options.options as ApexOptions}
-            series={options.series}
-            type="bar"
-            height="400"
+            formatter={data => formatValue(data)}
+            data={dailyTransactions}
           />
         </div>
       </div>
@@ -62,4 +44,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Transactions

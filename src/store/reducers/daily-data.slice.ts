@@ -30,7 +30,8 @@ export const fetchDailyData = createAsyncThunk('dailyData/fetch', async () => {
     }, {
       headers: { 'x-api-key': process.env.NEXT_PUBLIC_API_KEY || '' }
     })
-  return data.result as DailyData[]
+  const formattedData = (data.result as DailyData[]).map(unit => ({ ...unit, day: new Date(unit.day) }))
+  return formattedData
 })
 
 const dailyDataSlice = createSlice({

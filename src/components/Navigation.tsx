@@ -23,46 +23,59 @@ const Navigation = () => {
       icon: faArrowRightArrowLeft
     },
     {
-      path: '/validators',
-      title: 'Validators',
-      icon: faCircleNodes
-    },
-    {
-      path: '/projects',
-      title: 'New Projects',
-      icon: faClone
-    },
-    {
       path: '/volume',
       title: 'Volume',
       icon: faSackDollar
     },
     {
+      path: '/validators',
+      title: 'Validators',
+      icon: faCircleNodes,
+      disabled: true
+    },
+    {
+      path: '/projects',
+      title: 'New Projects',
+      icon: faClone,
+      disabled: true
+    },
+    {
       path: '/bridge',
       title: 'Bridge',
-      icon: faBridge
+      icon: faBridge,
+      disabled: true
     },
     {
       path: '/comparison',
       title: 'Comparison',
-      icon: faArrowsLeftRight
+      icon: faArrowsLeftRight,
+      disabled: true
     }
   ]
   return (
-      <ul className="navigation">
-        {
-          links.map(link => (
-            <li key={link.path}>
-              <Link href={link.path} passHref={true}>
-                <a className={router.pathname === link.path.toLowerCase() ? 'sidebar-selected' : ''}>
-                  <FontAwesomeIcon icon={link.icon} />
-                  {link.title}
-                </a>
-              </Link>
-            </li>
-          ))
-        }
-      </ul>
+    <ul className="navigation">
+      {
+        links.map(link => (
+          <li key={link.path}>
+            {
+              link.disabled
+                ? (
+                <span><FontAwesomeIcon icon={link.icon} />
+                  {link.title}</span>
+                  )
+                : (
+                <Link href={link.path} passHref={true}>
+                  <a className={router.pathname === link.path.toLowerCase() ? 'sidebar-selected' : ''}>
+                    <FontAwesomeIcon icon={link.icon} />
+                    {link.title}
+                  </a>
+                </Link>
+                  )
+            }
+          </li>
+        ))
+      }
+    </ul>
   )
 }
 
