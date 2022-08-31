@@ -6,9 +6,8 @@ import { useSelector } from 'react-redux'
 import { TokenPricesState } from 'store/reducers/tokens-prices.slice'
 import { TvlUnit } from 'store/reducers/tvl-evolution.slice'
 import { RootState } from 'store/store'
+import { formatCurrency } from 'utils/helpers/format'
 import { getTokensValue } from 'utils/helpers/tokens'
-
-const formatNumber = (value: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(value / 1000)
 
 const TvlTable = () => {
   const tvlUnits = useSelector<RootState, TvlUnit[]>(state => state.tvlEvolution.data)
@@ -69,7 +68,7 @@ const TvlTable = () => {
                       {isNaN(token.change) ? '0' : token.change.toFixed(2)}%
                     </span>
                   </td>
-                  <td>{formatNumber(token.currentTvl)}k</td>
+                  <td>{formatCurrency(token.currentTvl)}</td>
                   <td className="d-none d-md-table-cell"><FontAwesomeIcon icon={faXmark} /></td>
                 </tr>
               ))
