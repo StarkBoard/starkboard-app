@@ -7,13 +7,13 @@ interface Props {
 }
 const PeriodSelection: React.FC<Props> = ({ selected, setSelected, prefix = 'Change' }: Props) => {
   return (
-    <div className="d-flex flex-md-row text-xs period-selection">
-      <p>{prefix} <small>(</small></p>
+    <span className="d-flex flex-md-row text-xs period-selection">
+      <span>{prefix} <small>(</small></span>
       {['D', 'W', 'M', 'All'].map(period => (
         <span key={period} onClick={() => setSelected(period)}><small className={selected === period ? 'selected' : ''}>{period}</small></span>
       ))}
-      <p><small>)</small></p>
-    </div>
+      <span><small>)</small></span>
+    </span>
   )
 }
 

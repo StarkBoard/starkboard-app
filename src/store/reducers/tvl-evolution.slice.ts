@@ -28,16 +28,21 @@ const initialState: TvlEvolutionState = {
   loading: true
 }
 
+interface Parameters {
+  prices: TokenPricesState;
+  network: 'mainnet' | 'testnet';
+}
 export const fetchTvlEvolution = createAsyncThunk(
   'tvlEvolution/fetch',
-  async (prices: TokenPricesState) => {
+  async ({ prices, network }: Parameters) => {
     const tokens = ['ETH', 'DAI', 'WBTC', 'USDT', 'USDC', 'STARK']
     const requests = [] as Promise<AxiosResponse>[]
     tokens.forEach(token => {
       requests.push(axios.post(
         process.env.NEXT_PUBLIC_BACKEND_API + '/getTokenTVLEvolution',
         {
-          token
+          token,
+          network
         },
         {
           headers: { 'x-api-key': process.env.NEXT_PUBLIC_API_KEY || '' }

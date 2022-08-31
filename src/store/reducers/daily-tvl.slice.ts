@@ -22,10 +22,11 @@ const initialState: DailyTvlState = {
   loading: true
 }
 
-export const fetchDailyTvl = createAsyncThunk('dailyTvl/fetch', async () => {
+export const fetchDailyTvl = createAsyncThunk('dailyTvl/fetch', async (network: 'mainnet' | 'testnet') => {
   const { data } = await axios.post(process.env.NEXT_PUBLIC_BACKEND_API + '/getDailyTVLData',
     {
-      only_daily: false
+      only_daily: false,
+      network
     }, {
       headers: { 'x-api-key': process.env.NEXT_PUBLIC_API_KEY || '' }
     })

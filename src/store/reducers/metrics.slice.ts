@@ -21,14 +21,15 @@ const initialState: MetricsState = {
 
 export const fetchMetrics = createAsyncThunk(
   'metrics/fetch',
-  async () => {
+  async (network: 'mainnet' | 'testnet') => {
     const fields = ['count_new_wallets', 'count_txs']
     const requests = [] as Promise<AxiosResponse>[]
     fields.forEach(field => {
       requests.push(axios.post(
         process.env.NEXT_PUBLIC_BACKEND_API + '/getCumulativeMetricEvolution',
         {
-          field
+          field,
+          network
         },
         {
           headers: { 'x-api-key': process.env.NEXT_PUBLIC_API_KEY || '' }

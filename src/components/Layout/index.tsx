@@ -11,6 +11,8 @@ import { fetchVolumeEvolution } from 'store/reducers/volume.slice'
 import { RootState, useAppDispatch } from 'store/store'
 import Footer from './Footer'
 import Header from './Header'
+import { getCookie, setCookie } from 'cookies-next';
+import { useRouter } from 'next/router'
 
 interface Props {
   children: ReactElement;
@@ -18,28 +20,38 @@ interface Props {
 
 const Layout: React.FC<Props> = ({ children }: Props) => {
   const [mode, setMode] = useState<'light' | 'dark'>('dark')
+  const [network, setNetwork] = useState<'mainnet' | 'testnet'>()
+  const router = useRouter()
 
   const dispatch = useAppDispatch()
   const tokensPrices = useSelector<RootState, TokenPricesState>(state => state.tokensPrices)
 
+  const switchNetwork = () => {
+    setCookie('network', network === 'mainnet' ? 'testnet' : 'mainnet')
+    router.reload()
+  }
+
   useEffect(() => {
-    if (!tokensPrices.loading) {
-      dispatch(fetchTvlEvolution(tokensPrices))
-      dispatch(fetchVolumeEvolution(tokensPrices))
+    if (!tokensPrices.loading && network) {
+      dispatch(fetchTvlEvolution({ prices: tokensPrices, network }))
+      dispatch(fetchVolumeEvolution({ prices: tokensPrices, network }))
     }
   }, [tokensPrices])
 
   useEffect(() => {
+    const network = getCookie('network') as 'mainnet' | 'testnet' || 'mainnet'
+    setNetwork(network)
+
     dispatch(fetchTokensPrices())
-    dispatch(fetchMetrics())
-    dispatch(fetchDailyTvl())
-    dispatch(fetchDailyData())
-    dispatch(fetchTranfers())
+    dispatch(fetchMetrics(network))
+    dispatch(fetchDailyTvl(network))
+    dispatch(fetchDailyData(network))
+    dispatch(fetchTranfers(network))
   }, [])
 
   return (
     <div className="body">
-      <Header mode={mode} switchMode={() => setMode(mode === 'dark' ? 'light' : 'dark')} />
+      <Header mode={mode} switchMode={() => setMode(mode === 'dark' ? 'light' : 'dark')} network={network} switchNetwork={switchNetwork}/>
       <div className="container">
         <div className="row">
           <div className="col-12 col-md-2 mt-4">

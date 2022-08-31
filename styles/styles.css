@@ -362,8 +362,6 @@ ul {
   padding: 10px;
 }
 
-
-
 .data-table {
   border-radius: 7px;
 }
@@ -420,4 +418,26 @@ ul {
 
 .period-selection p {
   margin-bottom: 0;
+}
+
+#chain-name {
+  font-size: 17px;
+  margin-bottom: 0px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+}
+
+#chain-name svg {
+  margin-right: 10px;
+  transition: 0s;
+}
+
+#chain-name:hover {
+  color: #02C1FE;
+}
+
+#chain-name:hover svg {
+  color: #02C1FE;
+  transition: 0s;
 }

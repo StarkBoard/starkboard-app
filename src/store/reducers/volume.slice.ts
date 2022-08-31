@@ -28,33 +28,46 @@ const initialState: VolumeEvolutionState = {
   loading: true
 }
 
+interface Parameters {
+  prices: TokenPricesState;
+  network: 'mainnet' | 'testnet';
+}
 export const fetchVolumeEvolution = createAsyncThunk(
   'volumeEvolution/fetch',
-  async (prices: TokenPricesState) => {
+  async ({ prices, network }: Parameters) => {
     const tokens = ['ETH', 'DAI', 'WBTC', 'USDT', 'USDC', 'STARK']
     const requests = [] as Promise<AxiosResponse>[]
-    tokens.forEach(token => {
-      requests.push(axios.post(
-        process.env.NEXT_PUBLIC_BACKEND_API + '/getCummulativeTransferVolumeEvolution',
-        {
-          token
-        },
-        {
-          headers: { 'x-api-key': process.env.NEXT_PUBLIC_API_KEY || '' }
-        }
-      ))
+    tokens.forEach((token) => {
+      requests.push(
+        axios.post(
+          process.env.NEXT_PUBLIC_BACKEND_API +
+            '/getCummulativeTransferVolumeEvolution',
+          {
+            token,
+            network
+          },
+          {
+            headers: { 'x-api-key': process.env.NEXT_PUBLIC_API_KEY || '' }
+          }
+        )
+      )
     })
     // Load Store Volume Evolution instances
-    const responses = (await Promise.all(requests)).map(response => response.data.result) as { aggregated_amount: number, token: string, day: Date }[][]
+    const responses = (await Promise.all(requests)).map(
+      (response) => response.data.result
+    ) as { aggregated_amount: number; token: string; day: Date }[][]
     const formattedResponses = [] as VolumeUnit[]
 
     const values = new Map<number, TvlUnit>()
 
     // Loop them in order to merge them. Instead of using an instance per token per day, we're merging them into a single instance for every tokens per day.
     responses.forEach((response, index) => {
-      response.forEach(response => {
+      response.forEach((response) => {
         const timeStamp = new Date(response.day).getTime()
-        values.set(timeStamp, { ...values.get(timeStamp), [tokens[index].toLowerCase()]: response.aggregated_amount } as TvlUnit)
+        values.set(timeStamp, {
+          ...values.get(timeStamp),
+          [tokens[index].toLowerCase()]: response.aggregated_amount
+        } as TvlUnit)
       })
     })
 
@@ -62,11 +75,21 @@ export const fetchVolumeEvolution = createAsyncThunk(
     for (const key of values.keys()) {
       const volumeUnit = values.get(key) as VolumeUnit
       const total = calculateTokensTotalValue(volumeUnit, prices)
-      const dailyVolume = formattedResponses.length === 0 ? total : total - formattedResponses[formattedResponses.length - 1].total
-      formattedResponses.push({ ...volumeUnit, total, dailyVolume, day: new Date(key) })
+      const dailyVolume =
+        formattedResponses.length === 0
+          ? total
+          : total - formattedResponses[formattedResponses.length - 1].total
+      formattedResponses.push({
+        ...volumeUnit,
+        total,
+        dailyVolume,
+        day: new Date(key)
+      })
     }
     // Sort them by increasing timestamp + remove low values in order to have a clean chart
-    const filteredData = formattedResponses.sort((a, b) => a.day.getTime() - b.day.getTime()).filter(value => value.total > 300000)
+    const filteredData = formattedResponses
+      .sort((a, b) => a.day.getTime() - b.day.getTime())
+      .filter((value) => value.total > 300000)
 
     // Map containing the token's last TVL
     const lastValues = new Map<string, number>()
@@ -80,7 +103,8 @@ export const fetchVolumeEvolution = createAsyncThunk(
           // The current day data does not include the current token, so add it using the last saved value or 0 if there is no saved values.
 
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (filteredData[index] as any)[token.toLowerCase()] = lastValues.get(token.toLowerCase()) || 0
+          (filteredData[index] as any)[token.toLowerCase()] =
+            lastValues.get(token.toLowerCase()) || 0
         } else {
           lastValues.set(token.toLowerCase(), tempData)
         }
