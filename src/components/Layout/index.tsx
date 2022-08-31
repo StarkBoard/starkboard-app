@@ -1,4 +1,3 @@
-import Loader from 'components/Loader'
 import Sidebar from 'components/Sidebar'
 import React, { ReactElement, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
