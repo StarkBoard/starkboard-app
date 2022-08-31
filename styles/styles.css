@@ -310,6 +310,10 @@ ul {
   font-weight: 600;
 }
 
+.navigation a:hover {
+  color: #02C1FE;
+}
+
 .navigation span {
   text-decoration: none;
   text-align: left;
@@ -324,6 +328,10 @@ ul {
 
 .navigation li {
   margin-top: 20px;
+}
+
+.navigation a.sidebar-selected svg {
+  color: #02C1FE;
 }
 
 .page {
@@ -343,9 +351,6 @@ ul {
   border-radius: 15px !important;
 }
 
-.navigation a.sidebar-selected svg {
-  color: #02C1FE;
-}
 
 
 .data-table th {
