@@ -17,7 +17,7 @@ const Volume = () => {
   const content = (
     <>
       <div className="row justify-content-between">
-        <DataEvolution data={volumeUnits.map(volume => volume.dailyVolume)} totalPrefix='Total Volume' />
+        <DataEvolution data={volumeUnits.map(volume => volume.total)} totalPrefix='Total Volume' />
       </div>
       <div className="container my-5 p-2 black-gradient rounded">
         <div className="row text-white text-center mt-3">
