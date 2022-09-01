@@ -459,9 +459,4 @@ ul {
 .apexcharts-tooltip-title {
   background: linear-gradient(to right, rgb(0, 0, 0), rgb(20, 20, 20)) !important;
   border-bottom: 0px !important;
-  margin-left: 5px;
-}
-
-.apexcharts-tooltip-marker {
-  display: none;
 }

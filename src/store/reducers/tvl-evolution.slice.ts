@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios, { AxiosResponse } from 'axios'
 import { setAll } from 'utils/helpers'
-import { calculateTokensTotalValue } from 'utils/helpers/tokens'
+import { calculateTokensTotalValue, tokens } from 'utils/helpers/tokens'
 import { RootState } from '../store'
 import { TokenPricesState } from './tokens-prices.slice'
 
@@ -35,7 +35,6 @@ interface Parameters {
 export const fetchTvlEvolution = createAsyncThunk(
   'tvlEvolution/fetch',
   async ({ prices, network }: Parameters) => {
-    const tokens = ['ETH', 'DAI', 'WBTC', 'USDT', 'USDC', 'STARK']
     const requests = [] as Promise<AxiosResponse>[]
     tokens.forEach(token => {
       requests.push(axios.post(

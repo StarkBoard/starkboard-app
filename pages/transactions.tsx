@@ -6,7 +6,7 @@ import { formatValue } from 'utils/helpers/format'
 import Chart from 'components/Charts'
 import Loader from 'components/Loader'
 import DataEvolution from 'components/DataEvolution'
-import TransactionsTypes from 'components/Charts/TransactionsType'
+import { baseChartOptions } from 'utils/shared'
 
 const Transactions = () => {
   const metrics = useSelector<RootState, MetricsUnit[]>(state => state.metrics.data)
@@ -28,7 +28,6 @@ const Transactions = () => {
           <Chart
             formatter={data => formatValue(data)}
             series={[{ data: dailyTransactions, name: 'Transactions' }]}
-            serieName='Transactions'
           />
         </div>
       </div>
@@ -37,7 +36,45 @@ const Transactions = () => {
           <h6 className="mb-0 font-weight-bold">Transactions Types</h6>
         </div>
         <div className="row">
-          <TransactionsTypes />
+          <Chart
+            formatter={data => formatValue(data)}
+            series={[{
+              name: 'Transfers',
+              data: metrics.map(metric => [metric.day.getTime(), metric.transfers])
+            }, {
+              name: 'Interactions',
+              data: metrics.map(metric => [metric.day.getTime(), metric.interactions])
+            }, {
+              name: 'Deployed Contracts',
+              data: metrics.map(metric => [metric.day.getTime(), metric.contractsDeployed])
+            }]}
+            customOptions={{
+              chart: {
+                ...baseChartOptions.chart,
+                stacked: true,
+                stackType: '100%'
+              },
+              colors: ['#AEF88B', '#5BF2B3', '#02C1FE'],
+              fill: {
+                type: 'none'
+              },
+              tooltip: {
+                ...baseChartOptions.tooltip,
+                shared: true,
+                intersect: false,
+                y: {
+                  formatter: (value: number) => formatValue(value)
+                }
+              },
+              yaxis: {
+                ...baseChartOptions.yaxis,
+                labels: {
+                  ...baseChartOptions.yaxis.labels,
+                  formatter: (value: number) => value + '%'
+                }
+              }
+            }}
+          />
         </div>
       </div>
     </>

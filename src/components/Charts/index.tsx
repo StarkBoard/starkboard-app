@@ -1,96 +1,31 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
 import { ApexOptions } from 'apexcharts'
+import { baseChartOptions } from 'utils/shared'
 
 interface Props {
   series: {
     name: string,
     data: number[][]
   }[],
+  customOptions?: ApexOptions,
   formatter: (value: number) => string,
 }
-const Chart: React.FC<Props> = ({ series, formatter }: Props) => {
+const Chart: React.FC<Props> = ({ series, formatter, customOptions }: Props) => {
   const ApexCharts = dynamic(() => import('react-apexcharts'), { ssr: false })
 
   const options = {
     series,
     options: {
-      chart: {
-        height: 350,
-        toolbar: {
-          show: false
-        },
-        selection: {
-          enabled: false
-        },
-        zoom: {
-          enabled: false
-        }
-      },
-      tooltip: {
-        enabled: true,
-        x: {
-          format: 'dd MMMM yyyy'
-        },
-        style: {
-          fontSize: '14px'
-        }
-      },
-      colors: ['#02C1FE'],
-      dataLabels: {
-        enabled: false
-      },
-      xaxis: {
-        type: 'datetime',
-        tickAmount: 3,
-        show: false,
-        labels: {
-          style: {
-            colors: '#fff',
-            fontWeight: 700,
-            fontSize: '14px'
-          },
-          datetimeFormatter: {
-            year: 'yyyy',
-            month: 'MMMM',
-            day: 'dd MMMM',
-            hour: 'HH:mm'
-          }
-        },
-        axisBorder: {
-          show: false
-        },
-        axisTicks: {
-          show: false
-        }
-      },
+      ...baseChartOptions,
       yaxis: {
+        ...baseChartOptions.yaxis,
         labels: {
-          style: {
-            colors: '#fff',
-            fontWeight: 700,
-            fontSize: '14px'
-          },
+          ...baseChartOptions.yaxis.labels,
           formatter
         }
       },
-      grid: {
-        show: false
-      },
-      fill: {
-        type: 'gradient',
-        gradient: {
-          shade: 'dark',
-          type: 'vertical',
-          shadeIntensity: 0.4,
-          gradientToColors: undefined, // optional, if not defined - uses the shades of same color in series
-          inverseColors: false,
-          opacityFrom: 1,
-          opacityTo: 1,
-          stops: [0, 50, 100],
-          colorStops: []
-        }
-      }
+      ...customOptions
     }
   }
   return (
