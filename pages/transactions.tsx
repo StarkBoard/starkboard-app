@@ -10,7 +10,7 @@ import TransactionsTypes from 'components/Charts/TransactionsType'
 
 const Transactions = () => {
   const metrics = useSelector<RootState, MetricsUnit[]>(state => state.metrics.data)
-  const dailyTransactions = useSelector<RootState, number[][]>(state => state.dailyData.data.map(data => ([data.day.getTime(), data.count_txs])))
+  const dailyTransactions = useSelector<RootState, number[][]>(state => state.dailyData.data.map(data => ([data.day.getTime(), data.count_txs])).reverse())
 
   const fetchingData = useSelector<RootState, boolean>(state => state.metrics.loading)
   const loading = fetchingData || metrics.length === 0
