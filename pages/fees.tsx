@@ -8,8 +8,8 @@ import AverageFees from 'components/Data/AverageFees'
 import Chart from 'components/Charts'
 
 const Fees = () => {
-  const dailyFees = useSelector<RootState, number[][]>(state => state.dailyData.data.map(data => ([data.day.getTime(), data.total_fees])))
-  const meanFees = useSelector<RootState, number[][]>(state => state.dailyData.data.filter(data => data.mean_fees > 0).map(data => ([data.day.getTime(), data.mean_fees])))
+  const dailyFees = useSelector<RootState, number[][]>(state => state.dailyData.data.map(data => ([data.day.getTime(), data.total_fees])).reverse())
+  const meanFees = useSelector<RootState, number[][]>(state => state.dailyData.data.filter(data => data.mean_fees > 0).map(data => ([data.day.getTime(), data.mean_fees])).reverse())
   const totalFees = useMemo(() => dailyFees.length === 0 ? 0 : dailyFees.map(fees => fees[1]).reduce((a, b) => a + b), [dailyFees])
 
   const fetchingData = useSelector<RootState, boolean>(state => state.metrics.loading)
@@ -33,7 +33,15 @@ const Fees = () => {
           <h6 className="mb-0 font-weight-bold">Average Daily Fees</h6>
         </div>
         <div className="row">
-        <Chart data={meanFees} formatter={(value) => formatValue(value, 10) + ' ETH'} serieName='Daily Fees' />
+          <Chart data={meanFees} formatter={(value) => formatValue(value, 10) + ' ETH'} serieName='Average Daily Fees' />
+        </div>
+      </div>
+      <div className="container my-5 p-2 black-gradient rounded">
+        <div className="row text-white text-center mt-3">
+          <h6 className="mb-0 font-weight-bold">Total Daily Fees</h6>
+        </div>
+        <div className="row">
+          <Chart data={dailyFees.filter(fees => fees[1] > 0)} formatter={(value) => formatValue(value, 5) + ' ETH'} serieName='Total Daily Fees' />
         </div>
       </div>
     </>
