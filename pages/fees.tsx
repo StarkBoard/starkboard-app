@@ -33,7 +33,7 @@ const Fees = () => {
           <h6 className="mb-0 font-weight-bold">Average Daily Fees</h6>
         </div>
         <div className="row">
-          <Chart data={meanFees} formatter={(value) => formatValue(value, 10) + ' ETH'} serieName='Average Daily Fees' />
+          <Chart series={[{ data: meanFees, name: 'Average Daily Fees' }]} formatter={(value) => formatValue(value, 10) + ' ETH'} />
         </div>
       </div>
       <div className="container my-5 p-2 black-gradient rounded">
@@ -41,7 +41,7 @@ const Fees = () => {
           <h6 className="mb-0 font-weight-bold">Total Daily Fees</h6>
         </div>
         <div className="row">
-          <Chart data={dailyFees.filter(fees => fees[1] > 0)} formatter={(value) => formatValue(value, 5) + ' ETH'} serieName='Total Daily Fees' />
+          <Chart series={[{ data: dailyFees.filter(fees => fees[1] > 0), name: 'Total Daily Fees' }]} formatter={(value) => formatValue(value, 5) + ' ETH'} />
         </div>
       </div>
     </>

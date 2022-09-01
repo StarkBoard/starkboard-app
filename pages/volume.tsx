@@ -24,7 +24,7 @@ const Volume = () => {
           <h6 className="mb-0 font-weight-bold">Daily Volume Evolution (USD)</h6>
         </div>
         <div className="row">
-          <Chart data={data} formatter={(value) => formatCurrency(value, 2)} serieName='Daily Volume' />
+          <Chart series={[{ data, name: 'Daily Volume' }]} formatter={(value) => formatCurrency(value, 2)} />
         </div>
       </div>
     </>

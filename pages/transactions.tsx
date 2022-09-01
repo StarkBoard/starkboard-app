@@ -27,7 +27,7 @@ const Transactions = () => {
         <div className="row">
           <Chart
             formatter={data => formatValue(data)}
-            data={dailyTransactions}
+            series={[{ data: dailyTransactions, name: 'Transactions' }]}
             serieName='Transactions'
           />
         </div>

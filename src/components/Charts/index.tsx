@@ -3,18 +3,17 @@ import dynamic from 'next/dynamic'
 import { ApexOptions } from 'apexcharts'
 
 interface Props {
-  data: number[][],
+  series: {
+    name: string,
+    data: number[][]
+  }[],
   formatter: (value: number) => string,
-  serieName: string
 }
-const Chart: React.FC<Props> = ({ data, formatter, serieName }: Props) => {
+const Chart: React.FC<Props> = ({ series, formatter }: Props) => {
   const ApexCharts = dynamic(() => import('react-apexcharts'), { ssr: false })
 
   const options = {
-    series: [{
-      name: serieName,
-      data
-    }],
+    series,
     options: {
       chart: {
         height: 350,

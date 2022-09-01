@@ -50,6 +50,7 @@ const TransactionsTypes: React.FC = () => {
       tooltip: {
         enabled: false
       },
+      colors: ['#AEF88B', '#5BF2B3', '#02C1FE'],
       dataLabels: {
         enabled: false
       },
