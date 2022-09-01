@@ -54,7 +54,7 @@ const Chart: React.FC<Props> = ({ data, formatter, serieName }: Props) => {
           datetimeFormatter: {
             year: 'yyyy',
             month: 'MMMM',
-            day: '',
+            day: 'dd MMMM',
             hour: 'HH:mm'
           }
         },
