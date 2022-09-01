@@ -36,7 +36,7 @@ const Home = () => {
         <div className="row text-white text-center mt-3">
           <h6 className="mb-0 font-weight-bold">TVL Evolution (USD)</h6>
         </div>
-        <div className="row">
+        <div className="row" id="tvl-chart">
           <Chart
           customOptions={{
             chart: {
@@ -48,6 +48,10 @@ const Home = () => {
               ...baseChartOptions.tooltip,
               shared: true,
               intersect: false,
+              fixed: {
+                enabled: true,
+                position: 'topRight'
+              },
               x: {
                 formatter: function (value, { series, dataPointIndex }) {
                   let output = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', day: 'numeric' }).format(new Date(value))

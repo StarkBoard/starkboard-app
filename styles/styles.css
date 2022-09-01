@@ -460,3 +460,8 @@ ul {
   background: linear-gradient(to right, rgb(0, 0, 0), rgb(20, 20, 20)) !important;
   border-bottom: 0px !important;
 }
+
+
+#tvl-chart .apexcharts-tooltip-title {
+  width: 220px;
+}
