@@ -32,6 +32,9 @@ const Chart: React.FC<Props> = ({ data, formatter, serieName }: Props) => {
         enabled: true,
         x: {
           format: 'dd MMMM yyyy'
+        },
+        style: {
+          fontSize: '14px'
         }
       },
       colors: ['#02C1FE'],
