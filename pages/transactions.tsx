@@ -7,6 +7,7 @@ import Chart from 'components/Charts'
 import Loader from 'components/Loader'
 import DataEvolution from 'components/DataEvolution'
 import { baseChartOptions } from 'utils/shared'
+import DataBlock from 'components/DataBlock'
 
 const Transactions = () => {
   const metrics = useSelector<RootState, MetricsUnit[]>(state => state.metrics.data)
@@ -18,7 +19,10 @@ const Transactions = () => {
   const content = (
     <>
       <div className="row justify-content-between">
-        <DataEvolution data={metrics.map(metrics => metrics.transactions)} totalPrefix="Total Transactions" />
+        <DataEvolution data={metrics.map(metrics => metrics.transactions)} totalBlockClasses="col-12 col-md-4" changeBlockClasses="mt-2 mt-md-0 col-12 col-md-4" totalPrefix="Total Transactions" />
+        <div className="mt-2 mt-md-0 col-12 col-md-4">
+          <DataBlock color="BLACK" title="Deployed Contracts" data={formatValue(metrics.length === 0 ? 0 : metrics[metrics.length - 1].contractsDeployed)} />
+        </div>
       </div>
       <div className="container my-5 p-2 black-gradient rounded">
         <div className="row text-white text-center mt-3">
