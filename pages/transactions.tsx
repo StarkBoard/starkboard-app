@@ -28,6 +28,7 @@ const Transactions = () => {
           <Chart
             formatter={data => formatValue(data)}
             data={dailyTransactions}
+            serieName='Transactions'
           />
         </div>
       </div>

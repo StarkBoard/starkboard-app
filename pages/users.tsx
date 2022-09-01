@@ -30,7 +30,7 @@ const Users = () => {
           <h6 className="mb-0 font-weight-bold">Total Users Evolution</h6>
         </div>
         <div className="row">
-          <Chart data={usersEvolution} formatter={value => formatValue(value)} />
+          <Chart data={usersEvolution} formatter={value => formatValue(value)} serieName='Total Users' />
         </div>
       </div>
       <div className="row justify-content-between mb-5">

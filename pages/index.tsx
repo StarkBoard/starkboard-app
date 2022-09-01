@@ -33,7 +33,7 @@ const Home = () => {
           <h6 className="mb-0 font-weight-bold">TVL Evolution (USD)</h6>
         </div>
         <div className="row">
-          <Chart data={data} formatter={(value) => formatCurrency(value, 2)} />
+          <Chart data={data} formatter={(value) => formatCurrency(value, 2)} serieName='TVL' />
         </div>
       </div>
       <h2 className="ps-0 pb-4 page-title">TVL Ranking</h2>

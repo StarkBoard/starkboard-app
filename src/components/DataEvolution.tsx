@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react'
 import DataBlock from 'components/DataBlock'
-import { formatValue } from 'utils/helpers/format'
+import { formatCurrency, formatValue } from 'utils/helpers/format'
 import PeriodSelection from 'components/PeriodSelection'
 
 const getRollbackPeriod = (period: string, data: number[]) => period === 'D' ? 1 : period === 'W' ? 7 : period === 'M' ? 31 : data.length - 1
@@ -9,11 +9,18 @@ interface Props {
   data: number[],
   totalPrefix: string,
   enableTotal?: boolean,
-  totalBlockClasses?: string
-  changeBlockClasses?: string
+  totalBlockClasses?: string,
+  changeBlockClasses?: string,
+  isCurrency?: boolean
 }
 
-const DataEvolution: React.FC<Props> = ({ data, totalPrefix, enableTotal = true, totalBlockClasses = 'col-12 col-md-6', changeBlockClasses = 'col-12 col-md-6 mt-2 mt-md-0' }: Props) => {
+const DataEvolution: React.FC<Props> = ({
+  data,
+  totalPrefix, enableTotal = true,
+  totalBlockClasses = 'col-12 col-md-6',
+  changeBlockClasses = 'col-12 col-md-6 mt-2 mt-md-0',
+  isCurrency = false
+}: Props) => {
   const [selectedVariationPeriod, setSelectedVariationPeriod] = useState('D')
   const [selectedCumulativePeriod, setSelectedCumulativePeriod] = useState('D')
 
@@ -44,7 +51,7 @@ const DataEvolution: React.FC<Props> = ({ data, totalPrefix, enableTotal = true,
       {
         enableTotal && (
           <div className={totalBlockClasses}>
-            <DataBlock color="BLACK" title={periodCumulativeSelection} data={formatValue(total)} />
+            <DataBlock color="BLACK" title={periodCumulativeSelection} data={isCurrency ? formatCurrency(total) : formatValue(total)} />
           </div>
         )
       }

@@ -441,3 +441,27 @@ ul {
   color: #02C1FE;
   transition: 0s;
 }
+
+.apexcharts-tooltip {
+  background: linear-gradient(to right, rgb(0, 0, 0), rgb(20, 20, 20)) !important;
+  border: #423E52 1px solid;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  border: 1px solid #423E52 !important;
+  -webkit-box-shadow: none !important;
+	-moz-box-shadow: none !important;
+	box-shadow: none !important;
+  border-radius: 15px !important;
+  padding: 5px !important;
+}
+
+.apexcharts-tooltip-title {
+  background: linear-gradient(to right, rgb(0, 0, 0), rgb(20, 20, 20)) !important;
+  border-bottom: 0px !important;
+  margin-left: 5px;
+}
+
+.apexcharts-tooltip-marker {
+  display: none;
+}

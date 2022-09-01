@@ -4,13 +4,15 @@ import { ApexOptions } from 'apexcharts'
 
 interface Props {
   data: number[][],
-  formatter: (value: number) => string
+  formatter: (value: number) => string,
+  serieName: string
 }
-const Chart: React.FC<Props> = ({ data, formatter }: Props) => {
+const Chart: React.FC<Props> = ({ data, formatter, serieName }: Props) => {
   const ApexCharts = dynamic(() => import('react-apexcharts'), { ssr: false })
 
   const options = {
     series: [{
+      name: serieName,
       data
     }],
     options: {
@@ -26,20 +28,11 @@ const Chart: React.FC<Props> = ({ data, formatter }: Props) => {
           enabled: false
         }
       },
-      states: {
-        hover: {
-          filter: {
-            type: 'none'
-          }
-        },
-        active: {
-          filter: {
-            type: 'none'
-          }
-        }
-      },
       tooltip: {
-        enabled: false
+        enabled: true,
+        x: {
+          format: 'dd MMMM yyyy'
+        }
       },
       colors: ['#02C1FE'],
       dataLabels: {
