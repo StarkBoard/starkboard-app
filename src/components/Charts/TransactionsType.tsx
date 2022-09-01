@@ -1,21 +1,30 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
 import { ApexOptions } from 'apexcharts'
+import { useSelector } from 'react-redux'
+import { RootState } from 'store/store'
+import { MetricsUnit } from 'store/reducers/metrics.slice'
 
-interface Props {
-  data: number[][],
-  formatter: (value: number) => string
-}
-const Chart: React.FC<Props> = ({ data, formatter }: Props) => {
+const TransactionsTypes: React.FC = () => {
   const ApexCharts = dynamic(() => import('react-apexcharts'), { ssr: false })
+  const metrics = useSelector<RootState, MetricsUnit[]>(state => state.metrics.data)
 
   const options = {
     series: [{
-      data
+      name: 'Transfers',
+      data: metrics.map(metric => metric.transfers)
+    }, {
+      name: 'Interactions',
+      data: metrics.map(metric => metric.interactions)
+    }, {
+      name: 'Deployed Contracts',
+      data: metrics.map(metric => metric.contractsDeployed)
     }],
     options: {
       chart: {
-        height: 350,
+        type: 'bar',
+        stacked: true,
+        stackType: '100%',
         toolbar: {
           show: false
         },
@@ -26,28 +35,32 @@ const Chart: React.FC<Props> = ({ data, formatter }: Props) => {
           enabled: false
         }
       },
-      states: {
-        hover: {
-          filter: {
-            type: 'none'
-          }
-        },
-        active: {
-          filter: {
-            type: 'none'
-          }
-        }
-      },
-      tooltip: {
-        enabled: false
-      },
-      colors: ['#02C1FE'],
       dataLabels: {
         enabled: false
       },
+      grid: {
+        show: false
+      },
+      legend: {
+        fontSize: '14px',
+        fontWeight: 700,
+        labels: {
+          colors: '#fff'
+        }
+      },
+      yaxis: {
+        labels: {
+          style: {
+            colors: '#fff',
+            fontWeight: 700,
+            fontSize: '14px'
+          },
+          formatter: (value: number) => value + '%'
+        }
+      },
       xaxis: {
         type: 'datetime',
-        tickAmount: 3,
+        categories: metrics.map(metric => metric.day.getTime()),
         show: false,
         labels: {
           style: {
@@ -68,33 +81,6 @@ const Chart: React.FC<Props> = ({ data, formatter }: Props) => {
         axisTicks: {
           show: false
         }
-      },
-      yaxis: {
-        labels: {
-          style: {
-            colors: '#fff',
-            fontWeight: 700,
-            fontSize: '14px'
-          },
-          formatter
-        }
-      },
-      grid: {
-        show: false
-      },
-      fill: {
-        type: 'gradient',
-        gradient: {
-          shade: 'dark',
-          type: 'vertical',
-          shadeIntensity: 0.4,
-          gradientToColors: undefined, // optional, if not defined - uses the shades of same color in series
-          inverseColors: false,
-          opacityFrom: 1,
-          opacityTo: 1,
-          stops: [0, 50, 100],
-          colorStops: []
-        }
       }
     }
   }
@@ -109,4 +95,4 @@ const Chart: React.FC<Props> = ({ data, formatter }: Props) => {
   )
 }
 
-export default Chart
+export default TransactionsTypes

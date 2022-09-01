@@ -6,6 +6,9 @@ import { RootState } from '../store'
 export interface MetricsUnit {
   wallets: number;
   transactions: number;
+  transfers: number;
+  contractsDeployed: number;
+  interactions: number;
   day: Date;
 }
 
@@ -22,7 +25,7 @@ const initialState: MetricsState = {
 export const fetchMetrics = createAsyncThunk(
   'metrics/fetch',
   async (network: 'mainnet' | 'testnet') => {
-    const fields = ['count_new_wallets', 'count_txs']
+    const fields = ['count_new_wallets', 'count_txs', 'count_transfers', 'count_new_contracts']
     const requests = [] as Promise<AxiosResponse>[]
     fields.forEach(field => {
       requests.push(axios.post(
@@ -39,9 +42,16 @@ export const fetchMetrics = createAsyncThunk(
     const responses = (await Promise.all(requests)).map(response => response.data.result) as { aggregated_amount: string, day: Date }[][]
     const formattedResponses = [] as MetricsUnit[]
     responses[0].forEach((response, index) => {
+      const wallets = parseInt(response.aggregated_amount)
+      const transactions = parseInt(responses[1][index]?.aggregated_amount || '0')
+      const transfers = parseInt(responses[2][index]?.aggregated_amount || '0')
+      const contractsDeployed = parseInt(responses[3][index]?.aggregated_amount || '0')
       formattedResponses.push({
-        wallets: parseInt(response.aggregated_amount),
-        transactions: parseInt(responses[1][index].aggregated_amount),
+        wallets,
+        transactions,
+        transfers,
+        contractsDeployed,
+        interactions: transactions - transfers - contractsDeployed,
         day: new Date(response.day)
       })
     })
