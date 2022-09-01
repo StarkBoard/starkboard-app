@@ -3,7 +3,7 @@ import DataBlock from 'components/DataBlock'
 import { formatCurrency, formatValue } from 'utils/helpers/format'
 import PeriodSelection from 'components/PeriodSelection'
 
-const getRollbackPeriod = (period: string, data: number[]) => period === 'D' ? 1 : period === 'W' ? 7 : period === 'M' ? 31 : data.length - 1
+const getRollbackPeriod = (period: string, data: number[]) => period === 'D' ? 1 : period === 'W' ? 7 : period === 'M' ? 31 : data.length
 
 interface Props {
   data: number[],

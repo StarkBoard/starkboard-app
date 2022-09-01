@@ -1,6 +1,6 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRightArrowLeft, faArrowsLeftRight, faBridge, faCircleNodes, faClone, faHouse, faSackDollar, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faArrowRightArrowLeft, faArrowsLeftRight, faBridge, faCircleNodes, faClone, faFire, faHouse, faSackDollar, faUser } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -26,6 +26,11 @@ const Navigation = () => {
       path: '/volume',
       title: 'Volume',
       icon: faSackDollar
+    },
+    {
+      path: '/fees',
+      title: 'Fees',
+      icon: faFire
     },
     {
       path: '/validators',
