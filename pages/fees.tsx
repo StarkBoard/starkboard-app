@@ -19,13 +19,13 @@ const Fees = () => {
     <>
       <div className="row justify-content-between">
         <div className="row justify-content-between">
-          <div className="col-6 col-md-4">
+          <div className="col-12 col-md-4">
             <DataBlock color="BLACK" title="Total Fees" data={formatValue(totalFees) + ' ETH'} />
           </div>
-          <AverageFees data={meanFees.map(fees => fees[1]).filter(fees => fees > 0)} />
           <div className="col-12 col-md-4 mt-2 mt-md-0">
             <DataBlock color="BLACK" title="Estimated Current Fees" data={formatValue(meanFees.length === 0 ? 0 : meanFees[meanFees.length - 1][1], 10) + ' ETH'} />
           </div>
+          <AverageFees data={meanFees.map(fees => fees[1]).filter(fees => fees > 0)} />
         </div>
       </div>
       <div className="container my-5 p-2 black-gradient rounded">

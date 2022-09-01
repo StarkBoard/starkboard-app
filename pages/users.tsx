@@ -20,10 +20,10 @@ const Users = () => {
   const content = (
     <>
       <div className="row justify-content-between">
-        <div className="col-6">
+        <div className="col-12 col-md-6">
           <DataBlock color="BLACK" title="Total Users" data={formatValue(totalUsers)} />
         </div>
-        <DataEvolution enableTotal={false} changeBlockClasses="col-6 col-6" totalPrefix="Change" data={metrics.map(unit => unit.wallets) }/>
+        <DataEvolution enableTotal={false} changeBlockClasses="mt-2 mt-md-0 col-12 col-md-6" totalPrefix="Change" data={metrics.map(unit => unit.wallets) }/>
       </div>
       <div className="container my-5 p-2 black-gradient rounded">
         <div className="row text-white text-center mt-3">
