@@ -35,6 +35,21 @@ const TransactionsTypes: React.FC = () => {
           enabled: false
         }
       },
+      states: {
+        hover: {
+          filter: {
+            type: 'none'
+          }
+        },
+        active: {
+          filter: {
+            type: 'none'
+          }
+        }
+      },
+      tooltip: {
+        enabled: false
+      },
       dataLabels: {
         enabled: false
       },

@@ -17,7 +17,9 @@ const Transactions = () => {
 
   const content = (
     <>
-      <DataEvolution data={metrics.map(metrics => metrics.transactions)} totalPrefix="Total Transactions" />
+      <div className="row justify-content-between">
+        <DataEvolution data={metrics.map(metrics => metrics.transactions)} totalPrefix="Total Transactions" />
+      </div>
       <div className="container my-5 p-2 black-gradient rounded">
         <div className="row text-white text-center mt-3">
           <h6 className="mb-0 font-weight-bold">Daily Transactions</h6>

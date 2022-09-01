@@ -8,13 +8,16 @@ const getRollbackPeriod = (period: string, data: number[]) => period === 'D' ? 1
 interface Props {
   data: number[],
   totalPrefix: string,
+  enableTotal?: boolean,
+  totalBlockClasses?: string
+  changeBlockClasses?: string
 }
 
-const DataEvolution: React.FC<Props> = ({ data, totalPrefix }: Props) => {
+const DataEvolution: React.FC<Props> = ({ data, totalPrefix, enableTotal = true, totalBlockClasses = 'col-12 col-md-6', changeBlockClasses = 'col-12 col-md-6 mt-2 mt-md-0' }: Props) => {
   const [selectedVariationPeriod, setSelectedVariationPeriod] = useState('D')
   const [selectedCumulativePeriod, setSelectedCumulativePeriod] = useState('D')
 
-  const totalTransactions = useMemo(() => {
+  const total = useMemo(() => {
     if (data.length === 0) return 0
 
     const rollbackPeriod = getRollbackPeriod(selectedCumulativePeriod, data)
@@ -23,7 +26,7 @@ const DataEvolution: React.FC<Props> = ({ data, totalPrefix }: Props) => {
     return current - previous
   }, [data, selectedCumulativePeriod])
 
-  const totalTransactionsChange = useMemo(() => {
+  const change = useMemo(() => {
     if (data.length > 2) {
       const rollbackPeriod = getRollbackPeriod(selectedVariationPeriod, data)
       const current = data[data.length - 1]
@@ -38,13 +41,15 @@ const DataEvolution: React.FC<Props> = ({ data, totalPrefix }: Props) => {
 
   return (
     <>
-      <div className="row justify-content-between">
-        <div className="col-12 col-md-6">
-          <DataBlock color="BLACK" title={periodCumulativeSelection} data={formatValue(totalTransactions)} />
-        </div>
-        <div className="col-12 col-md-6 mt-2 mt-md-0">
-          <DataBlock color="BLUE" title={periodVariationSelection} data={`${totalTransactionsChange > 0 ? '+' : ''}${totalTransactionsChange.toFixed(2)}%`} />
-        </div>
+      {
+        enableTotal && (
+          <div className={totalBlockClasses}>
+            <DataBlock color="BLACK" title={periodCumulativeSelection} data={formatValue(total)} />
+          </div>
+        )
+      }
+      <div className={changeBlockClasses}>
+        <DataBlock color="BLUE" title={periodVariationSelection} data={`${change > 0 ? '+' : ''}${change.toFixed(2)}%`} />
       </div>
     </>
   )
