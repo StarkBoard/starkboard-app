@@ -1,4 +1,4 @@
-import { faTrophy, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { faTrophy } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
@@ -6,13 +6,21 @@ import { useSelector } from 'react-redux'
 import { TokenPricesState } from 'store/reducers/tokens-prices.slice'
 import { TvlUnit } from 'store/reducers/tvl-evolution.slice'
 import { RootState } from 'store/store'
-import { formatCurrency } from 'utils/helpers/format'
+import { formatCurrency, formatValue } from 'utils/helpers/format'
 import { getTokensValue } from 'utils/helpers/tokens'
+
+const tokensTypes = new Map<string, string>()
+tokensTypes.set('eth', 'Layer 1')
+tokensTypes.set('dai', 'Stablecoin')
+tokensTypes.set('wbtc', '1:1 Backed ERC20')
+tokensTypes.set('usdc', 'Stablecoin')
+tokensTypes.set('usdt', 'Stablecoin')
+tokensTypes.set('stark', 'Layer 1')
 
 const TvlTable = () => {
   const tvlUnits = useSelector<RootState, TvlUnit[]>(state => state.tvlEvolution.data)
   const prices = useSelector<RootState, TokenPricesState>(state => state.tokensPrices)
-  const [orderedTokens, setOrderedTokens] = useState<{ currentTvl: number, previousTvl: number, change: number, name: string }[]>([])
+  const [orderedTokens, setOrderedTokens] = useState<{ currentTvl: number, previousTvl: number, change: number, name: string, amount: number }[]>([])
 
   useEffect(() => {
     if (tvlUnits.length > 2) {
@@ -25,8 +33,8 @@ const TvlTable = () => {
           currentTvl,
           previousTvl,
           name: token,
+          amount: tvlUnits[tvlUnits.length - 1][token as 'eth'],
           change: ((currentTvl - previousTvl) / previousTvl) * 100
-
         })
       }
       setOrderedTokens(orderedTokens.sort((a, b) => (b.currentTvl - a.currentTvl)))
@@ -43,7 +51,7 @@ const TvlTable = () => {
               <th className="d-none d-md-table-cell">Category</th>
               <th className="d-none d-md-table-cell">24h Change</th>
               <th>TVL</th>
-              <th className="d-none d-md-table-cell">MCap/TVL</th>
+              <th className="d-none d-md-table-cell">Amount</th>
             </tr>
           </thead>
           <tbody>
@@ -63,14 +71,14 @@ const TvlTable = () => {
                     <div></div>
                   </td>
                   <td>{token.name.toUpperCase()}</td>
-                  <td className="d-none d-md-table-cell">Layer 1</td>
+                  <td className="d-none d-md-table-cell">{tokensTypes.get(token.name)}</td>
                   <td className="d-none d-md-table-cell">
                     <span style={{ color: isNaN(token.change) || token.change === 0 ? 'white' : token.change > 0 ? '#03D9A5' : '#DE365E' }}>
                       {isNaN(token.change) ? '0' : token.change.toFixed(2)}%
                     </span>
                   </td>
                   <td>{formatCurrency(token.currentTvl)}</td>
-                  <td className="d-none d-md-table-cell"><FontAwesomeIcon icon={faXmark} /></td>
+                  <td className="d-none d-md-table-cell">{formatValue(token.amount)}</td>
                 </tr>
               ))
             }
