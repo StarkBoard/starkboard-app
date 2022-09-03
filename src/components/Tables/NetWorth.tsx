@@ -1,5 +1,3 @@
-import { faTrophy } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { TokenPricesState } from 'store/reducers/tokens-prices.slice'
@@ -47,9 +45,6 @@ const NetworthTable = () => {
                 <tr className="text-white" key={token.name}>
                   <td className="d-flex flex-row align-items-center justify-content-between">
                     <div className="d-flex flex-row">
-                      <div>
-                        <FontAwesomeIcon icon={faTrophy} style={{ color: index === 0 ? '#E4B200' : index === 1 ? '#C1C1C1' : index === 2 ? '#7F4C35' : '#01C1FD' }} />
-                      </div>
                       <div className="mx-3">{index + 1}</div>
                     </div>
                     <div></div>
