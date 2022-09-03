@@ -21,16 +21,16 @@ const Users = () => {
     <>
       <div className="row justify-content-between">
         <div className="col-12 col-md-6">
-          <DataBlock color="BLACK" title="Total Users" data={formatValue(totalUsers)} />
+          <DataBlock color="BLACK" title="Total Wallets" data={formatValue(totalUsers)} />
         </div>
         <DataEvolution enableTotal={false} changeBlockClasses="mt-2 mt-md-0 col-12 col-md-6" totalPrefix="Change" data={metrics.map(unit => unit.wallets) }/>
       </div>
       <div className="container my-5 p-2 black-gradient rounded">
         <div className="row text-white text-center mt-3">
-          <h6 className="mb-0 font-weight-bold">Total Users Evolution</h6>
+          <h6 className="mb-0 font-weight-bold">Total Wallets Evolution</h6>
         </div>
         <div className="row">
-          <Chart series={[{ name: 'Total Users', data: usersEvolution }]} formatter={value => formatValue(value)} />
+          <Chart series={[{ name: 'Total Wallets', data: usersEvolution }]} formatter={value => formatValue(value)} />
         </div>
       </div>
       <div className="row justify-content-between mb-5">

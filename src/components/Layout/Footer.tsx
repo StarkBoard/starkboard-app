@@ -10,7 +10,7 @@ const Footer: React.FC = () => {
           <div className="footer-col">
             <h4>STARKBOARD</h4>
             <p className="text-white text-small">Starkboard provides all the latest Starknet data
-              that you are looking for!</p>
+              that you are looking for</p>
           </div>
           <div className="footer-col">
             <h4>COMMUNITY</h4>

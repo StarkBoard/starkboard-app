@@ -469,3 +469,8 @@ ul {
 .apexcharts-xcrosshairs.apexcharts-active, .apexcharts-ycrosshairs.apexcharts-active {
   opacity: 0 !important;
 }
+
+#logo-title {
+  margin-left: -30px;
+  font-weight: 600;
+}

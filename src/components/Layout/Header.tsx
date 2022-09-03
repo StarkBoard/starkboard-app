@@ -4,7 +4,8 @@ import { faDiscord, faMedium, faTwitter } from '@fortawesome/free-brands-svg-ico
 import { faArrowRightArrowLeft, faBars } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Navigation from 'components/Navigation'
-import React, { useState } from 'react'
+import { useRouter } from 'next/router'
+import React, { useEffect, useState } from 'react'
 
 interface Props {
   mode: 'light' | 'dark',
@@ -14,11 +15,21 @@ interface Props {
 }
 const Header: React.FC<Props> = ({ mode, network, switchNetwork }: Props) => {
   const [showNavBar, toggleNavBar] = useState(false)
+  const { pathname } = useRouter()
+
+  useEffect(() => {
+    if (showNavBar) {
+      toggleNavBar(false)
+    }
+  }, [pathname])
   return (
     <header id="header">
       <div className="container">
         <nav className="d-flex flex-row justify-content-between align-items-center">
-          <img src={`images/logo-${mode}.png`} id="logo" className="logo p-4 p-12" />
+          <div className="d-block d-md-flex flex-row  justify-content-start align-items-center">
+            <img src={`images/logo-${mode}.png`} id="logo" className="logo p-md-4" />
+            <h1 className="text-white h3 text-uppercase mb-0 d-none d-md-inline-block" id="logo-title">Starkboard</h1>
+          </div>
           <ul className="icones d-flex flex-row mb-0 align-items-center">
             <li className="d-none d-md-flex">
               <a href="https://medium.com/@starkboard/5a1e37fb31df" target="_blank" rel="noreferrer" className="text-white">

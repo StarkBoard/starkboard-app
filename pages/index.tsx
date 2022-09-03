@@ -24,10 +24,10 @@ const Home = () => {
   const content = (
     <>
       <div className="row justify-content-between">
-        <div className="col-6 col-md-4">
+        <div className="col-12 col-md-4">
           <DataBlock color="BLACK" title="Total Value Locked (USD)" mobileTitle="TVL" data={formatCurrency(totalTvl)} />
         </div>
-        <DataEvolution enableTotal={false} changeBlockClasses="col-6 col-md-4" totalPrefix="Change" data={tvlUnits.map(unit => unit.total)} />
+        <DataEvolution enableTotal={false} changeBlockClasses="col-12 col-md-4 mt-2 mt-md-0" totalPrefix="Change" data={tvlUnits.map(unit => unit.total)} />
         <div className="col-12 col-md-4 mt-2 mt-md-0">
           <DataBlock color="BLACK" title="TVL in non-native" data="Soon" />
         </div>
@@ -68,7 +68,7 @@ const Home = () => {
             }
           }}
             series={formattedData}
-            formatter={(value) => formatCurrency(value, 2)}
+            formatter={(value) => formatCurrency(value, 0)}
           />
         </div>
       </div>
