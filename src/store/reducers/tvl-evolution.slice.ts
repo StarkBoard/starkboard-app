@@ -90,7 +90,23 @@ export const fetchTvlEvolution = createAsyncThunk(
       filteredData[index].total = calculateTokensTotalValue(filteredData[index], prices)
     }
 
-    return filteredData.filter(value => value.total > 300000) as TvlUnit[]
+    const data = []
+
+    // Add previous day's data for missing days
+    for (let x = 0; x < filteredData.length; x++) {
+      const currentDate = filteredData[x].day
+      data.push(filteredData[x])
+      if (x === filteredData.length - 1) break
+
+      // Day missing
+      if (filteredData[x + 1].day.getDate() !== currentDate.getDate() + 1) {
+        data.push({
+          ...filteredData[x],
+          day: new Date(new Date(currentDate).setDate(currentDate.getDate() + 1))
+        })
+      }
+    }
+    return data.filter(value => value.total > 300000) as TvlUnit[]
   }
 )
 
