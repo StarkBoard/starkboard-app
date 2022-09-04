@@ -8,6 +8,8 @@ interface DailyData {
   total_fees: number,
   count_new_contracts: number,
   count_new_wallets: number,
+  count_wallets_active: number,
+  top_wallets_active: number,
   count_transfers: number,
   count_txs: number,
   day: Date

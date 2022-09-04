@@ -10,6 +10,7 @@ import Loader from 'components/Loader'
 import DataEvolution from 'components/DataEvolution'
 
 const Users = () => {
+  const dailyActiveWallets = useSelector<RootState, number[][]>(state => state.dailyData.data.map(unit => [unit.day.getTime(), unit.count_wallets_active]))
   const metrics = useSelector<RootState, MetricsUnit[]>(state => state.metrics.data.filter(metrics => metrics.wallets > 0))
   const usersEvolution = useMemo(() => metrics.map(metric => ([metric.day.getTime(), metric.wallets])), [metrics])
   const totalUsers = useMemo(() => metrics.length === 0 ? 0 : metrics[metrics.length - 1].wallets, [metrics])
@@ -33,12 +34,12 @@ const Users = () => {
           <Chart series={[{ name: 'Total Wallets', data: usersEvolution }]} formatter={value => formatValue(value)} />
         </div>
       </div>
-      <div className="row justify-content-between mb-5">
-        <div className="col-6">
-          <DataBlock color="BLACK" title="Unique Daily Users" data={'Soon'} />
+      <div className="container my-5 p-2 black-gradient rounded">
+        <div className="row text-white text-center mt-3">
+          <h6 className="mb-0 font-weight-bold">Daily Active Wallets</h6>
         </div>
-        <div className="col-6">
-          <DataBlock color="BLUE" title="Average value per user" data="Soon" />
+        <div className="row">
+          <Chart series={[{ name: 'Wallets', data: dailyActiveWallets }]} formatter={value => formatValue(value, 3)} />
         </div>
       </div>
       <h2 className="ps-0 pb-4 page-title">Networth leaderboard (Top 50)</h2>
