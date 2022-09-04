@@ -1,6 +1,10 @@
 import { TokenPricesState } from 'store/reducers/tokens-prices.slice'
 import { TvlBase } from 'store/reducers/tvl-evolution.slice'
 
+const tokensAddresses = {
+  ETH: '0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7'
+}
+
 const tokens = ['ETH', 'DAI', 'WBTC', 'USDT', 'USDC', 'STARK']
 const tokensColor = ['#02C1FE', '#F5AC37', '#F7931A', '#269976', '#266EC0', '#272769']
 
@@ -27,4 +31,4 @@ const getTokensValue = (
   stark: tvl.stark * tokenPrices.stark
 })
 
-export { calculateTokensTotalValue, getTokensValue, tokens, tokensColor }
+export { calculateTokensTotalValue, getTokensValue, tokens, tokensColor, tokensAddresses }

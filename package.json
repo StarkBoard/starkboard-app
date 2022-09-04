@@ -23,7 +23,8 @@
     "react": "17.0.2",
     "react-apexcharts": "^1.4.0",
     "react-dom": "17.0.2",
-    "react-redux": "^7.2.6"
+    "react-redux": "^7.2.6",
+    "starknet": "^3.18.2"
   },
   "devDependencies": {
     "@types/node": "17.0.14",

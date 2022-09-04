@@ -1,5 +1,5 @@
 import Sidebar from 'components/Sidebar'
-import React, { ReactElement, useEffect, useState } from 'react'
+import React, { ReactElement, useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { fetchDailyData } from 'store/reducers/daily-data.slice'
 import { fetchDailyTvl } from 'store/reducers/daily-tvl.slice'
@@ -13,6 +13,7 @@ import Footer from './Footer'
 import Header from './Header'
 import { getCookie, setCookie } from 'cookies-next'
 import { useRouter } from 'next/router'
+import { fetchBalances } from 'store/reducers/balances.slice'
 
 interface Props {
   children: ReactElement;
@@ -24,12 +25,31 @@ const Layout: React.FC<Props> = ({ children }: Props) => {
   const router = useRouter()
 
   const dispatch = useAppDispatch()
+  const fetchingBalances = useSelector<RootState, boolean>(state => state.balances.loading)
   const tokensPrices = useSelector<RootState, TokenPricesState>(state => state.tokensPrices)
+  const largestWalletsRaw = useSelector<RootState, string[][]>(state => state.dailyData.data.map(data => data.top_wallets_active))
+  const largestWallets = useMemo(() => {
+    return largestWalletsRaw.reduce((merged, block) => {
+      if (block === null) return merged
+      merged.push(...block)
+      return merged
+    }, [])
+  }, [largestWalletsRaw])
 
   const switchNetwork = () => {
     setCookie('network', network === 'mainnet' ? 'testnet' : 'mainnet')
     router.reload()
   }
+
+  useEffect(() => {
+    if (!network) return
+    if (!fetchingBalances) {
+      const networthDays = 30
+      const addressesRaw = largestWallets.length < networthDays ? largestWallets : largestWallets.slice(0 - networthDays * 5)
+      const addresses = [...new Set(addressesRaw)]
+      dispatch(fetchBalances({ addresses, network }))
+    }
+  }, [largestWallets.length, network])
 
   useEffect(() => {
     if (!tokensPrices.loading && network) {

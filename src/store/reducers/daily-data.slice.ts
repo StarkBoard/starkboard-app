@@ -9,7 +9,7 @@ interface DailyData {
   count_new_contracts: number,
   count_new_wallets: number,
   count_wallets_active: number,
-  top_wallets_active: number,
+  top_wallets_active: string[],
   count_transfers: number,
   count_txs: number,
   day: Date
@@ -33,7 +33,11 @@ export const fetchDailyData = createAsyncThunk('dailyData/fetch', async (network
     }, {
       headers: { 'x-api-key': process.env.NEXT_PUBLIC_API_KEY || '' }
     })
-  const formattedData = (data.result as DailyData[]).map(unit => ({ ...unit, day: new Date(unit.day) }))
+  const formattedData = (data.result as DailyData[]).map(unit => ({
+    ...unit,
+    day: new Date(unit.day),
+    top_wallets_active: JSON.parse(unit.top_wallets_active as unknown as string)
+  }))
   return formattedData
 })
 
