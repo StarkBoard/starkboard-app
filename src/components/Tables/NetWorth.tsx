@@ -13,7 +13,7 @@ const NetworthTable = () => {
     for (const variable in balances) {
       allBalances.push([variable, balances[variable]])
     }
-    return allBalances.sort((a, b) => compare(a as number[], b as number[]))
+    return allBalances.sort((a, b) => compare(a as number[], b as number[])).slice(0, 50)
   }, [balances])
 
   return (

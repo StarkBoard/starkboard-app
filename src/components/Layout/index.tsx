@@ -44,7 +44,7 @@ const Layout: React.FC<Props> = ({ children }: Props) => {
   useEffect(() => {
     if (!network) return
     if (!fetchingBalances) {
-      const networthDays = 30
+      const networthDays = 7
       const addressesRaw = largestWallets.length < networthDays ? largestWallets : largestWallets.slice(0 - networthDays * 5)
       const addresses = [...new Set(addressesRaw)]
       dispatch(fetchBalances({ addresses, network }))
