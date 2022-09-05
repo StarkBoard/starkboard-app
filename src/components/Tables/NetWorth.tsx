@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from 'store/store'
-import { formatCurrency } from 'utils/helpers/format'
+import { formatValue } from 'utils/helpers/format'
 
 const NetworthTable = () => {
   const balances = useSelector<RootState, { [key: string]: number }>(state => state.balances.balances)
@@ -38,7 +38,7 @@ const NetworthTable = () => {
                     <div></div>
                   </td>
                   <td style={{ fontWeight: '400' }}>{ balance[0] }</td>
-                  <td style={{ fontWeight: '400' }}>{ formatCurrency(balance[1] as number / 1e18) }</td>
+                  <td style={{ fontWeight: '400' }}>{ formatValue(balance[1] as number / 1e18) } ETH</td>
                 </tr>
               ))
             }
