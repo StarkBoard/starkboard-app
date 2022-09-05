@@ -6,7 +6,7 @@ import { formatCurrency } from 'utils/helpers/format'
 const NetworthTable = () => {
   const balances = useSelector<RootState, { [key: string]: number }>(state => state.balances.balances)
 
-  const compare = (a: number[], b: number[]) => a[1] < b[1] ? -1 : a[1] > b[1] ? 1 : 0
+  const compare = (a: number[], b: number[]) => a[1] > b[1] ? -1 : a[1] < b[1] ? 1 : 0
 
   const sortedBalances = useMemo(() => {
     const allBalances = []
@@ -37,8 +37,8 @@ const NetworthTable = () => {
                     </div>
                     <div></div>
                   </td>
-                  <td>{ balance[0] }</td>
-                  <td>{ formatCurrency(balance[1] as number / 1e18) }</td>
+                  <td style={{ fontWeight: '400' }}>{ balance[0] }</td>
+                  <td style={{ fontWeight: '400' }}>{ formatCurrency(balance[1] as number / 1e18) }</td>
                 </tr>
               ))
             }
