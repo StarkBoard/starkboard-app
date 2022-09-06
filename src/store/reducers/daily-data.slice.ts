@@ -38,7 +38,7 @@ export const fetchDailyData = createAsyncThunk('dailyData/fetch', async (network
     day: new Date(unit.day),
     top_wallets_active: JSON.parse(unit.top_wallets_active as unknown as string)
   }))
-  return formattedData
+  return formattedData.reverse()
 })
 
 const dailyDataSlice = createSlice({
@@ -56,7 +56,7 @@ const dailyDataSlice = createSlice({
       })
       .addCase(fetchDailyData.fulfilled, (state, action) => {
         state.loading = false
-        state.data = [...state.data, ...action.payload]
+        state.data = action.payload
       })
       .addCase(fetchDailyData.rejected, (state, action) => {
         console.log(action.error)

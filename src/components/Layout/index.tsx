@@ -28,14 +28,17 @@ const Layout: React.FC<Props> = ({ children }: Props) => {
   const fetchingBalances = useSelector<RootState, boolean>(state => state.balances.loading)
   const tokensPrices = useSelector<RootState, TokenPricesState>(state => state.tokensPrices)
   const largestWalletsRaw = useSelector<RootState, string[][]>(state => state.dailyData.data.map(data => data.top_wallets_active))
+
   const largestWallets = useMemo(() => {
-    return largestWalletsRaw.reduce((merged, block) => {
+    const networthDays = 7
+    const selectedWallets = largestWalletsRaw.length < networthDays ? largestWalletsRaw : largestWalletsRaw.slice(0 - networthDays * 5)
+
+    return selectedWallets.reduce((merged, block) => {
       if (block === null) return merged
       merged.push(...block)
       return merged
     }, [])
   }, [largestWalletsRaw])
-
   const switchNetwork = () => {
     setCookie('network', network === 'mainnet' ? 'testnet' : 'mainnet')
     router.reload()
@@ -44,9 +47,7 @@ const Layout: React.FC<Props> = ({ children }: Props) => {
   useEffect(() => {
     if (!network) return
     if (!fetchingBalances) {
-      const networthDays = 7
-      const addressesRaw = largestWallets.length < networthDays ? largestWallets : largestWallets.slice(0 - networthDays * 5)
-      const addresses = [...new Set(addressesRaw)]
+      const addresses = [...new Set(largestWallets)]
       dispatch(fetchBalances({ addresses, network }))
     }
   }, [largestWallets.length, network])
