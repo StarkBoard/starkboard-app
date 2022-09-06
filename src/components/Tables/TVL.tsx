@@ -13,7 +13,7 @@ tokensTypes.set('dai', 'Stablecoin')
 tokensTypes.set('wbtc', '1:1 Backed ERC20')
 tokensTypes.set('usdc', 'Stablecoin')
 tokensTypes.set('usdt', 'Stablecoin')
-tokensTypes.set('stark', 'Layer 1')
+tokensTypes.set('stark', 'Layer 2')
 
 const TvlTable = () => {
   const tvlUnits = useSelector<RootState, TvlUnit[]>(state => state.tvlEvolution.data)
