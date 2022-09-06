@@ -1,16 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { User } from 'store/reducers/top-users'
 import { RootState } from 'store/store'
 import { formatValue } from 'utils/helpers/format'
 
-interface User {
-  balance: number;
-  nonce: number;
-}
-
 const NetworthTable = () => {
-  const users = useSelector<RootState, [string, User][]>(state => state.topUsers.users)
+  const users = useSelector<RootState, User[]>(state => state.topUsers.users)
 
   return (
     <div className="card table-container">
@@ -27,19 +23,19 @@ const NetworthTable = () => {
           <tbody>
             {
               users.map((user, index) => (
-                <tr className="text-white" key={user[0]}>
+                <tr className="text-white" key={user.wallet_address}>
                   <td className="d-flex flex-row align-items-center justify-content-between">
                     <div className="d-flex flex-row">
                       <div className="mx-3">{index + 1}</div>
-                      <a href={`https://voyager.online/contract/${user[0]}`} target="_blank" rel="noreferrer" style={{ marginTop: '0px' }}>
+                      <a href={`https://voyager.online/contract/${user.wallet_address}`} target="_blank" rel="noreferrer" style={{ marginTop: '0px' }}>
                         <img src="/images/voyager.png" height={20} width={20} alt="Voyager Logo" />
                       </a>
                     </div>
                     <div></div>
                   </td>
-                  <td style={{ fontWeight: '400' }}>{user[0]}</td>
-                  <td style={{ fontWeight: '400' }}>{formatValue(user[1].balance as number / 1e18)} ETH</td>
-                  <td style={{ fontWeight: '400' }}>{formatValue(user[1].nonce as number)}</td>
+                  <td style={{ fontWeight: '400' }}>{user.wallet_address}</td>
+                  <td style={{ fontWeight: '400' }}>{formatValue(user.eth as number / 1e18)} ETH</td>
+                  <td style={{ fontWeight: '400' }}>{formatValue(user.count_txs as number)}</td>
                 </tr>
               ))
             }

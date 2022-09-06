@@ -1,5 +1,5 @@
 import Sidebar from 'components/Sidebar'
-import React, { ReactElement, useEffect, useMemo, useState } from 'react'
+import React, { ReactElement, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { fetchDailyData } from 'store/reducers/daily-data.slice'
 import { fetchDailyTvl } from 'store/reducers/daily-tvl.slice'
@@ -25,35 +25,12 @@ const Layout: React.FC<Props> = ({ children }: Props) => {
   const router = useRouter()
 
   const dispatch = useAppDispatch()
-  const fetchingTopUsers = useSelector<RootState, boolean>(state => state.topUsers.loading)
   const tokensPrices = useSelector<RootState, TokenPricesState>(state => state.tokensPrices)
-  const largestWalletsRaw = useSelector<RootState, string[][]>(state => state.dailyData.data.map(data => data.top_wallets_active))
-
-  const largestWallets = useMemo(() => {
-    const filteredWallets = largestWalletsRaw.reduce((merged, users) => {
-      if (users === null) return merged
-      merged.push(...users)
-      return merged
-    }, [])
-    const limit = 50
-    const cleanWallets = [...new Set(filteredWallets)]
-    return cleanWallets.length < limit ? cleanWallets : cleanWallets.slice(0 - 15)
-  }, [largestWalletsRaw])
 
   const switchNetwork = () => {
     setCookie('network', network === 'mainnet' ? 'testnet' : 'mainnet')
     router.reload()
   }
-
-  useEffect(() => {
-    if (!network) return
-    if (!fetchingTopUsers) {
-      const addresses = largestWallets
-      dispatch(fetchTopUsers({ addresses, network }))
-    }
-  }, [largestWallets.length, network])
-
-  console.log(largestWallets)
 
   useEffect(() => {
     if (!tokensPrices.loading && network) {
@@ -71,6 +48,7 @@ const Layout: React.FC<Props> = ({ children }: Props) => {
     dispatch(fetchDailyTvl(network))
     dispatch(fetchDailyData(network))
     dispatch(fetchTranfers(network))
+    dispatch(fetchTopUsers(network))
   }, [])
 
   return (
