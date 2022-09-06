@@ -35,7 +35,7 @@ const Layout: React.FC<Props> = ({ children }: Props) => {
       merged.push(...users)
       return merged
     }, [])
-    const limit = 15
+    const limit = 50
     const cleanWallets = [...new Set(filteredWallets)]
     return cleanWallets.length < limit ? cleanWallets : cleanWallets.slice(0 - 15)
   }, [largestWalletsRaw])
