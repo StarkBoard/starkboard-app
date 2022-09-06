@@ -13,7 +13,7 @@ import Footer from './Footer'
 import Header from './Header'
 import { getCookie, setCookie } from 'cookies-next'
 import { useRouter } from 'next/router'
-import { fetchBalances } from 'store/reducers/balances.slice'
+import { fetchTopUsers } from 'store/reducers/top-users'
 
 interface Props {
   children: ReactElement;
@@ -25,20 +25,21 @@ const Layout: React.FC<Props> = ({ children }: Props) => {
   const router = useRouter()
 
   const dispatch = useAppDispatch()
-  const fetchingBalances = useSelector<RootState, boolean>(state => state.balances.loading)
+  const fetchingTopUsers = useSelector<RootState, boolean>(state => state.topUsers.loading)
   const tokensPrices = useSelector<RootState, TokenPricesState>(state => state.tokensPrices)
   const largestWalletsRaw = useSelector<RootState, string[][]>(state => state.dailyData.data.map(data => data.top_wallets_active))
 
   const largestWallets = useMemo(() => {
-    const networthDays = 7
-    const selectedWallets = largestWalletsRaw.length < networthDays ? largestWalletsRaw : largestWalletsRaw.slice(0 - networthDays * 5)
-
-    return selectedWallets.reduce((merged, block) => {
-      if (block === null) return merged
-      merged.push(...block)
+    const filteredWallets = largestWalletsRaw.reduce((merged, users) => {
+      if (users === null) return merged
+      merged.push(...users)
       return merged
     }, [])
+    const limit = 15
+    const cleanWallets = [...new Set(filteredWallets)]
+    return cleanWallets.length < limit ? cleanWallets : cleanWallets.slice(0 - 15)
   }, [largestWalletsRaw])
+
   const switchNetwork = () => {
     setCookie('network', network === 'mainnet' ? 'testnet' : 'mainnet')
     router.reload()
@@ -46,11 +47,13 @@ const Layout: React.FC<Props> = ({ children }: Props) => {
 
   useEffect(() => {
     if (!network) return
-    if (!fetchingBalances) {
-      const addresses = [...new Set(largestWallets)]
-      dispatch(fetchBalances({ addresses, network }))
+    if (!fetchingTopUsers) {
+      const addresses = largestWallets
+      dispatch(fetchTopUsers({ addresses, network }))
     }
   }, [largestWallets.length, network])
+
+  console.log(largestWallets)
 
   useEffect(() => {
     if (!tokensPrices.loading && network) {
@@ -72,7 +75,7 @@ const Layout: React.FC<Props> = ({ children }: Props) => {
 
   return (
     <div className="body">
-      <Header mode={mode} switchMode={() => setMode(mode === 'dark' ? 'light' : 'dark')} network={network} switchNetwork={switchNetwork}/>
+      <Header mode={mode} switchMode={() => setMode(mode === 'dark' ? 'light' : 'dark')} network={network} switchNetwork={switchNetwork} />
       <div className="container">
         <div className="row">
           <div className="col-12 col-md-2 mt-4">

@@ -14,6 +14,7 @@ const Users = () => {
   const metrics = useSelector<RootState, MetricsUnit[]>(state => state.metrics.data.filter(metrics => metrics.wallets > 0))
   const usersEvolution = useMemo(() => metrics.map(metric => ([metric.day.getTime(), metric.wallets])), [metrics])
   const totalUsers = useMemo(() => metrics.length === 0 ? 0 : metrics[metrics.length - 1].wallets, [metrics])
+  const fetchingTopUsers = useSelector<RootState, boolean>(state => state.topUsers.loading)
 
   const fetchingData = useSelector<RootState, boolean>(state => state.metrics.loading)
   const loading = fetchingData || metrics.length === 0 || totalUsers === 0
@@ -43,7 +44,9 @@ const Users = () => {
         </div>
       </div>
       <h2 className="ps-0 pb-4 page-title">Networth leaderboard</h2>
-      <NetworthTable />
+      {
+        fetchingTopUsers ? (<Loader />) : (<NetworthTable />)
+      }
     </>
   )
 

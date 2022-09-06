@@ -1,20 +1,16 @@
-import React, { useMemo } from 'react'
+/* eslint-disable @next/next/no-img-element */
+import React from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from 'store/store'
 import { formatValue } from 'utils/helpers/format'
 
+interface User {
+  balance: number;
+  nonce: number;
+}
+
 const NetworthTable = () => {
-  const balances = useSelector<RootState, { [key: string]: number }>(state => state.balances.balances)
-
-  const compare = (a: number[], b: number[]) => a[1] > b[1] ? -1 : a[1] < b[1] ? 1 : 0
-
-  const sortedBalances = useMemo(() => {
-    const allBalances = []
-    for (const variable in balances) {
-      allBalances.push([variable, balances[variable]])
-    }
-    return allBalances.sort((a, b) => compare(a as number[], b as number[])).slice(0, 50)
-  }, [balances])
+  const users = useSelector<RootState, [string, User][]>(state => state.topUsers.users)
 
   return (
     <div className="card table-container">
@@ -25,20 +21,25 @@ const NetworthTable = () => {
               <th></th>
               <th>Address</th>
               <th className="d-none d-md-table-cell">Net Worth</th>
+              <th className="d-none d-md-table-cell">Nonce</th>
             </tr>
           </thead>
           <tbody>
             {
-              sortedBalances.map((balance, index) => (
-                <tr className="text-white" key={balance[0]}>
+              users.map((user, index) => (
+                <tr className="text-white" key={user[0]}>
                   <td className="d-flex flex-row align-items-center justify-content-between">
                     <div className="d-flex flex-row">
                       <div className="mx-3">{index + 1}</div>
+                      <a href={`https://voyager.online/contract/${user[0]}`} target="_blank" rel="noreferrer" style={{ marginTop: '0px' }}>
+                        <img src="/images/voyager.png" height={20} width={20} alt="Voyager Logo" />
+                      </a>
                     </div>
                     <div></div>
                   </td>
-                  <td style={{ fontWeight: '400' }}>{ balance[0] }</td>
-                  <td style={{ fontWeight: '400' }}>{ formatValue(balance[1] as number / 1e18) } ETH</td>
+                  <td style={{ fontWeight: '400' }}>{user[0]}</td>
+                  <td style={{ fontWeight: '400' }}>{formatValue(user[1].balance as number / 1e18)} ETH</td>
+                  <td style={{ fontWeight: '400' }}>{formatValue(user[1].nonce as number)}</td>
                 </tr>
               ))
             }
