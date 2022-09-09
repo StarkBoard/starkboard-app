@@ -6,8 +6,8 @@ import axios from 'axios'
 export interface User {
   count_txs: number;
   eth: number;
-  wallet_address: number;
-  weekly_tx: number
+  wallet_address: string;
+  monthly_txs: number;
 }
 
 interface TopUsersState {
