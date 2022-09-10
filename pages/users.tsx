@@ -43,7 +43,7 @@ const Users = () => {
           <Chart series={[{ name: 'Wallets', data: dailyActiveWallets }]} formatter={value => formatValue(value, 3)} />
         </div>
       </div>
-      <h2 className="ps-0 pb-4 page-title">Networth leaderboard</h2>
+      <h2 className="ps-0 pb-4 page-title">Active Wallets</h2>
       {
         fetchingTopUsers ? (<Loader />) : (<NetworthTable />)
       }

@@ -18,6 +18,7 @@ const NetworthTable = () => {
               <th>Address</th>
               <th className="d-none d-md-table-cell">Net Worth</th>
               <th className="d-none d-md-table-cell">Monthly Transactions</th>
+              <th className="d-none d-md-table-cell">Total Transactions</th>
             </tr>
           </thead>
           <tbody>
@@ -36,6 +37,7 @@ const NetworthTable = () => {
                   <td style={{ fontWeight: '400' }}>{user.wallet_address.slice(0, 10)}...{user.wallet_address.slice(-10)}</td>
                   <td style={{ fontWeight: '400' }}>{formatValue(user.eth as number)} ETH</td>
                   <td style={{ fontWeight: '400' }}>{user.monthly_txs}</td>
+                  <td style={{ fontWeight: '400' }}>{formatValue(user.count_txs, 5)}</td>
                 </tr>
               ))
             }
