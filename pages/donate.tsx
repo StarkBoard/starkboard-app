@@ -4,17 +4,17 @@ import React from 'react'
 const Donate = () => {
   const blocks = [{
     title: 'Stark Whale',
-    image: '/images/donate/whale.png',
+    image: '/images/donate/Whale.png',
     button: 'Donate 0.1 ETH',
     description: 'You can click at the "Donate" button to select for a chain you liked to make a donation to Starkboard team!'
   }, {
     title: 'Stark Shrimp',
-    image: '/images/donate/shrimp.png',
+    image: '/images/donate/Shrimp.png',
     button: 'Donate 0.1 ETH',
     description: '0.01 ETH is a weekly cost for our server to run Ape Board. Thank you for supporting us, Shrimp!'
   }, {
     title: 'Custom Amount',
-    image: '/images/donate/ethereum.png',
+    image: '/images/donate/Ethereum.png',
     button: 'Donate now',
     marginTop: 4,
     description: 'Thank you for your support! Any amount is much appreciated'
