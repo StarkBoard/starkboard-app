@@ -1,6 +1,6 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRightArrowLeft, faArrowsLeftRight, faBridge, faCircleNodes, faClone, faFire, faHouse, faSackDollar, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faArrowRightArrowLeft, faArrowsLeftRight, faBridge, faCircleNodes, faClone, faFire, faGift, faHouse, faSackDollar, faUser } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -55,6 +55,12 @@ const Navigation = () => {
       title: 'Comparison',
       icon: faArrowsLeftRight,
       disabled: true
+    },
+    {
+      path: '/donate',
+      title: 'Donate',
+      icon: faGift,
+      disabled: false
     }
   ]
   return (
