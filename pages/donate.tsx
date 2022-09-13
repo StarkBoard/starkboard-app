@@ -6,17 +6,18 @@ const Donate = () => {
     title: 'Stark Whale',
     image: '/images/donate/Whale.png',
     button: 'Donate 0.1 ETH',
-    description: 'You can click at the "Donate" button to select for a chain you liked to make a donation to Starkboard team!'
+    description: '0.1 ETH is a monthly cost for our Database to be maintained at StarkBoard. Thank you for supporting us, Whale!'
   }, {
     title: 'Stark Shrimp',
     image: '/images/donate/Shrimp.png',
     button: 'Donate 0.1 ETH',
-    description: '0.01 ETH is a weekly cost for our server to run Ape Board. Thank you for supporting us, Shrimp!'
+    marginTop: 4,
+    description: '0.01 ETH is a weekly cost for our server to run StarkBoard Thank you for supporting us, Shrimp!'
   }, {
     title: 'Custom Amount',
     image: '/images/donate/Ethereum.png',
     button: 'Donate now',
-    marginTop: 4,
+    marginTop: 5,
     description: 'Thank you for your support! Any amount is much appreciated'
   }]
   return (
