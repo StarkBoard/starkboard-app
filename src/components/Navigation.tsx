@@ -33,15 +33,14 @@ const Navigation = () => {
       icon: faFire
     },
     {
+      path: '/ecosystem',
+      title: 'Ecosystem',
+      icon: faClone
+    },
+    {
       path: '/validators',
       title: 'Validators',
       icon: faCircleNodes,
-      disabled: true
-    },
-    {
-      path: '/projects',
-      title: 'New Projects',
-      icon: faClone,
       disabled: true
     },
     {

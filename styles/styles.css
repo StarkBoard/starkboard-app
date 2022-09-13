@@ -483,3 +483,91 @@ ul {
 .donate-block h3 {
  font-weight: bold;
 }
+
+.ecosystem-image {
+  max-width: 100%;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  height: auto;
+}
+
+.ecosystem-card h3 {
+  font-weight: 600;
+}
+
+.ecosystem-card p {
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom: 0px;
+}
+
+.ecosystem-data-title {
+  color: #B3B3B3;
+  font-size: 13px;
+}
+
+.ecosystem-data-value {
+  color: white;
+  font-size: 22px;
+}
+
+.ecosystem-data-change {
+  color: #03D9A5;
+  font-size: 15px;
+  font-weight: 400 !important;
+}
+
+.ecosystem-pills span {
+  padding: 3px 20px;
+  margin-top: 3px;
+  font-weight: bold;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+
+.amm-pill {
+  background-color: #55521A;
+  color: #FFF500;
+}
+
+.kyc-pill {
+  background-color: #523D2F;
+  color: #ED974F;
+}
+
+.ecosystem-splitter {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: linear-gradient(to right, #02C1FE, #023693);
+}
+
+.ecosystem-icons a {
+  color: white;
+  margin-right: 15px;
+  font-size: 25px;;
+}
+
+
+.ecosystem-logo {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.ecosystem-logo {
+  border-radius: 50%;
+  position: absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+  background-color: black;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  height: 80px;
+}
+
+.ecosystem-header {
+  position: relative;
+}
