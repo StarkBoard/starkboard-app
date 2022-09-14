@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { User } from 'store/reducers/top-users'
+import { User } from 'store/reducers/top-users.slice'
 import { RootState } from 'store/store'
 import { formatValue } from 'utils/helpers/format'
 

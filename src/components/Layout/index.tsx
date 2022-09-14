@@ -13,7 +13,7 @@ import Footer from './Footer'
 import Header from './Header'
 import { getCookie, setCookie } from 'cookies-next'
 import { useRouter } from 'next/router'
-import { fetchTopUsers } from 'store/reducers/top-users'
+import { fetchTopUsers } from 'store/reducers/top-users.slice'
 
 interface Props {
   children: ReactElement;

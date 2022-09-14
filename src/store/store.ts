@@ -7,7 +7,8 @@ import tvlEvolutionSlice from './reducers/tvl-evolution.slice'
 import tokensPricesSlice from './reducers/tokens-prices.slice'
 import metricsSlice from './reducers/metrics.slice'
 import volumeSlice from './reducers/volume.slice'
-import topUsersSlice from './reducers/top-users'
+import topUsersSlice from './reducers/top-users.slice'
+import ecosystemSlice from './reducers/ecosystem.slice'
 
 export interface AppState {
   dailyTvl: typeof dailyTvlSlice;
@@ -18,6 +19,7 @@ export interface AppState {
   metrics: typeof metricsSlice;
   volue: typeof volumeSlice;
   topUsers: typeof topUsersSlice;
+  ecosystem: typeof ecosystemSlice;
 }
 
 const store = configureStore({
@@ -29,7 +31,8 @@ const store = configureStore({
     tokensPrices: tokensPricesSlice,
     metrics: metricsSlice,
     volume: volumeSlice,
-    topUsers: topUsersSlice
+    topUsers: topUsersSlice,
+    ecosystem: ecosystemSlice
   },
   middleware: getDefaultMiddleware => getDefaultMiddleware({ serializableCheck: false })
 })
