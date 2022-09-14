@@ -4,30 +4,29 @@
   color: #FFF500;
 }
 
-
 .nft-pill {
-  background-color: #523D2F;
-  color: #ED974F;
+  background-color: rgb(255, 21, 0, 40%);
+  color: #FF1500;
 }
 
 .defi-pill {
-  background-color: #523D2F;
-  color: #ED974F;
+  background-color: rgb(0, 255, 133, 40%);
+  color: #00FF85;
 }
 
 .gamefi-pill {
-  background-color: #523D2F;
-  color: #ED974F;
+  background-color: rgb(249, 26, 173, 40%);
+  color: #F91AAD;
 }
 
 .wallet-pill {
-  background-color: #523D2F;
-  color: #ED974F;
+  background-color: rgb(23, 128, 142, 40%);
+  color: #1D99AA;
 }
 
 .digital_id-pill {
-  background-color: #523D2F;
-  color: #ED974F;
+  background-color: rgb(145, 22, 236, 42%);
+  color: #9116EC;
 }
 
 .mobile-pill {
@@ -36,33 +35,33 @@
 }
 
 .payments-pill {
-  background-color: #523D2F;
-  color: #ED974F;
+  background-color: #55521A;
+  color: #FFF500;
 }
 
 .infrastructure-pill {
-  background-color: #523D2F;
-  color: #ED974F;
+  background-color: rgb(85, 47, 26, 50%);
+  color: #8C5125;
 }
 
 .dao-pill {
-  background-color: #523D2F;
-  color: #ED974F;
+  background-color: rgb(2, 57, 149, 40%);
+  color: #0C4EBC;
 }
 
 .governance-pill {
-  background-color: #523D2F;
-  color: #ED974F;
+  background-color: rgb(130, 241, 221, 40%);
+  color: #82F1DD;
 }
 
 .bridge-pill {
-  background-color: #523D2F;
-  color: #ED974F;
+  background-color: rgb(201, 46, 111, 40%);
+  color: #D32343;
 }
 
 .tools-pill {
-  background-color: #523D2F;
-  color: #ED974F;
+  background-color: rgb(170, 170, 170, 40%);
+  color: #AFAFAF;
 }
 
 .green_finance-pill {

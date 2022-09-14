@@ -20,10 +20,18 @@ const Ecosystem = () => {
           <div className={`col-12 col-lg-4 px-2 ${index === 0 ? 'mt-0' : index < 3 ? 'mt-3 mt-lg-0' : 'mt-3'}`} key={project.application}>
             <div className="black-gradient rounded ecosystem-card">
               <div className="ecosystem-header">
-                <img alt="Project Banner" src={project.banner_picture_url} className='ecosystem-image mb-1' />
-                <img src={project.profile_picture_url} alt="Project Logo" className='ecosystem-logo' />
+                {
+                  project.banner_picture_url && (
+                    <img alt="Project Banner" src={project.banner_picture_url} className='ecosystem-image mb-1' />
+                  )
+                }
+                {
+                  project.profile_picture_url && (
+                    <img src={project.profile_picture_url} alt="Project Logo" className='ecosystem-logo' />
+                  )
+                }
                 <div className="flex flex-row justify-content-center">
-                  <h3 className="text-white text-center mt-5">{project.application}</h3>
+                  <h3 className={`text-white text-center ${project.profile_picture_url ? 'mt-5' : 'mt-4'}`}>{project.application}</h3>
                 </div>
               </div>
               <div className="row mx-2 mt-4">
