@@ -13,17 +13,17 @@ const Ecosystem = () => {
   const { loading: fetchingData, projects } = useSelector<RootState, EcosystemState>(state => state.ecosystem)
   const loading = fetchingData || projects.length === 0
 
-  console.log(projects)
-
   const content = (
     <div className="row justify-content-between">
       {
         projects.map((project, index) => (
-          <div className={`col-12 col-md-4 px-2 ${index === 0 ? 'mt-0' : index < 3 ? 'mt-3 mt-md-0' : 'mt-3'}`} key={project.application}>
+          <div className={`col-12 col-lg-4 px-2 ${index === 0 ? 'mt-0' : index < 3 ? 'mt-3 mt-lg-0' : 'mt-3'}`} key={project.application}>
             <div className="black-gradient rounded ecosystem-card">
               <div className="ecosystem-header">
+                <img alt="Project Banner" src="/images/ecosystem/banner.png" className='ecosystem-image mb-1' />
+                <img src="/images/logo-dark.png" alt="Project Logo" className='ecosystem-logo' />
                 <div className="flex flex-row justify-content-center">
-                  <h3 className={'text-white text-center mt-4'}>{project.application}</h3>
+                  <h3 className="text-white text-center mt-5">Starkboard</h3>
                 </div>
               </div>
               <div className="row mx-2 mt-4">
@@ -45,7 +45,7 @@ const Ecosystem = () => {
                 <div>
                   {
                     project.tags.map((tag) => (
-                      <span key={tag} className={`${tag.toLowerCase()}-pill text-center`}>{tag.toUpperCase()}</span>
+                      <span key={tag} className={`${tag.toLowerCase().replace(' ', '_')}-pill text-center`}>{tag.toUpperCase().replace('_', ' ')}</span>
                     ))
                   }
                 </div>

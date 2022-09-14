@@ -31,17 +31,17 @@ const Header: React.FC<Props> = ({ mode, network, switchNetwork }: Props) => {
             <h1 className="text-white h3 text-uppercase mb-0 d-none d-md-inline-block" id="logo-title">Starkboard</h1>
           </div>
           <ul className="icones d-flex flex-row mb-0 align-items-center">
-            <li className="d-none d-md-flex">
+            <li className="d-none d-lg-flex">
               <a href="https://medium.com/@starkboard/5a1e37fb31df" target="_blank" rel="noreferrer" className="text-white">
                 <FontAwesomeIcon icon={faMedium} />
               </a>
             </li>
-            <li className="d-none d-md-flex">
+            <li className="d-none d-lg-flex">
               <a href="https://twitter.com/Starkboard" target="_blank" rel="noreferrer" className="text-white">
                 <FontAwesomeIcon icon={faTwitter} />
               </a>
             </li>
-            <li className="d-none d-md-flex">
+            <li className="d-none d-lg-flex">
               <a href="https://discord.gg/8KJKrpDUMZ" target="_blank" rel="noreferrer" className="text-white">
                 <FontAwesomeIcon icon={faDiscord} />
               </a>
@@ -53,18 +53,18 @@ const Header: React.FC<Props> = ({ mode, network, switchNetwork }: Props) => {
               <div className="d-flex flex-row">
                 {network && (
                   <p id="chain-name" onClick={switchNetwork}>
-                    <FontAwesomeIcon icon={faArrowRightArrowLeft} className="d-none d-md-inline-block" />
+                    <FontAwesomeIcon icon={faArrowRightArrowLeft} className="d-none d-lg-inline-block" />
                     {network.charAt(0).toUpperCase() + network.slice(1).toLowerCase()}
                   </p>
                 )}
               </div>
             </li>
-            <li onClick={() => toggleNavBar(!showNavBar)} className="d-md-none text-white">
+            <li onClick={() => toggleNavBar(!showNavBar)} className="d-lg-none text-white">
               <FontAwesomeIcon icon={faBars} />
             </li>
           </ul>
         </nav>
-        <div className={`d-${showNavBar ? 'block' : 'none'} d-md-none mb-0`} style={{ marginTop: '-20px' }}>
+        <div className={`d-${showNavBar ? 'block' : 'none'} d-lg-none mb-0`} style={{ marginTop: '-20px' }}>
           <Navigation />
         </div>
       </div>

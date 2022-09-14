@@ -24,11 +24,11 @@ const Home = () => {
   const content = (
     <>
       <div className="row justify-content-between">
-        <div className="col-12 col-md-4">
+        <div className="col-12 col-lg-4">
           <DataBlock color="BLACK" title="Total Value Locked (USD)" mobileTitle="TVL" data={formatCurrency(totalTvl)} />
         </div>
-        <DataEvolution enableTotal={false} changeBlockClasses="col-12 col-md-4 mt-2 mt-md-0" totalPrefix="Change" data={tvlUnits.map(unit => unit.total)} />
-        <div className="col-12 col-md-4 mt-2 mt-md-0">
+        <DataEvolution enableTotal={false} changeBlockClasses="col-12 col-lg-4 mt-2 mt-lg-0" totalPrefix="Change" data={tvlUnits.map(unit => unit.total)} />
+        <div className="col-12 col-lg-4 mt-2 mt-lg-0">
           <DataBlock color="BLACK" title="TVL in non-native" data="Soon" />
         </div>
       </div>

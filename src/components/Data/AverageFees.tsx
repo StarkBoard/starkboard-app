@@ -21,7 +21,7 @@ const AverageFees: React.FC<Props> = ({ data }: Props) => {
   const selection = (<PeriodSelection selected={selectedPeriod} setSelected={setSelectedPeriod} prefix={'Average Fees'} />)
 
   return (
-    <div className={'col-12 col-md-4 mt-2 mt-md-0'}>
+    <div className={'col-12 col-lg-4 mt-2 mt-lg-0'}>
       <DataBlock color={'BLUE'} title={selection} data={formatValue(average, 5) + ' ETH'} />
     </div>
   )

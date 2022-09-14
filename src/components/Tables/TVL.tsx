@@ -46,10 +46,10 @@ const TvlTable = () => {
             <tr>
               <th></th>
               <th>Name</th>
-              <th className="d-none d-md-table-cell">Category</th>
-              <th className="d-none d-md-table-cell">24h Change</th>
+              <th className="d-none d-lg-table-cell">Category</th>
+              <th className="d-none d-lg-table-cell">24h Change</th>
               <th>TVL</th>
-              <th className="d-none d-md-table-cell">Amount</th>
+              <th className="d-none d-lg-table-cell">Amount</th>
             </tr>
           </thead>
           <tbody>
@@ -66,14 +66,14 @@ const TvlTable = () => {
                     <div></div>
                   </td>
                   <td>{token.name.toUpperCase()}</td>
-                  <td className="d-none d-md-table-cell">{tokensTypes.get(token.name)}</td>
-                  <td className="d-none d-md-table-cell">
+                  <td className="d-none d-lg-table-cell">{tokensTypes.get(token.name)}</td>
+                  <td className="d-none d-lg-table-cell">
                     <span style={{ color: isNaN(token.change) || token.change === 0 ? 'white' : token.change > 0 ? '#03D9A5' : '#DE365E' }}>
                       {isNaN(token.change) ? '0' : token.change.toFixed(2)}%
                     </span>
                   </td>
                   <td>{formatCurrency(token.currentTvl)}</td>
-                  <td className="d-none d-md-table-cell">{formatValue(token.amount)}</td>
+                  <td className="d-none d-lg-table-cell">{formatValue(token.amount)}</td>
                 </tr>
               ))
             }

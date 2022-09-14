@@ -19,8 +19,8 @@ const Transactions = () => {
   const content = (
     <>
       <div className="row justify-content-between">
-        <DataEvolution data={metrics.map(metrics => metrics.transactions)} totalBlockClasses="col-12 col-md-4" changeBlockClasses="mt-2 mt-md-0 col-12 col-md-4" totalPrefix="Total Transactions" />
-        <div className="mt-2 mt-md-0 col-12 col-md-4">
+        <DataEvolution data={metrics.map(metrics => metrics.transactions)} totalBlockClasses="col-12 col-lg-4" changeBlockClasses="mt-2 mt-lg-0 col-12 col-lg-4" totalPrefix="Total Transactions" />
+        <div className="mt-2 mt-lg-0 col-12 col-lg-4">
           <DataBlock color="BLACK" title="Deployed Contracts" data={formatValue(metrics.length === 0 ? 0 : metrics[metrics.length - 1].contractsDeployed)} />
         </div>
       </div>

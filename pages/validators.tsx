@@ -38,13 +38,13 @@ const Home = () => {
     <>
       <h2 className="ps-0 pb-4 page-title">Nodes Analytics</h2>
       <div className="row justify-content-between">
-        <div className="col-6 col-md-4">
+        <div className="col-6 col-lg-4">
           <DataBlock color="BLACK" title="Total Nodes" data="344" />
         </div>
-        <div className="col-6 col-md-4">
+        <div className="col-6 col-lg-4">
           <DataBlock color="BLUE" title="Last Block" data="10s ago" />
         </div>
-        <div className="col-12 col-md-4 mt-2 mt-md-0">
+        <div className="col-12 col-lg-4 mt-2 mt-lg-0">
           <DataBlock color="BLACK" title="Active Stake" data="983 ETH" />
         </div>
       </div>
@@ -59,13 +59,13 @@ const Home = () => {
         </div>
       </div>
       <div className="row justify-content-between">
-        <div className="col-6 col-md-4">
+        <div className="col-6 col-lg-4">
           <DataBlock color="BLACK" title="Avg Block Time" data="21s" />
         </div>
-        <div className="col-12 col-md-4 mt-2 mt-md-0">
+        <div className="col-12 col-lg-4 mt-2 mt-lg-0">
           <DataBlock color="BLUE" title="Gas Price" data="1.2 Gwei" />
         </div>
-        <div className="col-6 col-md-4">
+        <div className="col-6 col-lg-4">
           <DataBlock color="BLACK" title="Avg Network Hashrate" data="0.1 H/s" />
         </div>
       </div>

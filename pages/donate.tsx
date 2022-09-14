@@ -33,7 +33,7 @@ const Donate = () => {
       <div className="row justify-content-center mt-3 gx-5">
         {
           blocks.map(block => (
-            <div className="col-md-4 py-4 h-128" key={block.image}>
+            <div className="col-lg-4 py-4 h-128" key={block.image}>
               <div className="black-gradient rounded donate-block px-4 py-4">
                 <div className="d-flex flex-column justify-content-center">
                   <h3 className="text-white text-center">{block.title}</h3>

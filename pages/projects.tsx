@@ -39,13 +39,13 @@ const Home = () => {
     <>
       <h2 className="ps-0 pb-4 page-title">New Projects (Twitter based)</h2>
       <div className="row justify-content-between">
-        <div className="col-6 col-md-4">
+        <div className="col-6 col-lg-4">
           <DataBlock color="BLACK" title="Total Projects" mobileTitle="TVL" data="1200" />
         </div>
-        <div className="col-6 col-md-4">
+        <div className="col-6 col-lg-4">
           <DataBlock color="BLUE" title="Change (last 24 hours)" mobileTitle="24h Change" data="+3" />
         </div>
-        <div className="col-12 col-md-4 mt-2 mt-md-0">
+        <div className="col-12 col-lg-4 mt-2 mt-lg-0">
           <DataBlock color="BLACK" title="Mainnet Percentage" data="4.7%" />
         </div>
       </div>

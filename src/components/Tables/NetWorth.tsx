@@ -16,9 +16,9 @@ const NetworthTable = () => {
             <tr>
               <th></th>
               <th>Address</th>
-              <th className="d-none d-md-table-cell">Net Worth</th>
-              <th className="d-none d-md-table-cell">Monthly Transactions</th>
-              <th className="d-none d-md-table-cell">Total Transactions</th>
+              <th className="d-none d-lg-table-cell">Net Worth</th>
+              <th className="d-none d-lg-table-cell">Monthly Transactions</th>
+              <th className="d-none d-lg-table-cell">Total Transactions</th>
             </tr>
           </thead>
           <tbody>
