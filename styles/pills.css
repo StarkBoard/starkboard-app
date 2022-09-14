@@ -1,0 +1,85 @@
+
+.amm-pill {
+  background-color: #55521A;
+  color: #FFF500;
+}
+
+.kyc-pill {
+  background-color: #523D2F;
+  color: #ED974F;
+}
+
+.nft-pill {
+  background-color: #523D2F;
+  color: #ED974F;
+}
+
+.kyc-pill {
+  background-color: #523D2F;
+  color: #ED974F;
+}
+
+.defi-pill {
+  background-color: #523D2F;
+  color: #ED974F;
+}
+
+.gamefi-pill {
+  background-color: #523D2F;
+  color: #ED974F;
+}
+
+.wallet-pill {
+  background-color: #523D2F;
+  color: #ED974F;
+}
+
+.digital_id-pill {
+  background-color: #523D2F;
+  color: #ED974F;
+}
+
+.mobile-pill {
+  background-color: #523D2F;
+  color: #ED974F;
+}
+
+.payments-pill {
+  background-color: #523D2F;
+  color: #ED974F;
+}
+
+.infrastructure-pill {
+  background-color: #523D2F;
+  color: #ED974F;
+}
+
+.dao-pill {
+  background-color: #523D2F;
+  color: #ED974F;
+}
+
+.governance-pill {
+  background-color: #523D2F;
+  color: #ED974F;
+}
+
+
+.tools-pill {
+  background-color: #523D2F;
+  color: #ED974F;
+}
+
+
+.ecosystem-pills span {
+  display: inline-block;
+  padding: 0.35em 0.65em;
+  margin-right: 5px;
+  font-size: 0.75em;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+}

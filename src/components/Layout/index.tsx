@@ -14,6 +14,7 @@ import Header from './Header'
 import { getCookie, setCookie } from 'cookies-next'
 import { useRouter } from 'next/router'
 import { fetchTopUsers } from 'store/reducers/top-users.slice'
+import { fetchEcosystem } from 'store/reducers/ecosystem.slice'
 
 interface Props {
   children: ReactElement;
@@ -49,6 +50,7 @@ const Layout: React.FC<Props> = ({ children }: Props) => {
     dispatch(fetchDailyData(network))
     dispatch(fetchTranfers(network))
     dispatch(fetchTopUsers(network))
+    dispatch(fetchEcosystem())
   }, [])
 
   return (

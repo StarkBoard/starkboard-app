@@ -18,7 +18,7 @@ export interface Project {
   'website': string
 }
 
-interface EcosystemState {
+export interface EcosystemState {
   projects: Project[],
   loading: boolean;
 }
@@ -34,7 +34,7 @@ export const fetchEcosystem = createAsyncThunk('ecosystem/fetch', async () => {
       headers: { 'x-api-key': process.env.NEXT_PUBLIC_API_KEY || '' }
     })
 
-  return data.result as Project[]
+  return data.result.map((project: Project) => ({ ...project, tags: JSON.parse(project.tags as unknown as string) })) as Project[]
 })
 
 const ecosystemSlice = createSlice({

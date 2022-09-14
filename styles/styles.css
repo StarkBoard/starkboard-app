@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 @import url('./footer.css');
+@import url('./pills.css');
 
 * {
   margin: 0;
@@ -516,25 +517,6 @@ ul {
   font-size: 15px;
   font-weight: 400 !important;
 }
-
-.ecosystem-pills span {
-  padding: 3px 20px;
-  margin-top: 3px;
-  font-weight: bold;
-  margin-right: 5px;
-  border-radius: 5px;
-}
-
-.amm-pill {
-  background-color: #55521A;
-  color: #FFF500;
-}
-
-.kyc-pill {
-  background-color: #523D2F;
-  color: #ED974F;
-}
-
 .ecosystem-splitter {
   display: block;
   height: 3px;
@@ -548,6 +530,10 @@ ul {
   font-size: 25px;;
 }
 
+
+.ecosystem-icons a:hover {
+  color: rgb(100, 100, 100);
+}
 
 .ecosystem-logo {
   position: relative;
