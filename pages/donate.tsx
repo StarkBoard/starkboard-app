@@ -10,7 +10,7 @@ const Donate = () => {
   }, {
     title: 'Stark Shrimp',
     image: '/images/donate/Shrimp.png',
-    button: 'Donate 0.1 ETH',
+    button: 'Donate 0.01 ETH',
     marginTop: 4,
     description: '0.01 ETH is a weekly cost for our server to run StarkBoard Thank you for supporting us, Shrimp!'
   }, {
