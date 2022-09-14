@@ -15,6 +15,8 @@ export interface Project {
   'medium': string,
   'tags': string[],
   'twitter': string,
+  profile_picture_url: string,
+  banner_picture_url: string,
   'website': string
 }
 
