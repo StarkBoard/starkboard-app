@@ -487,8 +487,8 @@ ul {
 
 .ecosystem-image {
   max-width: 100%;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
   height: auto;
 }
 
@@ -529,7 +529,6 @@ ul {
   margin-right: 15px;
   font-size: 25px;;
 }
-
 
 .ecosystem-icons a:hover {
   color: rgb(100, 100, 100);
