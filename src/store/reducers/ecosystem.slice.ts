@@ -52,7 +52,7 @@ const ecosystemSlice = createSlice({
       })
       .addCase(fetchEcosystem.fulfilled, (state, action) => {
         state.loading = false
-        state.projects = action.payload
+        state.projects = action.payload.sort((a, b) => b.countFollowers - a.countFollowers)
       })
       .addCase(fetchEcosystem.rejected, (state, action) => {
         console.log(action.error)
