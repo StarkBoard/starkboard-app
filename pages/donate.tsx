@@ -34,14 +34,14 @@ const Donate = () => {
         {
           blocks.map(block => (
             <div className="col-lg-4 py-4 h-128" key={block.image}>
-              <div className="black-gradient rounded donate-block px-4 py-4">
+              <div className="black-gradient rounded-custom donate-block px-4 py-4">
                 <div className="d-flex flex-column justify-content-center">
                   <h3 className="text-white text-center">{block.title}</h3>
                   <p className="text-white text-center mb-6 mt-3">{block.description}</p>
                   <div className={`d-flex justify-content-center w-100 mt-${block.marginTop || 0} mb-4`}>
                     <Image src={block.image} width="80" height="80" alt="" />
                   </div>
-                  <button className={'mt-4 blue-gradient rounded text-white py-2'}>{block.button}</button>
+                  <button className={'mt-4 blue-gradient rounded-custom text-white py-2'}>{block.button}</button>
                 </div>
               </div>
             </div>

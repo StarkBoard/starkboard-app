@@ -28,7 +28,7 @@ const Fees = () => {
           <AverageFees data={meanFees.map(fees => fees[1]).filter(fees => fees > 0)} />
         </div>
       </div>
-      <div className="container my-5 p-2 black-gradient rounded">
+      <div className="container my-5 p-2 black-gradient rounded-custom">
         <div className="row text-white text-center mt-3">
           <h6 className="mb-0 font-weight-bold">Average Daily Fees</h6>
         </div>
@@ -36,7 +36,7 @@ const Fees = () => {
           <Chart series={[{ data: meanFees, name: 'Average Daily Fees' }]} formatter={(value) => formatValue(value, 10) + ' ETH'} />
         </div>
       </div>
-      <div className="container my-5 p-2 black-gradient rounded">
+      <div className="container my-5 p-2 black-gradient rounded-custom">
         <div className="row text-white text-center mt-3">
           <h6 className="mb-0 font-weight-bold">Total Daily Fees</h6>
         </div>

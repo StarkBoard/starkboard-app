@@ -49,7 +49,7 @@ const Home = () => {
           <DataBlock color="BLACK" title="Mainnet Percentage" data="4.7%" />
         </div>
       </div>
-      <div className="container my-5 p-2 black-gradient rounded">
+      <div className="container my-5 p-2 black-gradient rounded-custom">
         <div className="row">
           <Chart
             options={options.options as ApexOptions}

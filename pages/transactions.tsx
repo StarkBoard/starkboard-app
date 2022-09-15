@@ -24,7 +24,7 @@ const Transactions = () => {
           <DataBlock color="BLACK" title="Deployed Contracts" data={formatValue(metrics.length === 0 ? 0 : metrics[metrics.length - 1].contractsDeployed)} />
         </div>
       </div>
-      <div className="container my-5 p-2 black-gradient rounded">
+      <div className="container my-5 p-2 black-gradient rounded-custom">
         <div className="row text-white text-center mt-3">
           <h6 className="mb-0 font-weight-bold">Daily Transactions</h6>
         </div>
@@ -35,7 +35,7 @@ const Transactions = () => {
           />
         </div>
       </div>
-      <div className="container my-5 p-2 black-gradient rounded">
+      <div className="container my-5 p-2 black-gradient rounded-custom">
         <div className="row text-white text-center mt-3">
           <h6 className="mb-0 font-weight-bold">Transactions Types</h6>
         </div>

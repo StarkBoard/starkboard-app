@@ -18,7 +18,7 @@ const Ecosystem = () => {
       {
         projects.map((project, index) => (
           <div className={`col-12 col-md-6 col-lg-4 px-2 ecosystem-card ${index === 0 ? 'mt-0' : index < 3 ? 'mt-3 mt-lg-0' : 'mt-3'}`} key={project.application}>
-            <div className="black-gradient rounded">
+            <div className="black-gradient rounded-custom">
               <div className="ecosystem-header">
                 {
                   project.banner_picture_url && (

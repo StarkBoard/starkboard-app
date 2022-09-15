@@ -27,7 +27,7 @@ const Users = () => {
         </div>
         <DataEvolution enableTotal={false} changeBlockClasses="mt-2 mt-lg-0 col-12 col-lg-6" totalPrefix="Change" data={metrics.map(unit => unit.wallets) }/>
       </div>
-      <div className="container my-5 p-2 black-gradient rounded">
+      <div className="container my-5 p-2 black-gradient rounded-custom">
         <div className="row text-white text-center mt-3">
           <h6 className="mb-0 font-weight-bold">Total Wallets Evolution</h6>
         </div>
@@ -35,7 +35,7 @@ const Users = () => {
           <Chart series={[{ name: 'Total Wallets', data: usersEvolution }]} formatter={value => formatValue(value)} />
         </div>
       </div>
-      <div className="container my-5 p-2 black-gradient rounded">
+      <div className="container my-5 p-2 black-gradient rounded-custom">
         <div className="row text-white text-center mt-3">
           <h6 className="mb-0 font-weight-bold">Daily Active Wallets</h6>
         </div>

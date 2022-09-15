@@ -32,7 +32,7 @@ const Home = () => {
           <DataBlock color="BLACK" title="TVL in non-native" data="Soon" />
         </div>
       </div>
-      <div className="container my-5 p-2 black-gradient rounded">
+      <div className="container my-5 p-2 black-gradient rounded-custom">
         <div className="row text-white text-center mt-3">
           <h6 className="mb-0 font-weight-bold">TVL Evolution (USD)</h6>
         </div>

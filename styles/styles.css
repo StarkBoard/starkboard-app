@@ -348,10 +348,9 @@ ul {
   font-weight: 600;;
 }
 
-.rounded {
+.rounded-custom {
   border-radius: 15px !important;
 }
-
 
 
 .data-table th {
