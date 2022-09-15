@@ -492,6 +492,16 @@ ul {
   height: auto;
 }
 
+.ecosystem-card {
+  position: relative;
+  top: 0;
+  transition: top ease 0.3s;
+}
+
+.ecosystem-card:hover {
+  top: -10px; 
+}
+
 .ecosystem-card h3 {
   font-weight: 600;
 }

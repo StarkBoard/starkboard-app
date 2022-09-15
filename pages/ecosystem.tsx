@@ -17,8 +17,8 @@ const Ecosystem = () => {
     <div className="row justify-content-between">
       {
         projects.map((project, index) => (
-          <div className={`col-12 col-lg-4 px-2 ${index === 0 ? 'mt-0' : index < 3 ? 'mt-3 mt-lg-0' : 'mt-3'}`} key={project.application}>
-            <div className="black-gradient rounded ecosystem-card">
+          <div className={`col-12 col-md-6 col-lg-4 px-2 ecosystem-card ${index === 0 ? 'mt-0' : index < 3 ? 'mt-3 mt-lg-0' : 'mt-3'}`} key={project.application}>
+            <div className="black-gradient rounded">
               <div className="ecosystem-header">
                 {
                   project.banner_picture_url && (
