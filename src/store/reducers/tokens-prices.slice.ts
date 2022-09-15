@@ -29,7 +29,7 @@ export const fetchTokensPrices = createAsyncThunk(
     const tokens = ['ethereum', 'dai', 'wrapped-bitcoin', 'tether', 'usd-coin', 'starknet']
     const request = await axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${tokens.join(',')}`)
     const prices = new Map<string, number>()
-    request.data.forEach((token: { current_price: number, id: string }) => { 
+    request.data.forEach((token: { current_price: number, id: string }) => {
       prices.set(token.id, token.current_price)
     })
     return { eth: prices.get('ethereum'), dai: prices.get('dai'), wbtc: prices.get('wrapped-bitcoin'), usdt: prices.get('tether'), usdc: prices.get('usd-coin'), stark: prices.get('starknet') }

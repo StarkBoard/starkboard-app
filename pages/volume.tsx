@@ -17,11 +17,11 @@ const Volume = () => {
   const content = (
     <>
       <div className="row justify-content-between">
-        <DataEvolution data={volumeUnits.map(volume => volume.total)} totalPrefix='Total Volume' isCurrency />
+        <DataEvolution data={volumeUnits.map(volume => volume.total)} totalPrefix='Total Transfer Volume' isCurrency />
       </div>
       <div className="container my-5 p-2 black-gradient rounded-custom">
         <div className="row text-white text-center mt-3">
-          <h6 className="mb-0 font-weight-bold">Daily Volume Evolution (USD)</h6>
+          <h6 className="mb-0 font-weight-bold">Daily Transfer Volume Evolution (USD)</h6>
         </div>
         <div className="row">
           <Chart series={[{ data, name: 'Daily Volume' }]} formatter={(value) => formatCurrency(value, 2)} />
