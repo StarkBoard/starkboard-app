@@ -600,7 +600,6 @@ ul {
   left: 0px;
   background: linear-gradient(to right, rgb(0, 0, 0), rgb(20, 20, 20));
   border: #423E52 1px solid;
-  height: 450px;
   border-radius: 15px;
   width: 350px;
   z-index: 100;
@@ -682,7 +681,7 @@ ul {
 }
 
 .filters-footer {
-  margin-top: 10px;
+  margin-top: 5px;
   border-radius: 15px;
   cursor: pointer;
 }

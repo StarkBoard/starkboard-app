@@ -17,7 +17,7 @@ const Filters: React.FC<Props> = ({ tags, selectedTags, setSelectedTags, show, t
     <div className="d-flex flex-row ecosystem-filters position-relative">
       {
         show && (
-          <div className="position-absolute filters-modal py-4 container">
+          <div className="position-absolute filters-modal pt-4 pb-2 container">
             <div className="row filters-list pb-3">
               {
                 tags.map(tag => (
