@@ -565,3 +565,140 @@ ul {
 .ecosystem-header {
   position: relative;
 }
+
+.text-input {
+  border-radius: 3px;
+  padding: 5px 5px;
+}
+
+.ecosystem-filters button {
+  color: white;
+  padding: 5px 30px;
+  background: linear-gradient(to right, #02C1FE, #023693);
+  font-weight: light;
+}
+
+
+.ecosystem-filters button span {
+  font-weight: bold;;
+  margin-left: 20px;
+}
+
+.ecosystem-filters {
+  margin-bottom: -10px;
+  height: 40px;
+  color: white;
+}
+
+.filters-list {
+  padding-left: 30px;
+  border-bottom: #423E52 1px solid;;
+}
+
+.filters-modal {
+  top: 60px;
+  left: 0px;
+  background: linear-gradient(to right, rgb(0, 0, 0), rgb(20, 20, 20));
+  border: #423E52 1px solid;
+  height: 450px;
+  border-radius: 15px;
+  width: 350px;
+  z-index: 100;
+}
+
+/* Customize the label (the container) */
+.custom-checkbox {
+  display: block;
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.custom-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 11px;
+  left: 0;
+  height: 15px;
+  width: 15px;
+  border: 1px solid white;
+  background-color: black;
+  border-radius: 3px;
+}
+
+
+/* When the checkbox is checked, add a blue background */
+.custom-checkbox input:checked ~ .checkmark {
+  background: linear-gradient(to right, #02C1FE, #023693);
+  border: none;
+}
+
+.custom-checkbox input:checked ~  span {
+  background: -webkit-linear-gradient(#02C1FE, #023693);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Style the checkmark/indicator */
+.custom-checkbox .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.custom-checkbox span {
+  font-size: 15px;
+}
+
+.filters-footer .cancel-button {
+  background: transparent;
+  border: none;
+}
+
+.filters-footer .cancel-button {
+  background: transparent;
+  border: none;
+}
+
+.filters-footer {
+  margin-top: 10px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.filters-footer:hover {
+  background: -webkit-linear-gradient(#02C1FE, #023693);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.ecosystem-filters .text-input {
+  border-radius: 5px;
+  color: white;
+  padding-left: 10px !important;
+  height: 41px;
+  border: #423E52 1px solid;;
+  background-color: black;
+  margin-right: 20px;
+}

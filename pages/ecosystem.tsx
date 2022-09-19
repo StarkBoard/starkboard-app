@@ -2,21 +2,28 @@
 import { faDiscord, faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons'
 import { faGlobe } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Filters from 'components/Filters'
 import Loader from 'components/Loader'
-import React from 'react'
+import React, { useCallback, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { EcosystemState } from 'store/reducers/ecosystem.slice'
 import { RootState } from 'store/store'
 import { formatValue } from 'utils/helpers/format'
 
+const tags = ['wallet', 'digital_id', 'defi', 'nft', 'gamefi', 'dao', 'governance', 'bridge', 'infrastructure', 'payments', 'tools', 'starkex', 'mobile', 'green_finance']
 const Ecosystem = () => {
   const { loading: fetchingData, projects } = useSelector<RootState, EcosystemState>(state => state.ecosystem)
   const loading = fetchingData || projects.length === 0
+  const [selectedTags, setSelectedTags] = useState(tags)
+  const [showFilters, toggleFilters] = useState(false)
+  const [query, setQuery] = useState('')
+
+  const filteredProjects = useCallback(() => projects.filter(project => project.tags.some(tag => selectedTags.indexOf(tag) > -1) && (project.application.toLowerCase().includes(query.toLowerCase()) || project.description.toLowerCase().includes(query.toLowerCase()) || query.length === 0)), [selectedTags, projects, query])
 
   const content = (
     <div className="row justify-content-between">
       {
-        projects.map((project, index) => (
+        filteredProjects().map((project, index) => (
           <div className={`col-12 col-md-6 col-lg-4 px-2 ecosystem-card ${index === 0 ? 'mt-0' : index < 3 ? 'mt-3 mt-lg-0' : 'mt-3'}`} key={project.application}>
             <div className="black-gradient rounded-custom">
               <div className="ecosystem-header">
@@ -95,7 +102,18 @@ const Ecosystem = () => {
   )
   return (
     <>
-      <h2 className="ps-0 pb-4 page-title">Ecosystem</h2>
+      <div className="d-flex flex-column flex-md-row justify-content-between pb-4">
+        <h2 className="ps-0 page-title">Ecosystem</h2>
+        <Filters
+          tags={tags}
+          show={showFilters}
+          toggle={toggleFilters}
+          selectedTags={selectedTags}
+          query={query}
+          setQuery={setQuery}
+          setSelectedTags={setSelectedTags}
+        />
+      </div>
       {loading ? (<Loader />) : content}
     </>
   )
