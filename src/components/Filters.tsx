@@ -43,10 +43,10 @@ const Filters: React.FC<Props> = ({ tags, selectedTags, setSelectedTags, show, t
         )
       }
 
-      <input type="text" className="text-input px-md-4" placeholder="Search something..." value={query} onChange={(e) => setQuery(e.target.value)} />
+      <input type="text" className="text-input px-2 px-md-4" placeholder="Search something..." value={query} onChange={(e) => setQuery(e.target.value)} />
       <button className="btn" onClick={() => toggle(!show)}>
         <FontAwesomeIcon icon={faSliders} />
-        <span className="d-none d-md-inline">Filters</span>
+        <span className="d-none d-lg-inline">Filters</span>
       </button>
     </div>
   )

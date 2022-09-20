@@ -574,6 +574,7 @@ ul {
 .ecosystem-filters button {
   color: white;
   padding: 5px 30px;
+  border: none !important;
   background: linear-gradient(to right, #02C1FE, #023693);
   font-weight: light;
 }
