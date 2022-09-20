@@ -597,7 +597,7 @@ ul {
 
 .filters-modal {
   top: 60px;
-  left: 0px;
+  left: -10px;
   background: linear-gradient(to right, rgb(0, 0, 0), rgb(20, 20, 20));
   border: #423E52 1px solid;
   border-radius: 15px;

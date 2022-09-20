@@ -14,7 +14,7 @@ interface Props {
 
 const Filters: React.FC<Props> = ({ tags, selectedTags, setSelectedTags, show, toggle, query, setQuery }) => {
   return (
-    <div className="d-flex flex-row ecosystem-filters position-relative">
+    <div className="d-flex flex-row ecosystem-filters position-relative justify-content-between">
       {
         show && (
           <div className="position-absolute filters-modal pt-4 pb-2 container">
@@ -46,7 +46,7 @@ const Filters: React.FC<Props> = ({ tags, selectedTags, setSelectedTags, show, t
       <input type="text" className="text-input px-md-4" placeholder="Search something..." value={query} onChange={(e) => setQuery(e.target.value)} />
       <button className="btn" onClick={() => toggle(!show)}>
         <FontAwesomeIcon icon={faSliders} />
-        <span>Filters</span>
+        <span className="d-none d-md-inline">Filters</span>
       </button>
     </div>
   )
