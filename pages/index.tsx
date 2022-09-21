@@ -38,35 +38,40 @@ const Home = () => {
         </div>
         <div className="row" id="tvl-chart">
           <Chart
-          customOptions={{
-            chart: {
-              ...baseChartOptions.chart,
-              stacked: true
-            },
-            colors: tokensColor,
-            tooltip: {
-              ...baseChartOptions.tooltip,
-              shared: true,
-              intersect: false,
-              fixed: {
-                enabled: true,
-                position: 'topRight'
+            customOptions={{
+              chart: {
+                ...baseChartOptions.chart,
+                stacked: true
               },
-              x: {
-                formatter: function (value, { series, dataPointIndex }) {
-                  let output = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', day: 'numeric' }).format(new Date(value))
-                  if (series) {
-                    const total = series.map((serie: number[]) => serie[dataPointIndex]).reduce((a: number, b: number) => a + b)
-                    output = output + ' (Total: ' + formatCurrency(total) + ')'
-                  }
-                  return output
+              legend: {
+                onItemClick: {
+                  toggleDataSeries: false
                 }
+              },
+              colors: tokensColor,
+              tooltip: {
+                ...baseChartOptions.tooltip,
+                shared: true,
+                intersect: false,
+                fixed: {
+                  enabled: true,
+                  position: 'topRight'
+                },
+                x: {
+                  formatter: function (value, { series, dataPointIndex }) {
+                    let output = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', day: 'numeric' }).format(new Date(value))
+                    if (series) {
+                      const total = series.map((serie: number[]) => serie[dataPointIndex]).reduce((a: number, b: number) => a + b)
+                      output = output + ' (Total: ' + formatCurrency(total) + ')'
+                    }
+                    return output
+                  }
+                }
+              },
+              fill: {
+                type: 'none'
               }
-            },
-            fill: {
-              type: 'none'
-            }
-          }}
+            }}
             series={formattedData}
             formatter={(value) => formatCurrency(value, 0)}
           />
