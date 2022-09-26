@@ -671,12 +671,7 @@ ul {
   font-size: 15px;
 }
 
-.filters-footer .cancel-button {
-  background: transparent;
-  border: none;
-}
-
-.filters-footer .cancel-button {
+.filters-footer button {
   background: transparent;
   border: none;
 }
@@ -686,11 +681,11 @@ ul {
   border-radius: 15px;
   cursor: pointer;
 }
-
-.filters-footer:hover {
+.filters-footer button:hover {
   background: -webkit-linear-gradient(#02C1FE, #023693);
-  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+
 }
 
 .ecosystem-filters .text-input {

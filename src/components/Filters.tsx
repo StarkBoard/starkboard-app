@@ -36,9 +36,11 @@ const Filters: React.FC<Props> = ({ tags, selectedTags, setSelectedTags, show, t
                 ))
               }
             </div>
-            <div className="filters-footer d-flex flex-row justify-content-center w-full">
-              <button className="cancel-button" onClick={() => toggle(false)}>Close</button>
+            <div className="filters-footer d-flex flex-row justify-content-between">
+              <button className="clear-button" onClick={() => setSelectedTags([])}>Clear All</button>
+              <button className="close-button" onClick={() => toggle(false)}>Close</button>
             </div>
+
           </div>
         )
       }
