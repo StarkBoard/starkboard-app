@@ -11,7 +11,7 @@ export interface TvlBase {
   wbtc: number;
   usdt: number;
   usdc: number;
-  stark: number;
+  strk: number;
 }
 export interface TvlUnit extends TvlBase {
   total: number;

@@ -15,7 +15,7 @@ const calculateTokensTotalValue = (tvl: TvlBase, tokenPrices: TokenPricesState):
   total += tvl.wbtc ? tvl.wbtc * tokenPrices.wbtc : 0
   total += tvl.usdt ? tvl.usdt * tokenPrices.usdt : 0
   total += tvl.usdc ? tvl.usdc * tokenPrices.usdc : 0
-  total += tvl.stark ? tvl.stark * tokenPrices.stark : 0
+  total += tvl.strk ? tvl.strk * tokenPrices.strk : 0
   return total
 }
 
@@ -28,7 +28,7 @@ const getTokensValue = (
   wbtc: tvl.wbtc * tokenPrices.wbtc,
   usdc: tvl.usdc * tokenPrices.usdc,
   usdt: tvl.usdt * tokenPrices.usdt,
-  stark: tvl.stark * tokenPrices.stark
+  strk: tvl.strk * tokenPrices.strk
 })
 
 export { calculateTokensTotalValue, getTokensValue, tokens, tokensColor, tokensAddresses }

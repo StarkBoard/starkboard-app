@@ -13,7 +13,7 @@ export interface VolumeUnit {
   usdt: number;
   usdc: number;
   dailyVolume: number;
-  stark: number;
+  strk: number;
   total: number;
   day: Date;
 }

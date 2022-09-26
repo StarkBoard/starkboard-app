@@ -9,7 +9,7 @@ export interface TokenPricesState {
   wbtc: number;
   usdt: number;
   usdc: number;
-  stark: number;
+  strk: number;
   loading: boolean;
 }
 
@@ -19,7 +19,7 @@ const initialState: TokenPricesState = {
   wbtc: 0,
   usdt: 0,
   usdc: 0,
-  stark: 0,
+  strk: 0,
   loading: true
 }
 
@@ -32,7 +32,7 @@ export const fetchTokensPrices = createAsyncThunk(
     request.data.forEach((token: { current_price: number, id: string }) => {
       prices.set(token.id, token.current_price)
     })
-    return { eth: prices.get('ethereum'), dai: prices.get('dai'), wbtc: prices.get('wrapped-bitcoin'), usdt: prices.get('tether'), usdc: prices.get('usd-coin'), stark: prices.get('starknet') }
+    return { eth: prices.get('ethereum'), dai: prices.get('dai'), wbtc: prices.get('wrapped-bitcoin'), usdt: prices.get('tether'), usdc: prices.get('usd-coin'), strk: prices.get('starknet') }
   }
 )
 
