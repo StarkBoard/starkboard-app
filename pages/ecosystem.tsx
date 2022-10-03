@@ -27,11 +27,15 @@ const Ecosystem = () => {
           <div className={`col-12 col-md-6 col-lg-4 px-2 ecosystem-card ${index === 0 ? 'mt-0' : index < 3 ? 'mt-3 mt-lg-0' : 'mt-3'}`} key={project.application}>
             <div className="black-gradient rounded-custom">
               <div className="ecosystem-header">
-                {
-                  project.banner_picture_url && (
-                    <img alt="Project Banner" src={project.banner_picture_url} className='ecosystem-image mb-1' />
-                  )
-                }
+                <div
+                  className='ecosystem-image mb-1'
+                  style={{
+                    background: `url(${project.banner_picture_url || ''}) no-repeat`,
+                    backgroundSize: 'cover',
+                    backgroundColor: 'black',
+                    height: '100px'
+                  }}
+                />
                 {
                   project.profile_picture_url && (
                     <img src={project.profile_picture_url} alt="Project Logo" className='ecosystem-logo' />
