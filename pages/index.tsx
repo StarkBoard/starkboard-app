@@ -37,7 +37,7 @@ const Home = () => {
           <h6 className="mb-0 font-weight-bold">TVL Evolution (USD)</h6>
         </div>
         <div className="row" id="tvl-chart">
-          <Chart
+          {/* <Chart
             customOptions={{
               chart: {
                 ...baseChartOptions.chart,
@@ -74,7 +74,7 @@ const Home = () => {
             }}
             series={formattedData}
             formatter={(value) => formatCurrency(value, 0)}
-          />
+          /> */}
         </div>
       </div>
       <h2 className="ps-0 pb-4 page-title">TVL Ranking</h2>

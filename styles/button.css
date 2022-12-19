@@ -1,0 +1,16 @@
+
+/* Hover Button component background fill animation */
+.btn-anim-bg-clear {
+  background: linear-gradient(to bottom, #fff 0%, #fff 50%, #5D64DA 50%, #7574B7 100%) top;
+  background-size: 100% 200%;
+  background-position: bottom;
+  transition: all 500ms ease-in-out;
+  line-height: 16px;
+  padding: 14px 14px;
+  color: white;
+}
+
+.btn-anim-bg-clear:hover {
+  background-position: top;
+  color: black;
+}

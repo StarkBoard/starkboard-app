@@ -1,8 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
-/* eslint-disable jsx-a11y/alt-text */
-import { faDiscord, faMedium, faTwitter } from '@fortawesome/free-brands-svg-icons'
-import { faArrowRightArrowLeft, faBars } from '@fortawesome/free-solid-svg-icons'
+import { faChevronDown, faGear, faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Button from 'components/Button'
 import Navigation from 'components/Navigation'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
@@ -13,7 +11,7 @@ interface Props {
   network?: 'mainnet' | 'testnet'
   switchNetwork: () => void,
 }
-const Header: React.FC<Props> = ({ mode, network, switchNetwork }: Props) => {
+const Header: React.FC<Props> = ({ network, switchNetwork }: Props) => {
   const [showNavBar, toggleNavBar] = useState(false)
   const { pathname } = useRouter()
 
@@ -24,48 +22,29 @@ const Header: React.FC<Props> = ({ mode, network, switchNetwork }: Props) => {
   }, [pathname])
   return (
     <header id="header">
-      <div className="container">
-        <nav className="d-flex flex-row justify-content-between align-items-center">
-          <div className="d-block d-md-flex flex-row  justify-content-start align-items-center">
-            <img src={`images/logo-${mode}.png`} id="logo" className="logo p-md-4" />
-            <h1 className="text-white h3 text-uppercase mb-0 d-none d-md-inline-block" id="logo-title">Starkboard</h1>
+      <div className='text-center text-white bg-grad-blue-light-l-r py-2'>Starkboard V2 is live! Enjoy our new features and give us some feedback!</div>
+
+      <div className='py-3 bg-grad-blue-dark-t-b'>
+        <div className="container">
+          <nav className="d-flex flex-row justify-content-between align-items-center">
+            <div className="d-block d-md-flex flex-row  justify-content-start align-items-center">
+              <img src={'images/logo-dark-no-margin.png'} className="w-100" style={{ height: '22px' }} alt='Logo' role="button" />
+              <h1 className="text-white h3 text-uppercase mb-0 d-none d-md-inline-block fw-semibold ms-3" id="logo-title">Starkboard</h1>
+            </div>
+
+            <div className="space-x-14 d-flex flex-row mb-0 align-items-center">
+              <form id='header-search-form' className='border rounded' onSubmit={(e) => e.preventDefault()}>
+                <input type="text" className='bg-transparent border-0' placeholder="Search" />
+                <FontAwesomeIcon className='ms-2' icon={faSearch} />
+              </form>
+              <Button>Connect Wallet</Button>
+              <Button>$USD <FontAwesomeIcon icon={faChevronDown} /></Button>
+              <Button><FontAwesomeIcon icon={faGear} /></Button>
+            </div>
+          </nav>
+          <div className={`d-${showNavBar ? 'block' : 'none'} d-lg-none mb-0`} style={{ marginTop: '-20px' }}>
+            <Navigation />
           </div>
-          <ul className="icones d-flex flex-row mb-0 align-items-center">
-            <li className="d-none d-lg-flex">
-              <a href="https://medium.com/@starkboard/5a1e37fb31df" target="_blank" rel="noreferrer" className="text-white">
-                <FontAwesomeIcon icon={faMedium} />
-              </a>
-            </li>
-            <li className="d-none d-lg-flex">
-              <a href="https://twitter.com/Starkboard" target="_blank" rel="noreferrer" className="text-white">
-                <FontAwesomeIcon icon={faTwitter} />
-              </a>
-            </li>
-            <li className="d-none d-lg-flex">
-              <a href="https://discord.gg/8KJKrpDUMZ" target="_blank" rel="noreferrer" className="text-white">
-                <FontAwesomeIcon icon={faDiscord} />
-              </a>
-            </li>
-            {/*             <li id="darkmode" onClick={switchMode}>
-              <FontAwesomeIcon icon={faCircleHalfStroke} />
-            </li> */}
-            <li>
-              <div className="d-flex flex-row">
-                {network && (
-                  <p id="chain-name" onClick={switchNetwork}>
-                    <FontAwesomeIcon icon={faArrowRightArrowLeft} className="d-none d-lg-inline-block" />
-                    {network.charAt(0).toUpperCase() + network.slice(1).toLowerCase()}
-                  </p>
-                )}
-              </div>
-            </li>
-            <li onClick={() => toggleNavBar(!showNavBar)} className="d-lg-none text-white">
-              <FontAwesomeIcon icon={faBars} />
-            </li>
-          </ul>
-        </nav>
-        <div className={`d-${showNavBar ? 'block' : 'none'} d-lg-none mb-0`} style={{ marginTop: '-20px' }}>
-          <Navigation />
         </div>
       </div>
     </header>

@@ -1,0 +1,20 @@
+.space-x-14 > * {
+  margin-right: 14px;
+}
+.space-x-14 > *:last-child {
+  margin-right: 0;
+}
+
+#header-search-form {
+  color: var(--text-gray);
+  border-color: var(--text-gray);
+  padding: 9px 14px;
+}
+
+#header-search-form input {
+  outline: none;
+  color: var(--text-gray);
+}
+#header-search-form input::placeholder {
+  color: var(--text-gray);
+}
