@@ -21,6 +21,7 @@ html {
 
 .body {
   font-family: 'Poppins', sans-serif;
+  background: radial-gradient(82.08% 164.1% at 28.02% 64.36%, #131A2E 0%, #202C44 38.87%, #2F356D 100%);
 }
 
 header {
@@ -252,8 +253,7 @@ ul {
 }
 
 .black-gradient {
-  background: linear-gradient(to right, rgb(0, 0, 0), rgb(20, 20, 20));
-  border: #423E52 1px solid;
+  background: linear-gradient(180deg, #2B355A 0%, #181B33 100%), linear-gradient(0deg, #423E52, #423E52);
 }
 
 .blue-gradient {
@@ -348,7 +348,7 @@ ul {
 }
 
 .data-table {
-  background: linear-gradient(to right, rgb(0, 0, 0), rgb(20, 20, 20));
+  background: linear-gradient(180deg, #2B355A 0%, #181B33 100%), linear-gradient(0deg, #423E52, #423E52);
   margin-bottom: 0px !important;
 }
 
