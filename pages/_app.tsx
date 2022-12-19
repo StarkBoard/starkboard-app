@@ -1,5 +1,5 @@
 import '../styles/styles.css'
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 import React from 'react'
 import NextHead from 'next/head'

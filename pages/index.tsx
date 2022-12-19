@@ -5,12 +5,10 @@ import { useSelector } from 'react-redux'
 import { RootState } from 'store/store'
 import { TvlUnit } from 'store/reducers/tvl-evolution.slice'
 import { formatCurrency } from 'utils/helpers/format'
-import Chart from 'components/Charts'
 import Loader from 'components/Loader'
 import DataEvolution from 'components/DataEvolution'
-import { getTokensValue, tokens, tokensColor } from 'utils/helpers/tokens'
+import { getTokensValue } from 'utils/helpers/tokens'
 import { TokenPricesState } from 'store/reducers/tokens-prices.slice'
-import { baseChartOptions } from 'utils/shared'
 
 const Home = () => {
   const tvlUnits = useSelector<RootState, TvlUnit[]>(state => state.tvlEvolution.data)
@@ -20,7 +18,6 @@ const Home = () => {
 
   const fetchingData = useSelector<RootState, boolean>(state => state.tvlEvolution.loading)
   const loading = fetchingData || tvlUnits.length === 0 || tvlUnitsInDollars.length === 0
-  const formattedData = useMemo(() => tokens.map((token) => ({ data: tvlUnitsInDollars.map(unit => [unit.day.getTime(), unit[token.toLowerCase() as 'eth']]), name: token })), [tvlUnitsInDollars])
   const content = (
     <>
       <div className="row justify-content-between">
