@@ -60,7 +60,7 @@ const Layout: React.FC<Props> = ({ children }: Props) => {
         <div className="col-12 col-md-2">
           <Sidebar />
         </div>
-        <div className="col-12 col-md-9 mx-2 mx-xxl-5">
+        <div className="col-12 col-md-9 mx-2 mx-xxl-5 pt-5 pb-5 px-4">
           {children}
         </div>
       </div>

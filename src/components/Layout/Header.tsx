@@ -37,9 +37,9 @@ const Header: React.FC<Props> = ({ network, switchNetwork }: Props) => {
                 <input type="text" className='bg-transparent border-0' placeholder="Search" />
                 <FontAwesomeIcon className='ms-2' icon={faSearch} />
               </form>
-              <Button>Connect Wallet</Button>
-              <Button>$USD <FontAwesomeIcon icon={faChevronDown} /></Button>
-              <Button><FontAwesomeIcon icon={faGear} /></Button>
+              <Button className='purple-gradient-bg'>Connect Wallet</Button>
+              <Button className="purple-gradient-bg">$USD <FontAwesomeIcon icon={faChevronDown} /></Button>
+              <Button className="purple-gradient-bg"><FontAwesomeIcon icon={faGear} /></Button>
             </div>
           </nav>
           <div className={`d-${showNavBar ? 'block' : 'none'} d-lg-none mb-0`} style={{ marginTop: '-20px' }}>

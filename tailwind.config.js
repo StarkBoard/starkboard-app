@@ -7,6 +7,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        darkGrey: '#423E52',
         blue: {
           100: '#9595C5',
           200: '#6066D8'
@@ -22,6 +23,9 @@ module.exports = {
         }
       }
     }
+  },
+  borderWidth: {
+    xs: '0.5px'
   },
   plugins: []
 }

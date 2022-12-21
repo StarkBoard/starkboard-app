@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
 @import url('./colors.css');
 @import url('./pills.css');
 @import url('./button.css');
@@ -253,11 +254,15 @@ ul {
 }
 
 .black-gradient {
-  background: linear-gradient(180deg, #2B355A 0%, #181B33 100%), linear-gradient(0deg, #423E52, #423E52);
+  background: linear-gradient(180deg, #2B355A 0%, #181B33 100%),
+  linear-gradient(0deg, #423E52, #423E52);
+  
 }
 
 .blue-gradient {
-  background: linear-gradient(to right, #02C1FE, #023693);
+  background: linear-gradient(0deg, rgba(66, 62, 82, 0), rgba(66, 62, 82, 0)),
+  linear-gradient(104.25deg, #6B6CA3 6.11%, #5B61D5 84.75%);
+  
 }
 
 .navigation {
@@ -297,6 +302,15 @@ ul {
 
 .navigation li {
   margin-top: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 8px;
+}
+
+.navigation li.selected {
+  box-shadow: 0px 1px 0px 0px #51509C;
+  box-shadow: 0px 2px 4px 0px #00000040;
+  box-shadow: 0px 8px 22px 0px #51509C;
 }
 
 .navigation a.sidebar-selected svg {
@@ -309,7 +323,9 @@ ul {
 
 .page-title {
   color: white;
-  font-weight: 700;
+  font-size: 30px;
+  font-weight: 400;
+  font-family: 'DM Sans', sans-serif;
 }
 
 .data-block p {
@@ -317,8 +333,18 @@ ul {
   ;
 }
 
+.data-block.black-gradient {
+  border: 0.5px solid #423E52;
+  box-shadow: 0px 4px 4px 0px #00000040;
+}
+
+.data-block.blue-gradient {
+  border: 1px solid #423E52;
+  box-shadow: 0px 4px 4px 0px #00000040;
+}
+
 .rounded-custom {
-  border-radius: 15px !important;
+  border-radius: 8px !important;
 }
 
 
@@ -348,7 +374,8 @@ ul {
 }
 
 .data-table {
-  background: linear-gradient(180deg, #2B355A 0%, #181B33 100%), linear-gradient(0deg, #423E52, #423E52);
+  background: linear-gradient(180deg, #2B355B 0%, #191C34 100%),
+  linear-gradient(0deg, #423E52, #423E52);
   margin-bottom: 0px !important;
 }
 
@@ -367,7 +394,11 @@ ul {
 .data-table tbody td {
   border: none;
   color: white !important;
-  font-weight: bold;
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: 'DM Sans', sans-serif;
 }
 
 
@@ -667,4 +698,10 @@ ul {
   ;
   background-color: black;
   margin-right: 20px;
+}
+
+.tvl-table th {
+  padding: 20px 20px !important;
+  font-weight: 400;
+  font-family: 'DM Sans', sans-serif;
 }
