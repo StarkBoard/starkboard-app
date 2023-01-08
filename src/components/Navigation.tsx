@@ -60,7 +60,7 @@ const Navigation = () => {
     <ul className="navigation">
       {
         links.map(link => (
-          <li key={link.path}>
+          <li key={link.path} className={router.pathname === link.path.toLowerCase() ? 'selected purple-gradient-bg' : ''}>
             {
               link.disabled
                 ? (
@@ -69,7 +69,7 @@ const Navigation = () => {
                   )
                 : (
                 <Link href={link.path} passHref={true}>
-                  <a className={router.pathname === link.path.toLowerCase() ? 'sidebar-selected' : ''}>
+                  <a>
                     <FontAwesomeIcon icon={link.icon} />
                     {link.title}
                   </a>

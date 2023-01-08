@@ -1,3 +1,6 @@
+import '../styles/styles.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 import React from 'react'
 import NextHead from 'next/head'
 import { wrapper } from '../src/store/store'
@@ -5,8 +8,6 @@ import { Provider } from 'react-redux'
 import { AppProps } from 'next/app'
 import { GoogleAnalytics } from 'nextjs-google-analytics'
 
-import 'bootstrap/dist/css/bootstrap.css'
-import '../styles/styles.css'
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import Layout from 'components/Layout'

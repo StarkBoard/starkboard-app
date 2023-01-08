@@ -1,6 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
-@import url('./footer.css');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+@import url('./colors.css');
 @import url('./pills.css');
+@import url('./button.css');
+@import url('./header.css');
 
 * {
   margin: 0;
@@ -11,25 +18,18 @@
 
 html {
   scroll-behavior: smooth;
-  background-color: black;
 }
 
 .body {
   font-family: 'Poppins', sans-serif;
-  background-color: black;
+  background: radial-gradient(82.08% 164.1% at 28.02% 64.36%, #131A2E 0%, #202C44 38.87%, #2F356D 100%);
 }
 
 header {
   width: 100%;
-  background-color: black;
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-}
-
-.logo {
-  width: 140px;
-  cursor: pointer;
 }
 
 nav ul li {
@@ -95,26 +95,12 @@ nav ul li:hover {
   color: white !important;
 }
 
-.icones li {
-  cursor: pointer;
-  color: white !important;
-  text-decoration: none;
-}
-
 /*Darkmode*/
 .darkmode {
   background: #fff;
 }
 
 /* Icones style */
-
-.icones svg {
-  transition: 0.5s;
-}
-
-.icones svg:hover {
-  color: rgb(100, 100, 100);
-}
 
 .oda {
   font-size: 12px;
@@ -178,10 +164,6 @@ nav ul li:hover {
   p {
     text-align: center;
   }
-
-  .logo {
-    width: 40%;
-  }
 }
 
 .credit {
@@ -208,10 +190,6 @@ nav ul li:hover {
   background-color: #F3F3F3;
 }
 
-#landing-page.light .icones svg {
-  color: black;
-}
-
 #landing-page.light .button:hover {
   background-color: black;
   color: white;
@@ -223,10 +201,6 @@ nav ul li:hover {
 
 /* Dark mode */
 #landing-page.dark {
-  color: white;
-}
-
-#landing-page.dark .icones svg {
   color: white;
 }
 
@@ -267,7 +241,7 @@ nav ul li:hover {
   background-position: center center;
   background-size: cover;
   color: white;
-  font-size: 100px;;
+  font-size: 100px;
 }
 
 .row {
@@ -280,16 +254,15 @@ ul {
 }
 
 .black-gradient {
-  background: linear-gradient(to right, rgb(0, 0, 0), rgb(20, 20, 20));
-  border: #423E52 1px solid;
+  background: linear-gradient(180deg, #2B355A 0%, #181B33 100%),
+  linear-gradient(0deg, #423E52, #423E52);
+  
 }
 
 .blue-gradient {
-  background: linear-gradient(to right, #02C1FE, #023693);
-}
-
-.sidebar {
-  margin-top: 2.9rem !important;
+  background: linear-gradient(0deg, rgba(66, 62, 82, 0), rgba(66, 62, 82, 0)),
+  linear-gradient(104.25deg, #6B6CA3 6.11%, #5B61D5 84.75%);
+  
 }
 
 .navigation {
@@ -299,7 +272,7 @@ ul {
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
 }
 
 .navigation a {
@@ -329,6 +302,15 @@ ul {
 
 .navigation li {
   margin-top: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 8px;
+}
+
+.navigation li.selected {
+  box-shadow: 0px 1px 0px 0px #51509C;
+  box-shadow: 0px 2px 4px 0px #00000040;
+  box-shadow: 0px 8px 22px 0px #51509C;
 }
 
 .navigation a.sidebar-selected svg {
@@ -341,15 +323,28 @@ ul {
 
 .page-title {
   color: white;
-  font-weight: 700;
+  font-size: 30px;
+  font-weight: 400;
+  font-family: 'DM Sans', sans-serif;
 }
 
 .data-block p {
-  font-weight: 600;;
+  font-weight: 600;
+  ;
+}
+
+.data-block.black-gradient {
+  border: 0.5px solid #423E52;
+  box-shadow: 0px 4px 4px 0px #00000040;
+}
+
+.data-block.blue-gradient {
+  border: 1px solid #423E52;
+  box-shadow: 0px 4px 4px 0px #00000040;
 }
 
 .rounded-custom {
-  border-radius: 15px !important;
+  border-radius: 8px !important;
 }
 
 
@@ -379,7 +374,8 @@ ul {
 }
 
 .data-table {
-  background: linear-gradient(to right, rgb(0, 0, 0), rgb(20, 20, 20));
+  background: linear-gradient(180deg, #2B355B 0%, #191C34 100%),
+  linear-gradient(0deg, #423E52, #423E52);
   margin-bottom: 0px !important;
 }
 
@@ -398,7 +394,11 @@ ul {
 .data-table tbody td {
   border: none;
   color: white !important;
-  font-weight: bold;
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: 'DM Sans', sans-serif;
 }
 
 
@@ -450,8 +450,8 @@ ul {
   font-weight: 600;
   border: 1px solid #423E52 !important;
   -webkit-box-shadow: none !important;
-	-moz-box-shadow: none !important;
-	box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
   border-radius: 15px !important;
   padding: 5px !important;
 }
@@ -466,13 +466,9 @@ ul {
   width: 220px;
 }
 
-.apexcharts-xcrosshairs.apexcharts-active, .apexcharts-ycrosshairs.apexcharts-active {
+.apexcharts-xcrosshairs.apexcharts-active,
+.apexcharts-ycrosshairs.apexcharts-active {
   opacity: 0 !important;
-}
-
-#logo-title {
-  margin-left: -30px;
-  font-weight: 600;
 }
 
 .donate-block button {
@@ -481,7 +477,7 @@ ul {
 }
 
 .donate-block h3 {
- font-weight: bold;
+  font-weight: bold;
 }
 
 .ecosystem-image {
@@ -498,7 +494,7 @@ ul {
 }
 
 .ecosystem-card:hover {
-  top: -10px; 
+  top: -10px;
 }
 
 .ecosystem-card h3 {
@@ -526,6 +522,7 @@ ul {
   font-size: 15px;
   font-weight: 400 !important;
 }
+
 .ecosystem-splitter {
   display: block;
   height: 3px;
@@ -536,7 +533,8 @@ ul {
 .ecosystem-icons a {
   color: white;
   margin-right: 15px;
-  font-size: 25px;;
+  font-size: 25px;
+  ;
 }
 
 .ecosystem-icons a:hover {
@@ -581,7 +579,8 @@ ul {
 
 
 .ecosystem-filters button span {
-  font-weight: bold;;
+  font-weight: bold;
+  ;
   margin-left: 20px;
 }
 
@@ -593,7 +592,8 @@ ul {
 
 .filters-list {
   padding-left: 30px;
-  border-bottom: #423E52 1px solid;;
+  border-bottom: #423E52 1px solid;
+  ;
 }
 
 .filters-modal {
@@ -643,12 +643,12 @@ ul {
 
 
 /* When the checkbox is checked, add a blue background */
-.custom-checkbox input:checked ~ .checkmark {
+.custom-checkbox input:checked~.checkmark {
   background: linear-gradient(to right, #02C1FE, #023693);
   border: none;
 }
 
-.custom-checkbox input:checked ~  span {
+.custom-checkbox input:checked~span {
   background: -webkit-linear-gradient(#02C1FE, #023693);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -681,6 +681,7 @@ ul {
   border-radius: 15px;
   cursor: pointer;
 }
+
 .filters-footer button:hover {
   background: -webkit-linear-gradient(#02C1FE, #023693);
   -webkit-text-fill-color: transparent;
@@ -693,7 +694,14 @@ ul {
   color: white;
   padding-left: 10px !important;
   height: 41px;
-  border: #423E52 1px solid;;
+  border: #423E52 1px solid;
+  ;
   background-color: black;
   margin-right: 20px;
+}
+
+.tvl-table th {
+  padding: 20px 20px !important;
+  font-weight: 400;
+  font-family: 'DM Sans', sans-serif;
 }

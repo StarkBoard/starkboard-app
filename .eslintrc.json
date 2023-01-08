@@ -1,7 +1,17 @@
 {
   "parser": "@typescript-eslint/parser",
-  "plugins": ["react", "react-hooks"],
-  "extends": ["eslint:recommended", "next", "eslint:recommended", "plugin:react/recommended", "plugin:@typescript-eslint/recommended", "standard"],
+  "plugins": [
+    "react",
+    "react-hooks"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "next",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "standard"
+  ],
   "rules": {
     "react-hooks/exhaustive-deps": "off"
   }

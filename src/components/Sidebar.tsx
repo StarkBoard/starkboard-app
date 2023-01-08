@@ -3,7 +3,7 @@ import Navigation from './Navigation'
 
 const Sidebar = () => {
   return (
-    <div className="sidebar rounded-custom black-gradient d-none d-lg-block">
+    <div className="sidebar bg-grad-dark-t-b d-none d-lg-block h-100">
      <Navigation />
     </div>
   )

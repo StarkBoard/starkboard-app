@@ -41,10 +41,10 @@ const TvlTable = () => {
   return (
     <div className="card table-container">
       <div className="table-responsive">
-        <table className="table table-bordered data-table text-center table-striped text-white">
+        <table className="table table-bordered data-table text-center tvl-table table-striped text-white">
           <thead>
-            <tr>
-              <th></th>
+            <tr className="text-uppercase">
+              <th>Assets</th>
               <th>Name</th>
               <th className="d-none d-lg-table-cell">Category</th>
               <th className="d-none d-lg-table-cell">24h Change</th>

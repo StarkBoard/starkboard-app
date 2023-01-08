@@ -1,0 +1,34 @@
+:root {
+  --blue-100: #9595C5;
+  --blue-200: #6066D8;
+  --dark-text: #2A2A2A;
+  --dark-100: #52525b;
+  --dark-200: #2B3559;
+  --dark-300: #343857;
+  --dark-400: #1B1F37;
+  --dark-500: #0A070E;
+  --dark-600: #0B080F;
+  --text-gray: #C4C4C4;
+}
+
+.bg-grad-blue-light-l-r {
+  background: linear-gradient(90deg, #6A70FA 0%, #7E7DBD 100%);
+}
+
+.bg-grad-blue-light-t-b {
+  background: linear-gradient(180deg, #5D64DA 0%, #7574B7 100%);
+}
+
+.bg-grad-blue-dark-t-b {
+  background: linear-gradient(180deg, #2B355B 0%, #171A31 100%);
+}
+
+.bg-grad-dark-t-b {
+  background: linear-gradient(180deg, #1A2234 0%, #0A090A 100%);
+}
+
+
+.purple-gradient-bg {
+  background: linear-gradient(180deg, #5D64DA 0%, #7574B7 100%),
+  linear-gradient(0deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)) !important;
+  }
