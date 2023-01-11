@@ -17,7 +17,7 @@ export interface AppState {
   tvlEvolution: typeof tvlEvolutionSlice;
   tokensPrices: typeof tokensPricesSlice;
   metrics: typeof metricsSlice;
-  volue: typeof volumeSlice;
+  volume: typeof volumeSlice;
   topUsers: typeof topUsersSlice;
   ecosystem: typeof ecosystemSlice;
 }
