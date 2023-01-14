@@ -74,7 +74,7 @@ const Home = () => {
           /> */}
         </div>
       </div>
-      <h2 className="ps-0 pb-4 page-title">TVL Ranking</h2>
+      <h2 className="ps-0 pb-4 page-title">Assets ranking</h2>
       <Table />
     </>
   )
