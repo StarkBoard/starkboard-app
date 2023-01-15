@@ -1,3 +1,5 @@
+import { faCalendarDays } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Selector } from 'components/Selector/Selector'
 import { sum } from 'lodash'
 import Image from 'next/image'
@@ -106,7 +108,7 @@ const TvlTable = () => {
     <div className="card table-container data-table py-4">
       <div className="flex flex-row justify-between px-4">
         <Selector currentOption={appType} options={appTypeOptions} onChange={handleAppTypeChange} />
-        <Selector currentOption={period} options={periodOptions} onChange={handlePeriodChange} />
+        <Selector currentOption={period} options={periodOptions} onChange={handlePeriodChange} icon={<FontAwesomeIcon icon={faCalendarDays} style={{ width: '16.5px', height: '19px' }} className="text-white"/>} />
       </div>
       <div className="table-responsive mt-2">
         <table className="table  text-center tvl-table text-white">

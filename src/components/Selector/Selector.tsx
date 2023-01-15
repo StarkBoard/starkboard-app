@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, ReactNode } from 'react'
 
 interface SelectorProps {
   options: {
@@ -7,9 +7,10 @@ interface SelectorProps {
   }[];
   currentOption: string;
   onChange: (option: string) => void;
+  icon?: ReactNode;
 }
 
-export const Selector: FC<SelectorProps> = ({ options, currentOption, onChange }) => {
+export const Selector: FC<SelectorProps> = ({ options, currentOption, onChange, icon }) => {
   return (
     <div className="flex flex-row rounded-md border-opacity-20 p-1.5 selector-border">
       {options.map(option => {
@@ -26,6 +27,11 @@ export const Selector: FC<SelectorProps> = ({ options, currentOption, onChange }
           </div>
         )
       })}
+      {icon && (
+        <div className="flex justify-center items-center px-4">
+          {icon}
+        </div>
+      )}
       </div>
   )
 }
