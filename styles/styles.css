@@ -265,6 +265,10 @@ ul {
   
 }
 
+.purple-gradient {
+  background: linear-gradient(180deg, #8382BF, #6D72F4)
+}
+
 .navigation {
   list-style-type: none;
   padding: 20px;
@@ -380,15 +384,15 @@ ul {
 }
 
 .table-container {
-  background-color: #423E52 !important;
+  background-color: #323D68 !important;
 }
 
 .data-table thead tr {
-  border-bottom: 1px solid #423E52 !important;
+  border-bottom: 1px solid #323D68 !important;
 }
 
 .data-table tbody tr:not(:last-child) {
-  border-bottom: 1px solid #423E52 !important;
+  border-bottom: 1px solid #323D68 !important;
 }
 
 .data-table tbody td {
@@ -686,7 +690,6 @@ ul {
   background: -webkit-linear-gradient(#02C1FE, #023693);
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
-
 }
 
 .ecosystem-filters .text-input {
@@ -705,3 +708,15 @@ ul {
   font-weight: 400;
   font-family: 'DM Sans', sans-serif;
 }
+
+.selector-border {
+  border: 1px solid #323D68;
+}
+
+.selector-text {
+  color: #B7B7B9;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: 'DM Sans', sans-serif;
+}
+
