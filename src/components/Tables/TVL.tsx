@@ -1,11 +1,21 @@
+import { sum } from 'lodash'
 import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { TokenPricesState } from 'store/reducers/tokens-prices.slice'
 import { TvlUnit } from 'store/reducers/tvl-evolution.slice'
 import { RootState } from 'store/store'
-import { formatCurrency, formatValue } from 'utils/helpers/format'
+import { formatCurrency } from 'utils/helpers/format'
 import { getTokensValue } from 'utils/helpers/tokens'
+
+interface Token {
+  name: string
+  amount: number
+  change: number
+  currentTvl: number
+  previousTvl: number
+  tvlPercentage: number
+}
 
 const tokensTypes = new Map<string, string>()
 tokensTypes.set('eth', 'Layer 1')
@@ -18,7 +28,10 @@ tokensTypes.set('strk', 'Layer 2')
 const TvlTable = () => {
   const tvlUnits = useSelector<RootState, TvlUnit[]>(state => state.tvlEvolution.data)
   const prices = useSelector<RootState, TokenPricesState>(state => state.tokensPrices)
-  const [orderedTokens, setOrderedTokens] = useState<{ currentTvl: number, previousTvl: number, change: number, name: string, amount: number }[]>([])
+  const [orderedTokens, setOrderedTokens] = useState<Token[]>([])
+  const totalTVL = useMemo(() => {
+    return sum(tvlUnits.map(tvlUnit => tvlUnit.total))
+  }, [tvlUnits])
 
   useEffect(() => {
     if (tvlUnits.length > 2) {
@@ -32,7 +45,8 @@ const TvlTable = () => {
           previousTvl,
           name: token,
           amount: tvlUnits[tvlUnits.length - 1][token as 'eth'],
-          change: ((currentTvl - previousTvl) / previousTvl) * 100
+          change: ((currentTvl - previousTvl) / previousTvl) * 100,
+          tvlPercentage: ((currentTvl / totalTVL) * 100) * 100
         })
       }
       setOrderedTokens(orderedTokens.sort((a, b) => (b.currentTvl - a.currentTvl)))
@@ -44,12 +58,10 @@ const TvlTable = () => {
         <table className="table table-bordered data-table text-center tvl-table table-striped text-white">
           <thead>
             <tr className="text-uppercase">
-              <th>Assets</th>
-              <th>Name</th>
-              <th className="d-none d-lg-table-cell">Category</th>
+              <th className="d-flex justify-start">Assets</th>
+              <th className="d-none d-lg-table-cell">Percentage</th>
               <th className="d-none d-lg-table-cell">24h Change</th>
               <th>TVL</th>
-              <th className="d-none d-lg-table-cell">Amount</th>
             </tr>
           </thead>
           <tbody>
@@ -59,21 +71,22 @@ const TvlTable = () => {
                   <td className="d-flex flex-row align-items-center justify-content-between">
                     <div className="d-flex flex-row">
                       <div className="mx-3">{index + 1}</div>
-                      <div>
+                      <div className="d-flex flex-row">
                         <Image src={`/images/tokens/${token.name}.png`} height={20} width={20} alt={`${token.name} Logo`} className="d-flex " />
+                        <span className="ml-4">
+                         {token.name.toUpperCase()}
+                        </span>
                       </div>
                     </div>
                     <div></div>
                   </td>
-                  <td>{token.name.toUpperCase()}</td>
-                  <td className="d-none d-lg-table-cell">{tokensTypes.get(token.name)}</td>
+                  <td className="d-none d-lg-table-cell">{`${token.tvlPercentage.toFixed(0)} %`}</td>
                   <td className="d-none d-lg-table-cell">
                     <span style={{ color: isNaN(token.change) || token.change === 0 ? 'white' : token.change > 0 ? '#03D9A5' : '#DE365E' }}>
-                      {isNaN(token.change) ? '0' : token.change.toFixed(2)}%
+                      {isNaN(token.change) ? '0' : token.change.toFixed(1)}%
                     </span>
                   </td>
-                  <td>{formatCurrency(token.currentTvl)}</td>
-                  <td className="d-none d-lg-table-cell">{formatValue(token.amount)}</td>
+                  <td>{formatCurrency(token.currentTvl, 0)}</td>
                 </tr>
               ))
             }
