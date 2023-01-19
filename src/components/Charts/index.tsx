@@ -3,15 +3,18 @@ import dynamic from 'next/dynamic'
 import { ApexOptions } from 'apexcharts'
 import { baseChartOptions } from 'utils/shared'
 
-interface Props {
-  series: {
-    name: string,
-    data: number[][]
-  }[],
+export interface Series {
+  name: string;
+  data: number[][];
+}
+interface ChartProps {
+  series: Series[],
   customOptions?: ApexOptions,
   formatter: (value: number) => string,
+  chartType?: 'bar' | 'area',
+  height?: number
 }
-const Chart: React.FC<Props> = ({ series, formatter, customOptions }: Props) => {
+const Chart: React.FC<ChartProps> = ({ series, formatter, customOptions, chartType = 'bar', height = 400 }) => {
   const ApexCharts = dynamic(() => import('react-apexcharts'), { ssr: false })
 
   const options = {
@@ -33,8 +36,8 @@ const Chart: React.FC<Props> = ({ series, formatter, customOptions }: Props) => 
       options={options.options as ApexOptions}
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       series={options.series as any}
-      type="bar"
-      height="400"
+      type={chartType}
+      height={height}
     />
   )
 }
