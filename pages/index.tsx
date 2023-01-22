@@ -10,6 +10,7 @@ import DataEvolution from 'components/DataEvolution'
 import { getTokensValue, tokens } from 'utils/helpers/tokens'
 import { TokenPricesState } from 'store/reducers/tokens-prices.slice'
 import { AreaChart } from 'components/Charts/AreaChart'
+import { periodOptions } from 'types'
 
 const Home = () => {
   const tvlUnits = useSelector<RootState, TvlUnit[]>(state => state.tvlEvolution.data)
@@ -34,8 +35,8 @@ const Home = () => {
         </div>
       </div>
       <div className="flex flex-row gap-x-10 h-80 my-5" id="tvl-chart">
-        <AreaChart title={'TVL Evolution (USD)'} series={[formattedData[0]]} formatter={(value) => formatCurrency(value, 0)} />
-        <AreaChart title={'User Evolution'} series={[formattedData[0]]} formatter={(value) => formatCurrency(value, 0)} />
+        <AreaChart title={'TVL Evolution (USD)'} series={[formattedData[0]]} formatter={(value) => formatCurrency(value, 0)} dateOptions={periodOptions} displayDateSelector={true} />
+        <AreaChart title={'User Evolution'} series={[formattedData[0]]} formatter={(value) => formatCurrency(value, 0)} dateOptions={periodOptions} displayDateSelector={true} />
           {/* <Chart
             customOptions={{
               chart: {
