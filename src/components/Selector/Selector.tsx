@@ -19,7 +19,7 @@ export const Selector: FC<SelectorProps> = ({ options, currentOption, onChange, 
           <div
             key={option.originalValue}
             onClick={() => onChange(option.originalValue)}
-            className={`flex flex-row justify-center items-center px-3 py-2 cursor-pointer ${
+            className={`flex flex-row justify-center items-center px-2.5 py-2 cursor-pointer ${
               isSelected ? 'purple-gradient rounded' : 'hover:bg-white hover:bg-opacity-10'
             }`}
           >
@@ -28,7 +28,7 @@ export const Selector: FC<SelectorProps> = ({ options, currentOption, onChange, 
         )
       })}
       {icon && (
-        <div className="flex justify-center items-center px-4">
+        <div className="flex justify-center items-center px-3">
           {icon}
         </div>
       )}
