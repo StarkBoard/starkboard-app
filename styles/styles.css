@@ -722,3 +722,7 @@ ul {
   font-family: 'DM Sans', sans-serif;
 }
 
+.data-button-not-selected {
+  background: radial-gradient(88.99% 94.44% at 92.31% 100%, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 100%);
+  backdrop-filter: blur(5.21px);
+}
