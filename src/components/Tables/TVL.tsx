@@ -3,11 +3,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Selector } from 'components/Selector/Selector'
 import { sum } from 'lodash'
 import Image from 'next/image'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { TokenPricesState } from 'store/reducers/tokens-prices.slice'
 import { TvlUnit } from 'store/reducers/tvl-evolution.slice'
 import { RootState } from 'store/store'
+import { AppType, appTypeOptions, Period, periodOptions } from 'types'
 import { formatCurrency } from 'utils/helpers/format'
 import { getTokensValue } from 'utils/helpers/tokens'
 
@@ -27,44 +28,6 @@ tokensTypes.set('wbtc', '1:1 Backed ERC20')
 tokensTypes.set('usdc', 'Stablecoin')
 tokensTypes.set('usdt', 'Stablecoin')
 tokensTypes.set('strk', 'Layer 2')
-
-enum AppType {
-  ALL = 'ALL',
-  DAPP = 'DAPP',
-  LAYER2 = 'LAYER2'
-}
-
-enum Period {
-  WEEKLY = 'WEEKLY',
-  MONTHLY = 'MONTHLY',
-  TRIMESTER = 'TRIMESTER',
-  SEMESTER = 'SEMESTER',
-  YEARLY = 'YEARLY'
-}
-
-const appTypeMappingToName: Record<AppType, string> = {
-  [AppType.ALL]: 'All',
-  [AppType.DAPP]: 'Dapps',
-  [AppType.LAYER2]: 'Layer 2'
-}
-
-const periodMappingToDay: Record<Period, string> = {
-  [Period.WEEKLY]: '7D',
-  [Period.MONTHLY]: '30D',
-  [Period.TRIMESTER]: '90D',
-  [Period.SEMESTER]: '180D',
-  [Period.YEARLY]: '365D'
-}
-
-const appTypeOptions = Object.keys(AppType).map(key => ({
-  value: appTypeMappingToName[key as AppType],
-  originalValue: key as AppType
-}))
-
-const periodOptions = Object.keys(Period).map(key => ({
-  value: periodMappingToDay[key as Period],
-  originalValue: key as Period
-}))
 
 const TvlTable = () => {
   const tvlUnits = useSelector<RootState, TvlUnit[]>(state => state.tvlEvolution.data)
@@ -96,13 +59,19 @@ const TvlTable = () => {
     }
   }, [tvlUnits, prices])
 
-  const handleAppTypeChange = (option: string) => {
-    setAppType(option)
-  }
+  const handleAppTypeChange = useCallback(
+    (option: string) => {
+      setAppType(option)
+    },
+    [setAppType]
+  )
 
-  const handlePeriodChange = (option: string) => {
-    setPeriod(option)
-  }
+  const handlePeriodChange = useCallback(
+    (option: string) => {
+      setPeriod(option)
+    },
+    [setPeriod]
+  )
 
   return (
     <div className="card table-container data-table py-4">
