@@ -1,0 +1,32 @@
+[
+  {
+    "chain": "Polygon",
+    "logoURL": "https://www.creativefabrica.com/wp-content/uploads/2021/06/16/Cryptocurrency-Polygon-Logo-Graphics-13459548-1.jpg",
+    "TvlInUsd": 320000000
+  },
+  {
+    "chain": "Arbitrum",
+    "logoURL": "https://assets.coingecko.com/nft_contracts/images/1822/small/https-fanbase-1-s3-amazonaws-com-quixotic-collection-profile-046qixwt_400x400-jpeg.jpg?1664347649",
+    "TvlInUsd": 280000000
+  },
+  {
+    "chain": "zkSync",
+    "logoURL": "https://styles.redditmedia.com/t5_30djbl/styles/communityIcon_8u7bhy7ruyk71.png?width=256&s=e78984e5d79e199527131d760c9c9620a6b26e80",
+    "TvlInUsd": 230000000
+  },
+  {
+    "chain": "Optimistic",
+    "logoURL": "https://cdn-images-1.medium.com/max/1200/1*6zQEwahVQVEPk4QJpKGShw.png",
+    "TvlInUsd": 190000000
+  },
+  {
+    "chain": "Starknet",
+    "logoURL": "https://starkware.co/wp-content/uploads/2021/05/StarkNet-Icon.png",
+    "TvlInUsd": 180000000
+  },
+  {
+    "chain": "Other",
+    "logoURL": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/c0840e59-db43-4681-ae7b-31a04dc4bc55/d7eqdvw-4e97ac92-e4b9-4498-9655-e4d612eb478b.png/v1/fill/w_1600,h_900,strp/random_logo_by_criticl_d7eqdvw-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9OTAwIiwicGF0aCI6IlwvZlwvYzA4NDBlNTktZGI0My00NjgxLWFlN2ItMzFhMDRkYzRiYzU1XC9kN2VxZHZ3LTRlOTdhYzkyLWU0YjktNDQ5OC05NjU1LWU0ZDYxMmViNDc4Yi5wbmciLCJ3aWR0aCI6Ijw9MTYwMCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.X991O1jF5lTNZbbEoHEfoo6nlHEihBMHMIm5-uBCXcU",
+    "TvlInUsd": 32000000
+  }
+]
