@@ -726,3 +726,34 @@ ul {
   background: radial-gradient(88.99% 94.44% at 92.31% 100%, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 100%);
   backdrop-filter: blur(5.21px);
 }
+
+.chain-comparison-container {
+  background: linear-gradient(180deg, #5B62D4 0%, #1A1D35 100%);
+  border-top: 1.07652px solid #E7EAED;
+  border-left: 1.07652px solid #E7EAED;
+  box-shadow: 0px 4.30608px 4.30608px rgba(0, 0, 0, 0.25);
+}
+
+.chain-comparison-circle {
+   position: absolute;
+   background: radial-gradient(100% 100% at 0% 0%, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 100%);
+   border-radius: 50%;
+   backdrop-filter: blur(63.4312px);
+   height: 700px;
+   width: 700px;
+   top: -160px;
+}
+
+.chain-comparison-logo {
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+}
+
+.chain-comparison-table td {
+  font-weight: 700;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  border: none !important;
+}
+
