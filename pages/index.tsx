@@ -7,8 +7,11 @@ import { TvlUnit } from 'store/reducers/tvl-evolution.slice'
 import { formatCurrency } from 'utils/helpers/format'
 import Loader from 'components/Loader'
 import DataEvolution from 'components/DataEvolution'
-import { getTokensValue } from 'utils/helpers/tokens'
+import { getTokensValue, tokens } from 'utils/helpers/tokens'
 import { TokenPricesState } from 'store/reducers/tokens-prices.slice'
+import { AreaChart } from 'components/Charts/AreaChart'
+import { periodOptions } from 'types'
+import { ChainComparisonTVL } from 'components/Tables/ChainComparisonTVL'
 
 const Home = () => {
   const tvlUnits = useSelector<RootState, TvlUnit[]>(state => state.tvlEvolution.data)
@@ -18,6 +21,9 @@ const Home = () => {
 
   const fetchingData = useSelector<RootState, boolean>(state => state.tvlEvolution.loading)
   const loading = fetchingData || tvlUnits.length === 0 || tvlUnitsInDollars.length === 0
+
+  const formattedData = useMemo(() => tokens.map((token) => ({ data: tvlUnitsInDollars.map(unit => [unit.day.getTime(), unit[token.toLowerCase() as 'eth']]), name: token })), [tvlUnitsInDollars])
+
   const content = (
     <>
       <div className="row justify-content-between">
@@ -29,52 +35,12 @@ const Home = () => {
           <DataBlock color="BLACK" title="TVL in non-native" data="Soon" />
         </div>
       </div>
-      <div className="container my-5 p-2 black-gradient rounded-custom">
-        <div className="row text-white text-center mt-3">
-          <h6 className="mb-0 font-weight-bold">TVL Evolution (USD)</h6>
-        </div>
-        <div className="row" id="tvl-chart">
-          {/* <Chart
-            customOptions={{
-              chart: {
-                ...baseChartOptions.chart,
-                stacked: true
-              },
-              legend: {
-                onItemClick: {
-                  toggleDataSeries: false
-                }
-              },
-              colors: tokensColor,
-              tooltip: {
-                ...baseChartOptions.tooltip,
-                shared: true,
-                intersect: false,
-                fixed: {
-                  enabled: true,
-                  position: 'topRight'
-                },
-                x: {
-                  formatter: function (value, { series, dataPointIndex }) {
-                    let output = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', day: 'numeric' }).format(new Date(value))
-                    if (series) {
-                      const total = series.map((serie: number[]) => serie[dataPointIndex]).reduce((a: number, b: number) => a + b)
-                      output = output + ' (Total: ' + formatCurrency(total) + ')'
-                    }
-                    return output
-                  }
-                }
-              },
-              fill: {
-                type: 'none'
-              }
-            }}
-            series={formattedData}
-            formatter={(value) => formatCurrency(value, 0)}
-          /> */}
-        </div>
+      <div className="flex flex-row gap-x-10 h-80 my-5" id="tvl-chart">
+        <AreaChart title={'TVL Evolution (USD)'} series={[formattedData[0]]} formatter={(value) => formatCurrency(value, 0)} dateOptions={periodOptions} displayDateSelector={true} />
+        <AreaChart title={'User Evolution'} series={[formattedData[0]]} formatter={(value) => formatCurrency(value, 0)} dateOptions={periodOptions} displayDateSelector={true} />
       </div>
-      <h2 className="ps-0 pb-4 page-title">TVL Ranking</h2>
+      <ChainComparisonTVL />
+      <h2 className="ps-0 pb-4 page-title">Assets ranking</h2>
       <Table />
     </>
   )

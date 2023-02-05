@@ -1,11 +1,25 @@
+import { faCalendarDays } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Selector } from 'components/Selector/Selector'
+import { sum } from 'lodash'
 import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { TokenPricesState } from 'store/reducers/tokens-prices.slice'
 import { TvlUnit } from 'store/reducers/tvl-evolution.slice'
 import { RootState } from 'store/store'
-import { formatCurrency, formatValue } from 'utils/helpers/format'
+import { AppType, appTypeOptions, Period, periodOptions } from 'types'
+import { formatCurrency } from 'utils/helpers/format'
 import { getTokensValue } from 'utils/helpers/tokens'
+
+interface Token {
+  name: string
+  amount: number
+  change: number
+  currentTvl: number
+  previousTvl: number
+  tvlPercentage: number
+}
 
 const tokensTypes = new Map<string, string>()
 tokensTypes.set('eth', 'Layer 1')
@@ -18,7 +32,12 @@ tokensTypes.set('strk', 'Layer 2')
 const TvlTable = () => {
   const tvlUnits = useSelector<RootState, TvlUnit[]>(state => state.tvlEvolution.data)
   const prices = useSelector<RootState, TokenPricesState>(state => state.tokensPrices)
-  const [orderedTokens, setOrderedTokens] = useState<{ currentTvl: number, previousTvl: number, change: number, name: string, amount: number }[]>([])
+  const [orderedTokens, setOrderedTokens] = useState<Token[]>([])
+  const totalTVL = useMemo(() => {
+    return sum(tvlUnits.map(tvlUnit => tvlUnit.total))
+  }, [tvlUnits])
+  const [appType, setAppType] = useState<string>(AppType.ALL)
+  const [period, setPeriod] = useState<string>(Period.SEMESTER)
 
   useEffect(() => {
     if (tvlUnits.length > 2) {
@@ -32,48 +51,67 @@ const TvlTable = () => {
           previousTvl,
           name: token,
           amount: tvlUnits[tvlUnits.length - 1][token as 'eth'],
-          change: ((currentTvl - previousTvl) / previousTvl) * 100
+          change: ((currentTvl - previousTvl) / previousTvl) * 100,
+          tvlPercentage: ((currentTvl / totalTVL) * 100) * 100
         })
       }
       setOrderedTokens(orderedTokens.sort((a, b) => (b.currentTvl - a.currentTvl)))
     }
   }, [tvlUnits, prices])
+
+  const handleAppTypeChange = useCallback(
+    (option: string) => {
+      setAppType(option)
+    },
+    [setAppType]
+  )
+
+  const handlePeriodChange = useCallback(
+    (option: string) => {
+      setPeriod(option)
+    },
+    [setPeriod]
+  )
+
   return (
-    <div className="card table-container">
-      <div className="table-responsive">
-        <table className="table table-bordered data-table text-center tvl-table table-striped text-white">
+    <div className="card table-container data-table py-4">
+      <div className="flex flex-row justify-between px-4">
+        <Selector currentOption={appType} options={appTypeOptions} onChange={handleAppTypeChange} />
+        <Selector currentOption={period} options={periodOptions} onChange={handlePeriodChange} icon={<FontAwesomeIcon icon={faCalendarDays} style={{ width: '16.5px', height: '19px' }} className="text-white"/>} />
+      </div>
+      <div className="table-responsive mt-2">
+        <table className="table  text-center tvl-table text-white">
           <thead>
             <tr className="text-uppercase">
-              <th>Assets</th>
-              <th>Name</th>
-              <th className="d-none d-lg-table-cell">Category</th>
+              <th className="d-flex justify-start ml-5">Assets</th>
+              <th className="d-none d-lg-table-cell">Percentage</th>
               <th className="d-none d-lg-table-cell">24h Change</th>
-              <th>TVL</th>
-              <th className="d-none d-lg-table-cell">Amount</th>
+              <th className="d-flex">TVL</th>
             </tr>
           </thead>
           <tbody>
             {
               orderedTokens.map((token, index) => (
                 <tr className="text-white" key={token.name}>
-                  <td className="d-flex flex-row align-items-center justify-content-between">
+                  <td className="d-flex flex-row align-items-center justify-content-between ml-5">
                     <div className="d-flex flex-row">
                       <div className="mx-3">{index + 1}</div>
-                      <div>
+                      <div className="d-flex flex-row">
                         <Image src={`/images/tokens/${token.name}.png`} height={20} width={20} alt={`${token.name} Logo`} className="d-flex " />
+                        <span className="ml-4">
+                        {token.name.toUpperCase()}
+                        </span>
                       </div>
                     </div>
                     <div></div>
                   </td>
-                  <td>{token.name.toUpperCase()}</td>
-                  <td className="d-none d-lg-table-cell">{tokensTypes.get(token.name)}</td>
+                  <td className="d-none d-lg-table-cell">{`${token.tvlPercentage.toFixed(0)} %`}</td>
                   <td className="d-none d-lg-table-cell">
                     <span style={{ color: isNaN(token.change) || token.change === 0 ? 'white' : token.change > 0 ? '#03D9A5' : '#DE365E' }}>
-                      {isNaN(token.change) ? '0' : token.change.toFixed(2)}%
+                      {isNaN(token.change) ? '0' : token.change.toFixed(1)}%
                     </span>
                   </td>
-                  <td>{formatCurrency(token.currentTvl)}</td>
-                  <td className="d-none d-lg-table-cell">{formatValue(token.amount)}</td>
+                  <td className="d-flex">{formatCurrency(token.currentTvl, 0)}</td>
                 </tr>
               ))
             }
