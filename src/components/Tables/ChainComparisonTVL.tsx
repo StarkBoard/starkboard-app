@@ -1,6 +1,10 @@
-import { sumBy } from 'lodash'
+import { ApexOptions } from 'apexcharts'
+import { PieChart } from 'components/Charts/PieChart'
+import { orderBy, sumBy } from 'lodash'
 import React, { FC } from 'react'
+import { Chain } from 'types/chain'
 import { formatCurrency } from 'utils/helpers/format'
+import { getColorForChain } from 'utils/helpers/getColorForChain'
 import * as chainData from '../../mock/chainComparisonData.json'
 
 export const ChainComparisonTVL: FC = () => {
@@ -12,9 +16,22 @@ export const ChainComparisonTVL: FC = () => {
       percentShare: tvlPercent.toFixed(0)
     }
   })
+
+  const orderedTvlPerChain = orderBy(tvlPerChain, 'TvlInUsd', 'desc')
+  const chainDataChart = tvlPerChain.map(chain => chain.TvlInUsd)
+
+  const pieChartOptions: ApexOptions = {
+    labels: [
+      ...orderedTvlPerChain.map(chain => chain.chain)
+    ],
+    colors: [
+      ...orderedTvlPerChain.map(chain => getColorForChain(chain.chain as Chain))
+    ]
+  }
+
   return (
-    <div className="flex flew-row justify-between rounded chain-comparison-container">
-      <div className="flex flex-col w-full border">
+    <div className="flex flew-row justify-between rounded chain-comparison-container mb-5">
+      <div className="flex flex-col w-full">
         <div className="px-14 py-8">
           <div className="flex flex-row w-full">
             <h6 className="page-title w-full">{"StarkNet's TVL vs other L2"}</h6>
@@ -44,10 +61,10 @@ export const ChainComparisonTVL: FC = () => {
           </table>
         </div>
       </div>
-      <div className="flex flex-col w-full border">
+      <div className="flex flex-col w-full">
         <div className="relative h-full w-full overflow-hidden">
-          <div className="chain-comparison-circle">
-            <h6 className="page-title">{'Starknet'}</h6>
+          <div className="flex justify-center items-center chain-comparison-circle">
+            <PieChart series={chainDataChart} customOptions={pieChartOptions} formatter={value => formatCurrency(value, 0)} />
           </div>
         </div>
       </div>

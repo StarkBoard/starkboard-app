@@ -728,9 +728,9 @@ ul {
 }
 
 .chain-comparison-container {
-  background: linear-gradient(180deg, #5B62D4 0%, #1A1D35 100%);
-  border-top: 1.07652px solid #E7EAED;
-  border-left: 1.07652px solid #E7EAED;
+  background: linear-gradient(180deg, rgba(91, 98, 212, 0.1)  0%, rgba(26, 29, 53, 1) 100%);
+  border-top: 1.07652px solid rgba(255, 255, 255, 0.08);
+  border-left: 1.07652px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0px 4.30608px 4.30608px rgba(0, 0, 0, 0.25);
 }
 
