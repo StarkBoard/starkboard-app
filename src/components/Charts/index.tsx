@@ -7,14 +7,18 @@ export interface Series {
   name: string;
   data: number[][];
 }
+
+export type DonutSeries = number[];
+
 interface ChartProps {
-  series: Series[],
+  series: Series[] | DonutSeries,
   customOptions?: ApexOptions,
   formatter: (value: number) => string,
-  chartType?: 'bar' | 'area',
-  height?: number
+  chartType?: 'bar' | 'area' | 'donut',
+  height?: number,
+  width?: number,
 }
-const Chart: React.FC<ChartProps> = ({ series, formatter, customOptions, chartType = 'bar', height = 400 }) => {
+const Chart: React.FC<ChartProps> = ({ series, formatter, customOptions, chartType = 'bar', height = 400, width }) => {
   const ApexCharts = dynamic(() => import('react-apexcharts'), { ssr: false })
 
   const options = {
@@ -38,6 +42,7 @@ const Chart: React.FC<ChartProps> = ({ series, formatter, customOptions, chartTy
       series={options.series as any}
       type={chartType}
       height={height}
+      width={width}
     />
   )
 }
